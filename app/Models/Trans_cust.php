@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class Trans_cust extends Model
+{
+    use HasFactory, SoftDeletes;
+    protected $fillable = [
+        'emp_id', // emp_add
+        'cust_id',
+        'model_name', 
+        'id_model', 
+        'total_value', // required
+        'status_trans', // 0 = increased creadite - 1 = decreased creadite
+        'note',
+        'value_befor',
+        'status',
+        'detal_cash',// json
+        
+    ];
+    public function getcust()
+    {
+        return $this->belongsTo(Customer::class, 'cust_id');
+    }
+}
