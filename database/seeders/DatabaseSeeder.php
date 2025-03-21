@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
             GovernoratesTableSeeder::class,
             Type_visitsTableSeeder::class,
             Sale_typesTableSeeder::class,
-            ModelHasRolesTableSeeder::class,
+            // ModelHasRolesTableSeeder::class,
 
         ]);
     }
