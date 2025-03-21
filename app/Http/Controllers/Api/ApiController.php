@@ -26,7 +26,11 @@ use App\Models\Product;
 use App\Http\Resources\ProductResource;
 use App\Models\Center;
 use App\Http\Resources\CenterResource;
+use App\Models\List_contac;
+use App\Models\Social_styl;
+
 use App\Models\Contact;
+
 use App\Http\Resources\ContactResource;
 use App\Models\Area;
 use App\Models\Specialty;
@@ -358,6 +362,23 @@ class ApiController extends Controller
         
     }
 
+    public function getSocialStyle()
+    {
+        $token = request()->header('token');
+        $user = $this->check_api_token($token);
+        if (!$user) {
+            return response(['status' => 403, 'msg' => trans('auth.not_login'), 'data' => NULL]);
+        }
+
+        $data = Social_styl::where('status' , 0)->orderBy('id', 'DESC')->get();
+
+        if(count($data) == 0) {
+            return response(['status' => 401, 'msg' => trans('lang.nodata'), 'data' => null]);
+        } else {
+            return response(['status' => 200, 'msg' => trans('lang.successful'), 'data' => $data]);
+        }
+        
+    }
     public function getTypeContact()
     {
         $token = request()->header('token');
@@ -676,6 +697,31 @@ class ApiController extends Controller
                 'third_type' => $request->third_type,//0 = details - 1 = reminder
             ]);
 
+            $listcont = List_contac::where('status' , 0)
+            ->where('emplist_id', $row->empvisit_id)
+            ->where('contact_id',$row->contact_id)
+            ->first(); // Assuming you want the first result
+            
+            if($listcont != null){
+            // 0 = listed contact - 1 = listed center - 2 = both - 3 = out list
+
+            // Check if $row->contact_id is in the $conlist array
+            if ($row->contact_id === $listcont->contact_id)  {
+                $visit = Visit::where('id', $row->id)->update([
+                    'status_visit_list' => 0 ,
+                ]);
+                
+                } else{
+                    $visit = Visit::where('id', $row->id)->update([
+                        'status_visit_list' => 3 ,
+                    ]);
+                }
+            } else{
+                $visit = Visit::where('id', $row->id)->update([
+                    'status_visit_list' => 3 ,
+                ]);
+            }
+
             // $results = new VacationempResource($row);
                     
             return response(['status' => 200, 'msg' => trans('lang.successful'), 'data' => $row]);
@@ -683,6 +729,7 @@ class ApiController extends Controller
         }
 
     }
+
 
     public function getVisit(Request $request)
     {

@@ -31,6 +31,8 @@ Route::get('/get-event-details/{id}',[ApiController::class ,'getEventDetails']);
 Route::get('/get-expenses/{id}',[ApiController::class ,'getExpenses']);
 Route::get('/get-expense-details/{id}',[ApiController::class ,'getExpenseDetails']);
 Route::post('/request-expense',[ApiController::class ,'requestExpense']);
+Route::get('/type-social',[ApiController::class ,'getSocialStyle']);
+
 Route::get('/type-expense',[ApiController::class ,'getExpenseTypes']);
 Route::get('/get-vacations/{id}',[ApiController::class ,'getVacations']);
 Route::get('/get-vacation-details/{id}',[ApiController::class ,'getVacationDetails']);
