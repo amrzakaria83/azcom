@@ -14,7 +14,7 @@
                 </a>
             </div> -->
             <div class="menu-item ">
-                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="click">
+                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="hover">
                     <span class="menu-icon">
                         <!-- <i class="fonticon-setting fs-1"></i> -->
                     </span>
@@ -80,7 +80,7 @@
             </div> 
             @can('all list')
             <div class="menu-item">
-                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="click">
+                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="hover">
                     <span class="menu-icon">
                         <!-- <i class="fonticon-setting fs-1"></i> -->
                     </span>
@@ -111,7 +111,7 @@
             @endcan
             @can('all employee')
             <div class="menu-item ">
-                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="click">
+                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="hover">
                     <span class="menu-icon">
                         <!-- <i class="fonticon-setting fs-1"></i> -->
                     </span>
@@ -160,7 +160,7 @@
             @endcan
 
             <div class="menu-item">
-                <button class="btn btn-danger rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="click">
+                <button class="btn btn-danger rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="hover">
                     <span class="menu-icon">
                         <!-- <i class="fonticon-setting fs-2"></i> -->
                     </span>
@@ -263,7 +263,7 @@
             </div>
             @can('all center')
             <div class="menu-item">
-                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="click">
+                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="hover">
                     <span class="menu-icon">
                         <!-- <i class="fonticon-setting fs-1"></i> -->
                     </span>
@@ -293,7 +293,7 @@
             @endcan
             @can('sale')
             <div class="menu-item">
-                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="click">
+                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="hover">
                     <span class="menu-icon">
                         <!-- <i class="fonticon-setting fs-1"></i> -->
                     </span>
@@ -358,7 +358,7 @@
             </div>
             @endcan
             <div class="menu-item">
-                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="click">
+                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="hover">
                     <span class="menu-icon">
                         <!-- <i class="fonticon-setting fs-2"></i> -->
                     </span>
@@ -386,7 +386,7 @@
             </div>
             
             <div class="menu-item">
-                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="click">
+                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="hover">
                     <span class="menu-icon">
                         <!-- <i class="fonticon-setting fs-1"></i> -->
                     </span>
@@ -434,39 +434,9 @@
                     </div>
             </div>
             
-            @can('all assistant')
+            
             <div class="menu-item">
-                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="click">
-                    <span class="menu-icon">
-                        <!-- <i class="fonticon-setting fs-1"></i> -->
-                    </span>
-                    <span class="menu-title">{{trans('lang.assistants')}}</span></button>
-                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-auto min-w-200 mw-300px" data-kt-menu="true">
-                            <!--begin::Menu item-->
-                            <div class="menu-item px-3">
-                                <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
-                                    <a class="menu-link" href="{{route('admin.assistants.index')}}">
-                                    <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.assistants')}}-{{trans('lang.all')}}</span></a>
-                                </div>
-                            </div>
-                            @can('assistant new')
-                            <div class="menu-item px-3">
-                                <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
-                                    <a class="menu-link" href="{{route('admin.assistants.create')}}">
-                                    <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.assistants')}}-{{trans('lang.addnew')}}</span></a>
-                                </div>
-                            </div>
-                            @endcan
-                            
-                           <!--end::Menu item-->
-
-                        </div>
-            </div> 
-            @endcan
-            <div class="menu-item">
-                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="click">
+                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="hover">
                     <span class="menu-icon">
                         <!-- <i class="fonticon-setting fs-1"></i> -->
                     </span>
@@ -505,7 +475,7 @@
             </div> 
             @can('all expense')
             <div class="menu-item">
-                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="click">
+                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="hover">
                     <span class="menu-icon">
                         <!-- <i class="fonticon-setting fs-1"></i> -->
                     </span>
@@ -537,7 +507,7 @@
             </div> 
             @endcan
             <div class="menu-item">
-                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="click">
+                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="hover">
                     <span class="menu-icon">
                         <!-- <i class="fonticon-setting fs-1"></i> -->
                     </span>
@@ -587,7 +557,7 @@
             </div> 
             @can('all area')
             <div class="menu-item">
-                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="click">
+                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="hover">
                     <span class="menu-icon">
                         <!-- <i class="fonticon-setting fs-1"></i> -->
                     </span>
@@ -616,7 +586,7 @@
             @endcan
             @can('all specialty')
             <div class="menu-item">
-                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="click">
+                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="hover">
                     <span class="menu-icon">
                         <!-- <i class="fonticon-setting fs-1"></i> -->
                     </span>
@@ -645,7 +615,7 @@
             @endcan
             @can('all brand gift')
             <div class="menu-item">
-                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="click">
+                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="hover">
                     <span class="menu-icon">
                         <!-- <i class="fonticon-setting fs-1"></i> -->
                     </span>
@@ -674,7 +644,7 @@
             @endcan
             @can('all social style')
             <div class="menu-item">
-                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="click">
+                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="hover">
                     <span class="menu-icon">
                         <!-- <i class="fonticon-setting fs-1"></i> -->
                     </span>
@@ -703,7 +673,7 @@
             @endcan
             @can('all sale funnel')
             <div class="menu-item">
-                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="click">
+                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="hover">
                     <span class="menu-icon">
                         <!-- <i class="fonticon-setting fs-1"></i> -->
                     </span>
@@ -732,7 +702,7 @@
             @endcan
             @can('all rating')
             <div class="menu-item">
-                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="click">
+                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="hover">
                     <span class="menu-icon">
                         <!-- <i class="fonticon-setting fs-2"></i> -->
                     </span>
@@ -761,7 +731,7 @@
             @endcan
             @can('all event')
             <div class="menu-item">
-                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="click">
+                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="hover">
                     <span class="menu-icon">
                         <!-- <i class="fonticon-setting fs-2"></i> -->
                     </span>
@@ -788,13 +758,37 @@
                     </div>
             </div>
             @endcan
-            
-           
-            
-            
-            
+            @can('all assistant')
+            <div class="menu-item">
+                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="hover">
+                    <span class="menu-icon">
+                        <!-- <i class="fonticon-setting fs-1"></i> -->
+                    </span>
+                    <span class="menu-title">{{trans('lang.assistants')}}</span></button>
+                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-auto min-w-200 mw-300px" data-kt-menu="true">
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-3">
+                                <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
+                                    <a class="menu-link" href="{{route('admin.assistants.index')}}">
+                                    <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
+                                    <span class="menu-title">{{trans('lang.assistants')}}-{{trans('lang.all')}}</span></a>
+                                </div>
+                            </div>
+                            @can('assistant new')
+                            <div class="menu-item px-3">
+                                <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
+                                    <a class="menu-link" href="{{route('admin.assistants.create')}}">
+                                    <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
+                                    <span class="menu-title">{{trans('lang.assistants')}}-{{trans('lang.addnew')}}</span></a>
+                                </div>
+                            </div>
+                            @endcan
+                           <!--end::Menu item-->
+                        </div>
+            </div> 
+            @endcan            
             <!-- <div class="menu-item">
-                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="click">
+                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="hover">
                     <span class="menu-icon">
                     </span>
                     <span class="menu-title">{{trans('lang.contract_drs')}}</span></button>
