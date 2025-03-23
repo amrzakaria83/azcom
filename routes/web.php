@@ -15,7 +15,9 @@ use App\Http\Controllers\Front\HomeController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::get('/clear_cache', function () {
+    \Artisan::call('storage:link');
+});
 Route::get('/lang-change', [HomeController::class ,'changLang'])->name('teacher.lang.change');
 
 Route::post('/loginpost', [ClientLoginController::class ,'clientLogin'])->name('client.loginpost');

@@ -76,7 +76,7 @@
                                 <input type="hidden" id="sale_type_id" name="sale_type_id" value="" />
 
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-4">
                                 <label class="required fw-semibold fs-6 mb-2">{{trans('lang.valued_date')}}</label>
                                 <div class="position-relative d-flex align-items-center">
                                     <span class="svg-icon svg-icon-2 position-absolute mx-4">

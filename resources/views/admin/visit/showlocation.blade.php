@@ -59,7 +59,7 @@
 
 @section('script')
 <script
-    src=""
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAsoJSU4k6RgH8tO2gM1WLZBjOFwUF4TcY&callback=initMap&v=weekly&language=ar&loading=async"
     defer
 ></script>
 
@@ -76,7 +76,7 @@
         const map = new Map(document.getElementById("map"), {
             zoom: 13.3,
             center: { lat: {{$data->lat ?? 30.036256869979837}}, lng: {{$data->lng ?? 31.229324340820312}} },
-            mapId: "",
+            mapId: "AIzaSyBKwgDNdZdAvEvCTZU-QvTV3E8-edf_W_4",
         });
 
         function addMarker(location, content, color = "#0000FF") {
