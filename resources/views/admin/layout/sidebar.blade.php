@@ -856,7 +856,7 @@
                 </a>
             </div> -->
             @can('setting')
-            <div class="menu-item">
+            <div class="menu-item" style="padding-bottom: 100px;">
                 <a class="menu-link" href="{{route('admin.settings.edit', 1)}}">
                     <span class="menu-icon">
                         <i class="fonticon-setting fs-2"></i>
