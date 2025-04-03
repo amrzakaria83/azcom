@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Cut_sale;
 use App\Models\Center;
 use App\Models\Area;
+use App\Models\Governorate;
 use DataTables;
 use Validator;
 use Carbon\Carbon;
@@ -44,6 +45,37 @@ class Cut_salesController extends Controller
                     .$row->tax_id.'</a></div>';
                     }
                     return $name_en;
+                })
+                ->addColumn('value', function($row){
+
+                    $value = $row->value;
+                    
+                    return $value;
+                })
+                ->addColumn('area_id', function($row){
+                    // Check if the relationship exists and is not null
+                    if ( $row->getarea) {
+                        $area = $row->getarea->name_en;
+                        if (!empty($area)) {
+                            $area_id = '<span class="text-success fs-3">' . $area . '</span><br>';
+                            if ($row->getarea->country_id === "EGY"){
+                                $area_id .= '<span class="text-info">'.$row->getarea->getcity->city_name_en.'</span><br>';
+                                $gov = $row->getarea->getcity->governorate_id;
+                                $namgov = Governorate::find($gov);
+                                $area_id .= '<span>'.trans('lang.governorate').':'.$namgov->governorate_name_en.'</span><br>';
+                                $area_id .= '<span>'.trans('lang.egypt').'</span>';
+                            } elseif ($row->getarea->country_id === "UAE"){
+                                $area_id .= '<span class="text-info">'.$row->getarea->getcity->name_en.'</span><br>';
+                                $area_id .= '<span>'.trans('lang.uae').'</span>';
+                            }
+                        } else {
+                            $area_id = '<span class="text-danger fs-3">Not recognized</span>';
+                        }
+                    } else {
+                        $area_id = '<span class="text-danger fs-3">Not recognized</span>';
+                    }
+                    
+                    return $area_id;
                 })
                 ->addColumn('type_type', function($row){
  
@@ -106,7 +138,7 @@ class Cut_salesController extends Controller
                         });
                     }
                 })
-                ->rawColumns(['name_en','type_type','note','phone','is_active','checkbox','actions'])
+                ->rawColumns(['name_en','type_type','note','area_id','value','phone','is_active','checkbox','actions'])
                 ->make(true);
         }
         return view('admin.cut_sale.index');
@@ -221,6 +253,8 @@ class Cut_salesController extends Controller
             'emp_id' => Auth::guard('admin')->user()->id,
             'name_en' => $request->name_en,
             'phone' => $request->phone,
+            'area_id' => $request->area_id,
+            'value' => $request->value,
             'address' => $request->address,
             'email' => $request->email,
             'tax_id' => $request->tax_id,

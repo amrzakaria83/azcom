@@ -83,8 +83,10 @@
                                     </div>
                                 </th>
                                 <th class="min-w-125px text-start">{{trans('lang.name')}}</th>
+                                <th class="min-w-125px text-start">{{trans('lang.balance')}}</th>
                                 <th class="min-w-125px text-start">{{trans('lang.status')}}</th>
                                 <th class="min-w-125px text-start">{{trans('lang.phone')}}</th>
+                                <th class="min-w-125px text-start">{{trans('lang.area')}}</th>
                                 <th class="min-w-125px text-start">{{trans('lang.note')}}</th>
                                 <th class="min-w-125px text-start">{{trans('employee.is_active')}}</th>
                                 <th class="min-w-125px text-start">{{trans('employee.action')}}</th>
@@ -215,8 +217,10 @@
             columns: [
                 {data: 'checkbox', name: 'checkbox'},
                 {data: 'name_en', name: 'name_en'},
+                {data: 'value', name: 'value'},
                 {data: 'type_type', name: 'type_type'},
                 {data: 'phone', name: 'phone'},
+                {data: 'area_id', name: 'area_id'},
                 {data: 'note', name: 'note'},
                 {data: 'is_active', name: 'is_active'},
                 {data: 'actions', name: 'actions'},

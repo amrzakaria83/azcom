@@ -127,9 +127,23 @@
                                                 class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 text-danger text-center bg-light-primary approv_quantity"/>
                                         </td>
                                         <td class="text-center">
-                                            <input type="number" name="approv_percent[{{$order->id}}]"  min="0" id="approv_percent[{{$order->id}}]"
+                                            <!--begin::Input wrapper-->
+                                            <div class="w-lg-100 position-relative">
+                                                    <!--begin::Input-->
+                                                    <input type="number" class="form-control form-control-solid text-info text-center bg-light-primary approv_percent" 
+                                                    step="any" minlength="3" maxlength="4" placeholder="خصم" name="approv_percent[{{$order->id}}]"  min="0" 
+                                                    id="approv_percent[{{$order->id}}]" data-row-id="{{$order->id}}" value="{{$order->percent}}"/>
+                                                    <!--end::Input-->
+
+                                                    <!--begin::CVV icon-->
+                                                    <div class="position-absolute translate-middle-y top-50 end-0 me-3">
+                                                        <i class="fas fa-percentage"><span class="path1"></span><span class="path2"></span></i>
+                                                    </div>
+                                                    <!--end::CVV icon-->
+                                                </div>
+                                            <!-- <input type="number" name="approv_percent[{{$order->id}}]"  min="0" id="approv_percent[{{$order->id}}]"
                                                 data-row-id="{{$order->id}}" value="{{$order->percent}}"
-                                                class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 text-info text-center bg-light-primary approv_percent"/>
+                                                class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 text-info text-center bg-light-primary approv_percent"/> -->
                                         </td>
                                         <td class="text-center">
                                             <input type="number" name="approv_sellpriceproduct[{{$order->id}}]"  min="0" id="approv_sellpriceproduct[{{$order->id}}]"

@@ -194,6 +194,7 @@ return [
 
     "check_in" => "دخول",
     "check_out" => "خروج",
+    "balance" => "الرصيد",
 
 
 

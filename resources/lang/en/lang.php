@@ -201,6 +201,7 @@ return [
         
     "check_in" => "Checking In",
     "check_out" => "Checking Out",
+    "balance" => "Balance",
 
     ###########   Dashboard Lang   ###########
 

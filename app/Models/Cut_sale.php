@@ -11,7 +11,7 @@ class Cut_sale extends Model
     use HasFactory, SoftDeletes;
     protected $fillable = [
         'emp_id', // emp_add
-        'type_type', // 0 = center - 1 = newcustomer 
+        'type_type', // 0 = center - 1 = other
         'center_id',
         'name_ar',
         'name_en',

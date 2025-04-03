@@ -68,6 +68,33 @@
                         </div>
 
                         <div class="row mb-6">
+                            <label class="col-lg-2 col-form-label fw-semibold fs-6">{{trans('lang.numb')}} {{trans('lang.tax')}}</label>
+                            <div class="col-lg-8 fv-row">
+                                <input type="text" name="tax_id" placeholder="{{trans('lang.numb')}} {{trans('lang.tax')}}" value="{{$data->tax_id}}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-6">
+                            <label class="col-lg-2 col-form-label fw-semibold fs-6">{{trans('lang.balance')}}</label>
+                            <div class="col-lg-8 fv-row">
+                                <input type="text" name="value" placeholder="{{trans('lang.value')}}" value="{{$data->value}}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-6">
+                            <label class="col-lg-2 col-form-label required fw-semibold fs-3 text-info">{{trans('lang.area')}} </label>
+                            <div class="col-lg-8 fv-row">
+                                <select  data-placeholder="Select an option" class=" input-text form-control  form-select  mb-3 mb-lg-0" value="{{$data->area_id}}" name="area_id">
+                                    
+                                        @foreach (\App\Models\Area::where('status',0)->get() as $item)
+                                            <option value="{{$item->id}}" @if($data->area_id === $item->id) selected disabled @endif >{{$item->name_en}}</option>
+                                        @endforeach
+                                    
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-6">
                             <label class="col-lg-2 col-form-label fw-semibold fs-6">{{trans('lang.note')}}</label>
                             <div class="col-lg-8 fv-row">
                                 <input type="text" name="note" placeholder="{{trans('lang.note')}}" value="{{$data->note}}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
@@ -83,6 +110,7 @@
                                 </select>
                             </div>
                         </div>
+
 
                         
 

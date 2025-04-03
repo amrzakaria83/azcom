@@ -519,7 +519,7 @@ class Bill_sale_headersController extends Controller
                     }
                     if($row->method_for_payment != null){
 
-                        $status_order .='<br><span class="text-info fs-3">'.$row->method_for_payment.'</span>';
+                        $status_order .='<br><span class="text-danger fs-3">'.$row->method_for_payment.'</span>';
                     }
 
                     return $status_order;
