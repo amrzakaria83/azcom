@@ -203,6 +203,7 @@ return [
     "check_out" => "Checking Out",
     "balance" => "Balance",
     "payment_method" => "Payment Method",
+    "delivered" => "Delivered",
 
     ###########   Dashboard Lang   ###########
 

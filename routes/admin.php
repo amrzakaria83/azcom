@@ -669,9 +669,11 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
             Route::get('/editsalehead/{id}', 'Bill_sale_headersController@editsalehead')->name('editsalehead');// can
             Route::post('/storepermonesale','Bill_sale_headersController@storepermonesale')->name('storepermonesale');// can
             Route::get('/indexall','Bill_sale_headersController@indexall')->name('indexall'); // can
+            Route::get('/indexdelivered','Bill_sale_headersController@indexdelivered')->name('indexdelivered'); // can
             Route::get('/getprodname/{id?}','Bill_sale_headersController@getprodname')->name('getprodname');
             Route::get('/inactivesale/{id}', 'Bill_sale_headersController@inactivesale')->name('inactivesale');
             Route::get('/activesale/{id}', 'Bill_sale_headersController@activesale')->name('activesale');
+            Route::get('/deliveredesale/{id}', 'Bill_sale_headersController@deliveredesale')->name('deliveredesale');
 
 
         });
