@@ -342,4 +342,9 @@ class CentersController extends Controller
 
         return redirect()->back()->with('message', 'Added successfully')->with('status', 'success');
     }
+    public function showlocation()
+    {
+        $centerslocation = Center::where('status',0)->get();
+        return view('admin.center.showlocation', compact('centerslocation'));
+    }
 }

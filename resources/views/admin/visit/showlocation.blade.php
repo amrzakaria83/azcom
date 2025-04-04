@@ -38,6 +38,16 @@
 
 <div id="kt_app_content_container" class="app-container container-fluid">
     <div class="card">
+    <h1 class="text-info">
+        {{trans('lang.center')}} :  {{$data->getcenter->name_en}}
+        </h1>
+        <h2 class="text-success">
+        {{trans('lang.contact')}} :  {{$data->getcontact->name_en}}
+            
+        </h2>
+        <h3>
+        {{trans('employee.employee')}} :  {{$data->getemp->name_en}}
+        </h3>
         <input type="hidden" id="checkin_location" name="checkin_location" value="{{$data->checkin_location}}" />
         <input type="hidden" id="checkout_location" name="checkout_location" value="{{$data->checkout_location}}" />
         <input type="hidden" id="centellocation" name="centellocation" value="{{$centellocation}}" />
@@ -47,6 +57,11 @@
         <div class="card-body p-9">
             
             <div id="distance"></div>
+            <div>
+                {{trans('lang.check_in')}} : <i class="bi bi-geo-alt-fill text-success"></i>,
+                {{trans('lang.check_out')}} : <i class="bi bi-geo-alt-fill text-danger"></i>,
+                {{trans('lang.center')}} : <i class="bi bi-geo-alt-fill text-info"></i>,
+            </div>
             <div id="map" style="height: 500px; width: 100%;"></div>
                 
                 

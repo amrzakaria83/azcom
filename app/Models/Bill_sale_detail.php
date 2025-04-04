@@ -29,5 +29,9 @@ class Bill_sale_detail extends Model
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
+    public function getheader()
+    {
+        return $this->belongsTo(Bill_sale_header::class, 'bill_sale_header_id');
+    }
 
 }

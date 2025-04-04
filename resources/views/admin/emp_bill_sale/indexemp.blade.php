@@ -36,7 +36,7 @@
 @section('content')
     <!--begin::Container-->
     <div id="kt_app_content_container" class="app-container container-fluid">
-        <h1>{{trans('lang.visit')}}-{{trans('lang.products')}}-{{trans('lang.report')}}</h1>
+    <h1>{{trans('employee.employees')}}-{{trans('lang.products')}}-{{trans('lang.report')}}</h1>
 
             <div class="card no-border">
                 <!--begin::Card header-->

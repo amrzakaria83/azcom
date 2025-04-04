@@ -166,25 +166,30 @@ class Bill_sale_headersController extends Controller
 
                     if($row->status == 0) {
                         $is_active = '<div class="badge badge-light-success fw-bold">'.trans('employee.active').'</div>';
-                        // $is_active .= '<div><button type="button" class="btn btn-success btn-sm col-6" data-bs-toggle="modal" data-bs-target="#kt_modal_1b" data-center-id="'. $row->id .'" data-centername="'. $row->name_en .'">
-                        //     '.trans('lang.work_hours').'
-                        //     </button></div> ';
+                        $is_active .='<br><a href="'.route('admin.bill_sales.inactivesale', $row->id).'" class="btn btn-sm btn-icon btn-danger btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                                  <i class="bi bi bi-x-circle-fill fs-1x"></i>
+                                              </a>';
                     } else {
                         $is_active = '<div class="badge badge-light-danger fw-bold">'.trans('employee.notactive').'</div>';
+                        $is_active .='<br><a href="'.route('admin.bill_sales.activesale', $row->id).'" class="btn btn-sm btn-icon btn-success btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                <i class="bi bi bi-check-circle-fill fs-1x"></i>
+                            </a>';
                     }
-                    // $is_active .= $row->note;
-
                     return $is_active;
                 })
                 ->addColumn('actions', function($row){
-                    $actions = '<div class="ms-2">
-                                <a href="'.route('admin.bill_sales.show', $row->id).'" class="btn btn-sm btn-icon btn-warning btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                    <i class="bi bi-eye-fill fs-1x"></i>
-                                </a>
-                                <a href="'.route('admin.emp_bill_sales.edit', $row->id).'" class="btn btn-sm btn-icon btn-info btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                    <i class="bi bi-pencil-square fs-1x"></i>
-                                </a>
-                            </div>';
+                    if($row->status == 0 ) {
+                        $actions = '<div class="ms-2">
+                                    <a href="'.route('admin.bill_sales.show', $row->id).'" class="btn btn-sm btn-icon btn-warning btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                        <i class="bi bi-eye-fill fs-1x"></i>
+                                    </a>
+                                    <a href="'.route('admin.emp_bill_sales.edit', $row->id).'" class="btn btn-sm btn-icon btn-info btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                        <i class="bi bi-pencil-square fs-1x"></i>
+                                    </a>
+                                </div>';
+                        } else {
+                            $actions = '<div class="badge badge-light-danger fw-bold">'.trans('employee.notactive').'</div>';
+                        }
                     return $actions;
                 })
                 ->filter(function ($instance) use ($request) {
@@ -210,7 +215,7 @@ class Bill_sale_headersController extends Controller
                         });
                     }
                 })
-                ->rawColumns(['name_en','description','note','status_order','status_requ','status','countprod','totalsellprice','is_active','checkbox','actions'])
+                ->rawColumns(['name_en','description','note','status_order','status','countprod','totalsellprice','is_active','checkbox','actions'])
                 ->make(true);
         }
         return view('admin.bill_sale.index');
@@ -661,6 +666,28 @@ class Bill_sale_headersController extends Controller
             ->first(); // Use `first()` instead of `get()` since we're expecting a single record
         
         return response()->json($data);
+    }
+    public function activesale($idsale)
+    {
+       
+        $data = Bill_sale_header::find($idsale);
+        $data->update([
+            'emp_id' => Auth::guard('admin')->user()->id,
+            'status' => 0,
+        ]);
+
+        return redirect('admin/bill_sales')->with('message', 'Modified successfully')->with('status', 'success');
+    }
+    public function inactivesale($idsale)
+    {
+       
+        $data = Bill_sale_header::find($idsale);
+        $data->update([
+            'emp_id' => Auth::guard('admin')->user()->id,
+            'status' => 1,
+        ]);
+
+        return redirect('admin/bill_sales')->with('message', 'Modified successfully')->with('status', 'success');
     }
  
 }

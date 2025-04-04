@@ -26,6 +26,7 @@ class Emp_bill_salesController extends Controller
 
         if ($request->ajax()) {
             $data = Emp_bill_sale::query();
+            $data = $data->where('status', 0);
             $data = $data->orderBy('id', 'DESC');
 
             return Datatables::of($data)
@@ -36,7 +37,7 @@ class Emp_bill_salesController extends Controller
                     return $checkbox;
                 })
                 ->addColumn('name_en', function($row){
-                    $name_en = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->getemp->name_en.'</a><div>';
+                    $name_en = '<div class="d-flex flex-column"><a href="'.route('admin.emp_bill_sales.edit', $row->getsaledetails->getheader->id).'" class="text-gray-800 text-hover-primary mb-1">'.$row->getemp->name_en.'</a><div>';
 
                     return $name_en;
                 })
@@ -52,15 +53,57 @@ class Emp_bill_salesController extends Controller
                     return $description;
                 })
                 ->addColumn('sale_type_id', function($row){
-                    $sale_type_id = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->getsaletype->name_en.'</a><div>';
+                    $sale_type_id = '<div class="d-flex flex-column"><a href="'.route('admin.emp_bill_sales.edit', $row->getsaledetails->getheader->id).'" class="text-gray-800 text-hover-primary mb-1">'.$row->getsaletype->name_en.'</a><div>';
 
                     return $sale_type_id;
+                })
+                ->addColumn('prod_id', function($row){
+                    $bill = $row->getsaledetails->getprod->name_en;
+                    
+                    $prod_id = '<div class="d-flex flex-column"><a href="'.route('admin.emp_bill_sales.edit', $row->getsaledetails->getheader->id).'" class="text-gray-800 text-hover-primary mb-1">'.$bill.'</a><div>';
+
+                    return $prod_id;
+                })
+                ->addColumn('tquntitty', function($row){
+                    $bill = $row->getsaledetails->quantityproduc;
+                    
+                    $tquntitty = '<div class="d-flex flex-column"><a href="'.route('admin.emp_bill_sales.edit', $row->getsaledetails->getheader->id).'" class="text-gray-800 text-hover-primary mb-1">'.round($bill).'</a><div>';
+
+                    return $tquntitty;
+                })
+                ->addColumn('quntitty', function($row){
+                    $bill = ($row->getsaledetails->quantityproduc * $row->percent) / 100;
+                    
+                    $quntitty = '<div class="d-flex flex-column"><a href="'.route('admin.emp_bill_sales.edit', $row->getsaledetails->getheader->id).'" class="text-gray-800 text-hover-primary mb-1">'.round($bill, 3).'</a><div>';
+
+                    return $quntitty;
+                })
+                ->addColumn('tvalue', function($row){
+                    $bill = $row->getsaledetails->quantityproduc * $row->getsaledetails->sellpriceproduct;
+                    
+                    $tvalue = '<div class="d-flex flex-column"><a href="'.route('admin.emp_bill_sales.edit', $row->getsaledetails->getheader->id).'" class="text-gray-800 text-hover-primary mb-1">'.round($bill).'</a><div>';
+
+                    return $tvalue;
+                })
+                ->addColumn('created_at', function($row){
+                    $bill = date('Y-m-d', strtotime($row->getsaledetails->created_at));
+                    
+                    $created_at = '<div class="d-flex flex-column"><a href="'.route('admin.emp_bill_sales.edit', $row->getsaledetails->getheader->id).'" class="text-gray-800 text-hover-primary mb-1">'.$bill.'</a><div>';
+
+                    return $created_at;
+                })
+                ->addColumn('valued_time', function($row){
+                    $bill = date('Y-m-d', strtotime($row->getsaledetails->getheader->valued_time));
+                    
+                    $valued_time = '<div class="d-flex flex-column"><a href="'.route('admin.emp_bill_sales.edit', $row->getsaledetails->getheader->id).'" class="text-gray-800 text-hover-primary mb-1">'.$bill.'</a><div>';
+
+                    return $valued_time;
                 })
                 ->addColumn('sale_id', function($row){
                     $bill = Bill_sale_detail::find($row->sale_id);
                     $billhe = Bill_sale_header::find($bill->bill_sale_header_id);
                     $custmer = Cut_sale::find($billhe->cut_sale_id);
-                    $sale_id = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$custmer->name_en.'</a><div>';
+                    $sale_id = '<div class="d-flex flex-column"><a href="'.route('admin.emp_bill_sales.edit', $row->getsaledetails->getheader->id).'" class="text-gray-800 text-hover-primary mb-1">'.$custmer->name_en.'</a><div>';
 
                     return $sale_id;
                 })
@@ -99,7 +142,15 @@ class Emp_bill_salesController extends Controller
                     return $actions;
                 })
                 ->filter(function ($instance) use ($request) {
+                    $fromTime = $request->get('from_time');
+                    $toDate = $request->get('to_date');
 
+                    if (!empty($fromTime) && !empty($toDate) && strtotime($fromTime) && strtotime($toDate)) {
+                        $instance->whereHas('getsaledetails.getheader', function ($query) use ($fromTime, $toDate) {
+                            $query->whereDate('valued_time', '>=', $fromTime)
+                                ->whereDate('valued_time', '<=', $toDate);
+                        });
+                    }
                     if (!empty($request->get('empsaled_id')))
                     {
                     $instance->where(function ($query) use ($request) {
@@ -124,7 +175,7 @@ class Emp_bill_salesController extends Controller
                         });
                     }
                 })
-                ->rawColumns(['name_en','description','note','status','is_active','sale_type_id','sale_id','checkbox','actions'])
+                ->rawColumns(['name_en','description','note','status','tvalue','quntitty','is_active','sale_type_id','sale_id','checkbox','actions','prod_id','tquntitty','created_at','valued_time'])
                 ->make(true);
         }
         return view('admin.emp_bill_sale.index');
@@ -239,5 +290,17 @@ class Emp_bill_salesController extends Controller
  
         return view('admin.emp_bill_sale.indexemp', compact('tazd'));
     }
-    
+    public function inactiveempsale($idsale)
+    {
+       
+        $data = Emp_bill_sale::find($idsale);
+        $data->update([
+            'emp_id' => Auth::guard('admin')->user()->id,
+            'status' => 1,
+        ]);
+        $saleteta = Bill_sale_detail::find($data->sale_id);
+        $headsale = Bill_sale_header::find($saleteta->bill_sale_header_id);
+        
+        return redirect()->route('admin.emp_bill_sales.edit', $headsale->id)->with('message', 'Modified successfully')->with('status', 'success');
+    }
 }

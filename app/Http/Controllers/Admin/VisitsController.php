@@ -587,6 +587,12 @@ class VisitsController extends Controller
         $listcenter = '';
         $listcontact = '';
         $datacontact = '';
+        $totaltareget = 0;
+        $totalcontacts = 0;
+        $totalamdatacontact = 0;
+        $totalpmdatacontact = 0;
+        $totalsingle = 0;
+        $totaldouble = 0;
         $totalcontact = [];
         $totalcenter = [];
     
@@ -603,13 +609,24 @@ class VisitsController extends Controller
                         } else{
                             $salfunnel ='';
                         }
-                        $target = $data->taregetvisit;
+                        $amdatacontact = $datacontact->where('typevist_id' , 3)->count();
+                        $pmdatacontact = $datacontact->where('typevist_id' , 4)->count();
+                        $single = $datacontact->where('status_visit' , 0)->count(); //  0 = single visit - 1 = double visit - 2 = triple visit
+                        $double = $datacontact->where('status_visit' , 1)->count(); //  0 = single visit - 1 = double visit - 2 = triple visit
+                        $target = $data->taregetvisit ?? 0;
                         $contacts = $datacontact->count();
-                        $totalcontact[] = [$contacts,$datacontact,$namecontact,$target,$salfunnel];
-            }
+                        $totalcontact[] = [$contacts,$datacontact,$namecontact,$target,$salfunnel,$amdatacontact,$pmdatacontact];
+                        $totaltareget += $target; // Now this works because $totaltareget is an integer
+                        $totalcontacts += $contacts; // Now this works because $totaltareget is an integer
+                        $totalamdatacontact += $amdatacontact; // Now this works because $totaltareget is an integer
+                        $totalpmdatacontact += $pmdatacontact; // Now this works because $totaltareget is an integer
+                        $totalsingle += $single; // Now this works because $totaltareget is an integer
+                        $totaldouble += $double; // Now this works because $totaltareget is an integer
+                    }
         }
         $searched = [$from_time, $to_date,$list];
-        return view('admin.visit.indexlist',compact('totalcontact','datafirst','searched'));
+        return view('admin.visit.indexlist',compact('totalcontact','datafirst','searched',
+        'totaltareget','totalcontacts','totalamdatacontact','totalpmdatacontact','totalsingle','totaldouble'));
     }
     public function reportprod()
     {

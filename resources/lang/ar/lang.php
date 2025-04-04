@@ -96,6 +96,7 @@ return [
     "tax_id" => "الرقم الضريبى",
     "public" => "الجمهور",
     "pharmacist" => "صيدلى",
+    "created_at" => "تاريخ الانشاء",
 
     "saturday" => "السبت",
     "sunday" => "الاحد",

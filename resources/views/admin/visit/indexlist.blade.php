@@ -184,7 +184,14 @@
                         <!--begin::Table body-->
                         <tbody class="text-gray-600 fw-bold">
                             @if(isset($totalcontact))
-                            <tr><th colspan="3" class="fs-1 text-info">{{trans('lang.contact')}} ({{count($totalcontact)}})</th>
+                            <tr>
+                                <th class="fs-1 text-info"></th>
+                                <th class="fs-1 text-info text-center">{{trans('lang.contact')}} ({{count($totalcontact)}})</th>
+                                <th class="text-info text-center"><span class="fs-3 text-info">{{$totalcontacts}}</span><br><span>{{trans('lang.tareget')}}:({{$totaltareget}})/M</span></th>
+                                <th class="fs-1 text-info text-center">{{$totalamdatacontact}}</th>
+                                <th class="fs-1 text-info text-center">{{$totalpmdatacontact}}</th>
+                                <th class="fs-1 text-info text-center">{{$totalsingle}}</th>
+                                <th class="fs-1 text-info text-center">{{$totaldouble}}</th>
                             </tr>
                                 @foreach ( $totalcontact as $contact)
                                     <tr>

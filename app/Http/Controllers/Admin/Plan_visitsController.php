@@ -209,7 +209,8 @@ class Plan_visitsController extends Controller
     public function store(Request $request)
     {
         $rule = [
-            
+            'typevist_id' => 'required|numeric',
+            'center_id' => 'required|numeric'
         ];
 
         $validate = Validator::make($request->all(), $rule);
@@ -255,6 +256,8 @@ class Plan_visitsController extends Controller
     public function update(Request $request)
     {
         $rule = [
+            'typevist_id' => 'required|numeric',
+             'center_id' => 'required|numeric'
         ];
 
         $validate = Validator::make($request->all(), $rule);
@@ -265,15 +268,14 @@ class Plan_visitsController extends Controller
         $plan_visit = Plan_visit::find($request->id);
         $data = Plan_visit::where('id', $request->id)->update([
             'emp_id' => Auth::guard('admin')->user()->id,
-            // 'emphplan_id' => Auth::guard('admin')->user()->id,
-            // 'center_id' => $request->center_id,
-            // 'contact_id' => $request->contact_id,
-            // 'typevist_id' => $request->typevist_id,
-            // 'from_time' => $request->from_time,
-            // 'status_visit' => $request->status_visit,//0 = single visit - 1 = double visit - 2 = triple visit
-            // 'visit_emp_ass' => $request->status_visit != 0 ? json_encode($request->visit_emp_ass) : null,//json_encode($request->visit_emp_ass)
-            // 'note' => $request->note,
-            // 'status_return' => $request->status_return ?? 4,// 0 = done - 1 = canceld - 3 = delayed - 4 = planned
+            'center_id' => $request->center_id,
+            'contact_id' => $request->contact_id,
+            'typevist_id' => $request->typevist_id,
+            'from_time' => $request->from_time,
+            'status_visit' => $request->status_visit,//0 = single visit - 1 = double visit - 2 = triple visit
+            'visit_emp_ass' => $request->status_visit != 0 ? json_encode($request->visit_emp_ass) : null,//json_encode($request->visit_emp_ass)
+            'note' => $request->note,
+            'status_return' => $request->status_return ?? 4,// 0 = done - 1 = canceld - 3 = delayed - 4 = planned
             'status' => $request->status ,
         ]);
 

@@ -477,6 +477,7 @@ class ApiController extends Controller
             'gender' => 'required',
             'address' => 'required',
             'specialties' => 'required',
+            'socialstyle' => 'required',
             'note' => 'nullable',
             'type' => 'required'
         ];
@@ -493,7 +494,8 @@ class ApiController extends Controller
                 'phone' => $request->phone,
                 'gender' => $request->gender,
                 'address' => $request->address,
-                'specialties' => $request->specialties,
+                'speciality_id' => json_encode(array($request->specialties)),
+                'social_id' => $request->socialstyle,
                 'note' => $request->note ?? null,
                 'typecont_id' => $request->type,
                 'status' => $request->status ?? 0,
@@ -560,7 +562,7 @@ class ApiController extends Controller
         
     }
 
-    public function getCenter()
+    public function getCenter(Request $request)
     {
         $token = request()->header('token');
         $user = $this->check_api_token($token);
@@ -568,7 +570,14 @@ class ApiController extends Controller
             return response(['status' => 403, 'msg' => trans('auth.not_login'), 'data' => NULL]);
         }
 
-        $data = Center::where('status' , 0)->orderBy('id', 'DESC')->paginate(10);
+        $data = Center::where('status' , 0)->orderBy('id', 'DESC');
+
+        if ($request->search) {
+            $data = $data->where('name_en', 'LIKE', "%{$request->search}%");
+        }
+        
+        $data = $data->paginate(10);
+
         $results = CenterResource::collection($data)->response()->getData();
 
         if(count($data) == 0) {
@@ -579,7 +588,7 @@ class ApiController extends Controller
         
     }
 
-    public function getContact()
+    public function getContact(Request $request)
     {
         $token = request()->header('token');
         $user = $this->check_api_token($token);
@@ -587,7 +596,14 @@ class ApiController extends Controller
             return response(['status' => 403, 'msg' => trans('auth.not_login'), 'data' => NULL]);
         }
 
-        $data = Contact::where('status' , 0)->orderBy('id', 'DESC')->paginate(10);
+        $data = Contact::where('status' , 0)->orderBy('id', 'DESC');
+
+        if ($request->search) {
+            $data = $data->where('name_en', 'LIKE', "%{$request->search}%");
+        }
+        
+        $data = $data->paginate(10);
+
         $results = ContactResource::collection($data)->response()->getData();
 
         if(count($data) == 0) {

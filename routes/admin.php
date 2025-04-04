@@ -295,6 +295,8 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
             Route::post('/update', 'CentersController@update')->name('update');
             Route::post('/storetype','CentersController@storetype')->name('storetype');
             Route::post('/storeworkhour','CentersController@storeworkhour')->name('storeworkhour');
+            Route::get('/showlocation','CentersController@showlocation')->name('showlocation');
+
             
         });
 
@@ -668,6 +670,9 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
             Route::post('/storepermonesale','Bill_sale_headersController@storepermonesale')->name('storepermonesale');// can
             Route::get('/indexall','Bill_sale_headersController@indexall')->name('indexall'); // can
             Route::get('/getprodname/{id?}','Bill_sale_headersController@getprodname')->name('getprodname');
+            Route::get('/inactivesale/{id}', 'Bill_sale_headersController@inactivesale')->name('inactivesale');
+            Route::get('/activesale/{id}', 'Bill_sale_headersController@activesale')->name('activesale');
+
 
         });
 
@@ -681,6 +686,8 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
             Route::post('/update', 'Emp_bill_salesController@update')->name('update');
             Route::get('/indexempsearch','Emp_bill_salesController@indexempsearch')->name('indexempsearch');
             Route::get('/indexemp/{from_time?}/{to_date?}','Emp_bill_salesController@indexemp')->name('indexemp');
+            Route::get('/inactiveempsale/{id}', 'Emp_bill_salesController@inactiveempsale')->name('inactiveempsale');
+
 
         });
 

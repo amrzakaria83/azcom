@@ -132,6 +132,39 @@
                                             {{round(\App\Models\Emp_bill_sale::where('sale_id', $cont->id)->sum('percent'))}}%
                                         </td>
                                     </tr>
+                                    @php
+                                        $empbillsales = \App\Models\Emp_bill_sale::where('sale_id', $cont->id)->where('status', 0)->get(); // Fetch all records
+                                    @endphp
+
+                                    @if($empbillsales->count() > 0)
+                                        <tr>
+                                            <td colspan="6">
+                                                <table class="table table-row-dashed table-row-gray-500 gy-5 gs-5 mb-0">
+                                                    <thead>
+                                                        <tr class="fw-semibold fs-6 text-gray-800">
+                                                            <th colspan="4"></th>
+                                                            <th scope="col">{{ trans('lang.value') }}</th>
+                                                            <th scope="col">{{ trans('employee.employee') }}</th>
+                                                            <th scope="col">%</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($empbillsales as $empsale)
+                                                            <tr>
+                                                                <td colspan="4"></td>
+                                                                <td>{{ round($empsale->value) }}</td>
+                                                                <td>{{ $empsale->getemp->name_en }}</td>
+                                                                <td>{{ round($empsale->percent) }}</td> <!-- Assuming 'percent' is a column in Emp_bill_sale -->
+                                                                <td><a href="{{ route('admin.emp_bill_sales.inactiveempsale', $empsale->id) }}" class="btn btn-sm btn-icon btn-danger btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                                                    <i class="bi bi bi-x-circle-fill fs-1x"></i></a>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                             @endif
                             </tbody>

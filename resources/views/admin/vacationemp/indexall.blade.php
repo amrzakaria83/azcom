@@ -228,7 +228,7 @@
             searching: false,
             autoWidth: false,
             responsive: true,
-            pageLength: 10,
+            pageLength: 30,
             sort: false,
             dom: 'Bfrtip',
             buttons: [
@@ -238,11 +238,11 @@
                 //     text: 'طباعه'
                 // },
                 // {extend: 'pdf', className: 'btn btn-raised btn-danger', text: 'PDF'},
-                // {
-                //     extend: 'excel',
-                //     className: 'btn btn-sm btn-icon btn-success btn-active-dark me-3 p-3',
-                //     text: '<i class="bi bi-file-earmark-spreadsheet fs-1x"></i>'
-                // },
+                {
+                    extend: 'excel',
+                    className: 'btn btn-sm btn-icon btn-success btn-active-dark me-3 p-3',
+                    text: '<i class="bi bi-file-earmark-spreadsheet fs-1x"></i>'
+                },
                 //{extend: 'colvis', className: 'btn secondary', text: 'إظهار / إخفاء الأعمدة '}
             ],
             ajax: {
