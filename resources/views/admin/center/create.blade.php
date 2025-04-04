@@ -147,6 +147,7 @@
                                 <input type="text" name="address" placeholder="{{trans('employee.address')}}" value="" required class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
                             </div>
                         </div>
+                        
                         <div class="row mb-6">
                             <label class="col-lg-2 col-form-label required fw-semibold fs-3 text-info">lat</label>
                             <div class="col-lg-8 fv-row">
@@ -167,7 +168,6 @@
                                 <input type="text" name="map_location" placeholder="{{trans('lang.location_on_map')}}" value="" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
                             </div>
                         </div>
-
 
                         <div class="row mb-6">
                             <label class="col-lg-2 col-form-label fw-semibold fs-6">

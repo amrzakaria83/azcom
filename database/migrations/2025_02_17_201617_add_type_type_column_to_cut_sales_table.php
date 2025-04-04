@@ -24,6 +24,9 @@ return new class extends Migration
                     ->references('id')->on('areas')->onDelete('cascade')->comment('area_id');
             $table->string('lat')->nullable();
             $table->string('lng')->nullable();
+            $table->unsignedBigInteger('payment_method_id')->nullable();
+            $table->foreign('payment_method_id')
+                    ->references('id')->on('cust_payment_methods')->onDelete('cascade')->comment('payment_method_id');
 
         });
     }

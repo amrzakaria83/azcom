@@ -23,11 +23,16 @@ class Cut_sale extends Model
         'lat', 
         'lng', 
         'value',
+        'payment_method_id', // cust_payment_methods
         'note',
         'status',
     ];
     public function getarea()
     {
         return $this->belongsTo(Area::class, 'area_id');
+    }
+    public function getpaymethod()
+    {
+        return $this->belongsTo(Cust_payment_method::class, 'payment_method_id');
     }
 }

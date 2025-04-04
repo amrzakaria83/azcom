@@ -19,7 +19,7 @@
         <span class="h-20px border-gray-300 border-start mx-4"></span>
         <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
             <li class="breadcrumb-item text-muted px-2">
-                <a  href="{{route('admin.cut_sales.index')}}" class="text-muted text-hover-primary"></a>
+                <a  href="{{route('admin.cust_payment_methods.index')}}" class="text-muted text-hover-primary">{{trans('lang.type_type')}}</a>
             </li>
             <li class="breadcrumb-item">
                 <span class="bullet bg-gray-300 w-5px h-2px"></span>
@@ -37,69 +37,28 @@
 
     <div id="kt_app_content_container" class="app-container container-fluid">
         <div class="card mb-5 mb-xl-10">
+        <h1>
+            <span>{{trans('lang.type_type')}}-{{trans('lang.contact')}}-{{trans('lang.editview')}}</span>
+        </h1><br>
             <!--begin::Content-->
             <div id="kt_account_settings_profile_details" class="collapse show">
                 <!--begin::Form-->
-                <form action="{{route('admin.cut_sales.update')}}" method="POST" enctype="multipart/form-data" id="kt_account_profile_details_form" class="form">
+                <form action="{{route('admin.cust_payment_methods.update')}}" method="POST" enctype="multipart/form-data" id="kt_account_profile_details_form" class="form">
                     @csrf
                     <input type="hidden" name="id" value="{{$data->id}}" />
                     <!--begin::Card body-->
                     <div class="card-body border-top p-9">
 
                     <div class="row mb-6">
-                            <label class="col-lg-2 col-form-label required fw-semibold fs-3 text-info">{{trans('lang.name')}}</label>
+                            <label class="col-lg-2 col-form-label required fw-semibold fs-6">{{trans('lang.name')}}</label>
                             <div class="col-lg-8 fv-row">
                                 <input type="text" name="name_en" placeholder="{{trans('lang.name')}}" value="{{$data->name_en}}" required class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
                             </div>
                         </div>
-
                         <div class="row mb-6">
-                            <label class="col-lg-2 col-form-label required fw-semibold fs-3 text-info">{{trans('lang.payment_method')}} </label>
+                            <label class="col-lg-2 col-form-label  fw-semibold fs-6">{{trans('lang.color')}}</label>
                             <div class="col-lg-8 fv-row">
-                                <select  data-placeholder="Select an option" class=" input-text form-control  form-select  mb-3 mb-lg-0" value="{{$data->payment_method_id}}" name="payment_method_id">
-                                        @foreach (\App\Models\Cust_payment_method::where('status',0)->get() as $item)
-                                            <option value="{{$item->id}}" @if($data->payment_method_id === $item->id) selected  @endif >{{$item->name_en}}</option>
-                                        @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="row mb-6">
-                            <label class="col-lg-2 col-form-label fw-semibold fs-6">{{trans('lang.phone')}}</label>
-                            <div class="col-lg-8 fv-row">
-                                <input type="text" name="phone" placeholder="{{trans('lang.phone')}}" value="{{$data->phone}}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
-                            </div>
-                        </div>
-
-                        <div class="row mb-6">
-                            <label class="col-lg-2 col-form-label fw-semibold fs-6">{{trans('lang.address')}}</label>
-                            <div class="col-lg-8 fv-row">
-                                <input type="text" name="address" placeholder="{{trans('lang.address')}}" value="{{$data->address}}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
-                            </div>
-                        </div>
-
-                        <div class="row mb-6">
-                            <label class="col-lg-2 col-form-label fw-semibold fs-6">{{trans('lang.numb')}} {{trans('lang.tax')}}</label>
-                            <div class="col-lg-8 fv-row">
-                                <input type="text" name="tax_id" placeholder="{{trans('lang.numb')}} {{trans('lang.tax')}}" value="{{$data->tax_id}}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
-                            </div>
-                        </div>
-                        
-                        <div class="row mb-6">
-                            <label class="col-lg-2 col-form-label fw-semibold fs-6">{{trans('lang.balance')}}</label>
-                            <div class="col-lg-8 fv-row">
-                                <input type="text" name="value" placeholder="{{trans('lang.value')}}" value="{{$data->value}}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
-                            </div>
-                        </div>
-
-                        <div class="row mb-6">
-                            <label class="col-lg-2 col-form-label required fw-semibold fs-3 text-info">{{trans('lang.area')}} </label>
-                            <div class="col-lg-8 fv-row">
-                                <select  data-placeholder="Select an option" class=" input-text form-control  form-select  mb-3 mb-lg-0" value="{{$data->area_id}}" name="area_id">
-                                        @foreach (\App\Models\Area::where('status',0)->get() as $item)
-                                            <option value="{{$item->id}}" @if($data->area_id === $item->id) selected disabled @endif >{{$item->name_en}}</option>
-                                        @endforeach
-                                </select>
+                            <input type="color" id="favcolor" name="favcolor" value="{{$data->favcolor}}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0">
                             </div>
                         </div>
 
@@ -119,7 +78,6 @@
                                 </select>
                             </div>
                         </div>
-
 
                         
 

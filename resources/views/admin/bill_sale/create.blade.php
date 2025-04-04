@@ -57,7 +57,7 @@
                                     <select  data-placeholder="Select an option" class="input-text form-control form-select mb-3 mb-lg-0 text-center" id="cut_sale" name="cut_sale" data-control="select2" >
                                         <option  disabled selected>Select an option</option>
                                             @foreach (\App\Models\Cut_sale::where('status' , 0)->get() as $asd)
-                                                <option value="{{$asd->id}}" >{{$asd->name_en}}</option>
+                                                <option value="{{$asd->id}}" data-custpa="{{$asd->getpaymethod->name_en}}" >{{$asd->name_en}}</option>
                                                 @endforeach
                                     </select>
                                 </div>
@@ -92,6 +92,14 @@
                         </div>
 
                         <div class="row mb-6">
+
+                            <div class="col-sm-4">
+                                <label class="form-label">{{trans('employee.method_for_payment')}}</label>
+                                <div class="col-lg-12 fv-row">
+                                    <input type="text" name="method_for_payment" id="method_for_payment" placeholder="{{trans('employee.method_for_payment')}}" value="" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
+                                <span id="namemethod"></span>
+                                </div>
+                            </div>
                             <!-- <label class="col-lg-2 col-form-label fw-semibold fs-6">{{trans('lang.note')}}</label> -->
                             <div class="col-sm-4">
                                 <label class="form-label">{{trans('lang.note')}}</label>
@@ -99,12 +107,7 @@
                                     <input type="text" name="note" placeholder="{{trans('lang.note')}}" value="" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
                                 </div>
                             </div>
-                            <div class="col-sm-4">
-                                <label class="form-label">{{trans('employee.method_for_payment')}}</label>
-                                <div class="col-lg-12 fv-row">
-                                    <input type="text" name="method_for_payment" placeholder="{{trans('employee.method_for_payment')}}" value="" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
-                                </div>
-                            </div>
+                            
                             <div class="col-sm-4">
                                 <label class="form-label">{{trans('lang.status')}}</label>
                                 <div class="col-lg-12 fv-row">
@@ -250,7 +253,17 @@
         // Set the value of cut_sale_id to the selected value of cut_sale
         $('#cut_sale_id').val(cut_sale_value);
 
+        // Get the selected option element
+        var selectedOption = $(this).find('option:selected');
+    
+        // Get the data-custpa attribute value from the selected option
+        var custpaValue = selectedOption.data('custpa');
         // Disable the cut_sale dropdown
+        var paymentmethod = document.getElementById("method_for_payment");
+        
+        // $('#method_for_payment').text(custpaValue);
+        $('#method_for_payment').val(custpaValue).prop('hidden', true);
+                $('#namemethod').text(custpaValue);
         $(this).prop('disabled', true);
     });
     $('#sale_type').on('change', function() {

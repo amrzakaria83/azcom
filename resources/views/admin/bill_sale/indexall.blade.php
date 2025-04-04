@@ -104,7 +104,7 @@
 
                     </div>
                     <div class="row mb-6">
-                    <div class="col-sm-4">
+                        <div class="col-sm-4">
                             <label class="col-sm-2 fw-semibold fs-6 mb-2">{{trans('lang.area')}}</label>
                                 <div class="col-sm-6 fv-row">
                                     <select  data-placeholder="Select an option" class="input-text form-control form-select mb-3 mb-lg-0 text-center" id="area_id" name="area_id[]" multiple="multiple" data-control="select2" >
@@ -126,6 +126,7 @@
                                     </select>
                             </div>
                         </div>
+                    </div>
                     <div class="row mb-6">
                         <!--begin::Table-->
                         <table class="table align-middle table-rounded table-striped table-row-dashed fs-6" id="kt_datatable_table">

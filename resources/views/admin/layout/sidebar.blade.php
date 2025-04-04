@@ -316,13 +316,13 @@
                                 </div>
                             </div>
 
-                            <div class="menu-item px-3">
+                            <!-- <div class="menu-item px-3">
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.bill_sales.indexall')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
                                     <span class="menu-title">{{trans('lang.bills_of_sale')}}-{{trans('lang.all')}}</span></a>
                                 </div>
-                            </div>
+                            </div> -->
 <!--                             
                             <div class="menu-item px-3">
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">

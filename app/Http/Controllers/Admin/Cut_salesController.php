@@ -194,6 +194,7 @@ class Cut_salesController extends Controller
                 'area_id' => $datacenter->area_id ?? null,
                 'lat' => $request->lat ?? null,
                 'lng' => $request->lng ?? null,
+                'payment_method_id' => $request->payment_method_id ?? null,
                 'note' => $datacenter->note,
                 'status' => $datacenter->status ?? 0,
                 'value' => $request->value ?? 0,
@@ -210,10 +211,14 @@ class Cut_salesController extends Controller
                 'address' => $request->address,
                 'email' => $request->email,
                 'tax_id' => $request->tax_id,
+                'area_id' => $request->area_id ?? null,
                 'note' => $request->note,
                 'status' => $request->status ?? 0,
                 'value' => $request->value ?? 0,
-                
+                'lat' => $request->lat ?? null,
+                'lng' => $request->lng ?? null,
+                'payment_method_id' => $request->payment_method_id ?? null,
+
             ]);
     
             // if($request->hasFile('photo') && $request->file('photo')->isValid()){

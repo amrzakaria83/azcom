@@ -721,6 +721,17 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
             Route::post('/update', 'Event_attsController@update')->name('update');
 
         });
+
+        Route::name('cust_payment_methods.')->prefix('cust_payment_methods')->group(function(){
+            Route::get('/','Cust_payment_methodsController@index')->name('index');
+            Route::get('/show/{id}','Cust_payment_methodsController@show')->name('show');//->can('')
+            Route::post('/delete', 'Cust_payment_methodsController@destroy')->name('delete');
+            Route::get('/create','Cust_payment_methodsController@create')->name('create');
+            Route::post('/store','Cust_payment_methodsController@store')->name('store');
+            Route::get('/edit/{id}', 'Cust_payment_methodsController@edit')->name('edit');//->can('')
+            Route::post('/update', 'Cust_payment_methodsController@update')->name('update');
+            
+        });
     });
     
 });

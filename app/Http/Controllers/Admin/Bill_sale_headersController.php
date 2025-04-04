@@ -26,8 +26,8 @@ class Bill_sale_headersController extends Controller
     public function index(Request $request)
     {
         $data = Bill_sale_header::get();
-// 0 = request - 1 = approved - 2 = somecancell - 3 = all cancel - 4 = under deliverd - 5 = deliverd - 6 = Under collection 
-// - 7 = some paied - 8 = total paied
+        // 0 = request - 1 = approved - 2 = somecancell - 3 = all cancel - 4 = under deliverd - 5 = deliverd - 6 = Under collection 
+        // - 7 = some paied - 8 = total paied
 
         if ($request->ajax()) {
             $data = Bill_sale_header::query();
@@ -63,10 +63,11 @@ class Bill_sale_headersController extends Controller
                 ->addColumn('status_requ', function($row){
                     $status_requ = '';
                     $reqstatus = $row->status_requ;
+                    
                     if($reqstatus === 0 ){
                         $status_requ .='<a href="'.route('admin.bill_sales.editsalehead', $row->id).'" class="" data-kt-menu-trigger="click" data-kt-menu-placement="">';
                         $status_requ .='<span class="text-info fs-3">'.trans('lang.request').'</span>';
-                         $status_requ .= '</a>';
+                        $status_requ .='</a>';
                     } elseif($reqstatus === 1){
                         $status_requ .='<span class="text-success fs-3">'.trans('lang.approved').'</span>';
 
@@ -93,7 +94,6 @@ class Bill_sale_headersController extends Controller
 
                     }
                     
-
                     return $status_requ;
                 })
                 ->addColumn('note', function($row){
@@ -215,7 +215,7 @@ class Bill_sale_headersController extends Controller
                         });
                     }
                 })
-                ->rawColumns(['name_en','description','note','status_order','status','countprod','totalsellprice','is_active','checkbox','actions'])
+                ->rawColumns(['name_en','description','note','status_order','status_requ','status','countprod','totalsellprice','is_active','checkbox','actions'])
                 ->make(true);
         }
         return view('admin.bill_sale.index');
@@ -685,6 +685,7 @@ class Bill_sale_headersController extends Controller
         $data->update([
             'emp_id' => Auth::guard('admin')->user()->id,
             'status' => 1,
+            'status_requ' => 3,
         ]);
 
         return redirect('admin/bill_sales')->with('message', 'Modified successfully')->with('status', 'success');
