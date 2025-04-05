@@ -204,6 +204,9 @@ return [
     "balance" => "Balance",
     "payment_method" => "Payment Method",
     "delivered" => "Delivered",
+    "status_request" => "Status Request",
+    "cust_collection" => "Customer Collection",
+    "refund_cause" => "Refund Cause",
 
     ###########   Dashboard Lang   ###########
 

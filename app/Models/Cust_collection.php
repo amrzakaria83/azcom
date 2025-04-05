@@ -6,26 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Trans_cust extends Model
+class Cust_collection extends Model
 {
-    // model_name is 1- 'Cust_collection' 2 - 'Refund_sale'
     use HasFactory, SoftDeletes;
     protected $fillable = [
         'emp_id', // emp_add
         'cust_id',
-        'model_name', 
-        'id_model', 
-        'total_value', // required
-        'status_trans', // 0 = increased creadite - 1 = decreased creadite 
+        'value',
         'note',
-        'value_befor',
+        'balance_befor', // balance for Cut_sale is  value
         'status',
-        'detal_cash',// json
-        
     ];
     public function getcust()
     {
-        return $this->belongsTo(Customer::class, 'cust_id');
+        return $this->belongsTo(Cut_sale::class, 'cust_id');
     }
 
 }

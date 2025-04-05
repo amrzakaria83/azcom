@@ -480,7 +480,7 @@ class Bill_sale_headersController extends Controller
                         $status_requ .='<span class="text-info fs-3">'.trans('lang.under_delevery').'</span>';
 
                     } elseif($reqstatus === 5){
-                        $status_requ .='<span class="text-info fs-3">'.trans('lang.under_collection').'</span>';
+                        $status_requ .='<span class="text-info fs-3">'.trans('lang.delivered').'</span>';
 
                     } elseif($reqstatus === 6){
                         $status_requ .='<span class="text-info fs-3">'.trans('lang.some_paied').'</span>';
@@ -805,7 +805,8 @@ class Bill_sale_headersController extends Controller
                 })
                 ->addColumn('totalsellprice', function($row){
 
-                    $totalsellprice = '<span class="text-success fs-3">'.round($row->totalsellprice).'</span><br>';
+                    $totalsellprice = '<span class="text-success fs-3">'.round($row->approv_sellprice).'</span><br>';
+                    $totalsellprice .= '<span class="text-info fs-6">('.round($row->totalsellprice).')</span>';
                     
                     return $totalsellprice;
                 })
@@ -889,7 +890,7 @@ class Bill_sale_headersController extends Controller
             'status_requ' => 5,// 0 = request - 1 = approved - 2 = somecancell - 3 = all cancel - 4 = under deliverd - 5 = deliverd - 6 = Under collection - 7 = some paied - 8 = total paied
         ]);
 
-        return redirect('admin/bill_sales')->with('message', 'Modified successfully')->with('status', 'success');
+        return redirect()->back()->with('message', 'Modified successfully')->with('status', 'success');
     }
  
 }

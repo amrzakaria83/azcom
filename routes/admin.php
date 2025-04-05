@@ -734,6 +734,27 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
             Route::post('/update', 'Cust_payment_methodsController@update')->name('update');
             
         });
+
+        Route::name('cust_collections.')->prefix('cust_collections')->group(function(){
+            Route::get('/','Cust_collectionsController@index')->name('index');
+            Route::get('/show/{id}','Cust_collectionsController@show')->name('show');
+            Route::post('/delete', 'Cust_collectionsController@destroy')->name('delete');
+            Route::get('/create','Cust_collectionsController@create')->name('create');
+            Route::post('/store','Cust_collectionsController@store')->name('store');
+            Route::get('/edit/{id}', 'Cust_collectionsController@edit')->name('edit');
+            Route::post('/update', 'Cust_collectionsController@update')->name('update');
+            
+        });
+        Route::name('refund_causes.')->prefix('refund_causes')->group(function(){
+            Route::get('/','Refund_causesController@index')->name('index');
+            Route::get('/show/{id}','Refund_causesController@show')->name('show');
+            Route::post('/delete', 'Refund_causesController@destroy')->name('delete');
+            Route::get('/create','Refund_causesController@create')->name('create');
+            Route::post('/store','Refund_causesController@store')->name('store');
+            Route::get('/edit/{id}', 'Refund_causesController@edit')->name('edit');
+            Route::post('/update', 'Refund_causesController@update')->name('update');
+            
+        });
     });
     
 });

@@ -361,6 +361,22 @@
                                     <span class="menu-title">{{trans('lang.bills_of_sale')}}-{{trans('lang.type_type')}}-{{trans('lang.all')}}</span></a>
                                 </div>
                             </div>
+
+                            <div class="menu-item px-3">
+                                <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
+                                    <a class="menu-link" href="{{route('admin.refund_causes.create')}}">
+                                    <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
+                                    <span class="menu-title">{{trans('lang.refund_cause')}}-{{trans('lang.addnew')}}</span></a>
+                                </div>
+                            </div>
+
+                            <div class="menu-item px-3">
+                                <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
+                                    <a class="menu-link" href="{{route('admin.refund_causes.index')}}">
+                                    <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
+                                    <span class="menu-title">{{trans('lang.refund_cause')}}-{{trans('lang.all')}}</span></a>
+                                </div>
+                            </div>
                             <!--end::Menu item-->
                     </div>
             </div>
@@ -386,6 +402,14 @@
                                     <a class="menu-link" href="{{route('admin.cut_sales.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
                                     <span class="menu-title">{{trans('lang.customer')}}-{{trans('lang.addnew')}}</span></a>
+                                </div>
+                            </div>
+
+                            <div class="menu-item px-3">
+                                <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
+                                    <a class="menu-link" href="{{route('admin.cust_collections.create')}}">
+                                    <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
+                                    <span class="menu-title">{{trans('lang.cust_collection')}}</span></a>
                                 </div>
                             </div>
                             

@@ -197,7 +197,10 @@ return [
     "check_out" => "خروج",
     "balance" => "الرصيد",
     "payment_method" => "طريقة السداد",
+    "status_request" => "حالة الطلب",
 
+    "cust_collection" => "تحصيل عميل",
+    "refund_cause" => "سبب ارتجاع",
 
 
     ###########   Dashboard Lang   ###########
