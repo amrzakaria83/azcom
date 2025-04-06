@@ -201,6 +201,7 @@ return [
 
     "cust_collection" => "تحصيل عميل",
     "refund_cause" => "سبب ارتجاع",
+    "returns" => "مرتجعات",
 
 
     ###########   Dashboard Lang   ###########

@@ -64,7 +64,7 @@
                             </div>
                         
 
-                        <div class="row mb-6">
+                        <div class="row mb-6" style="visibility: hidden;">
                             <label class="col-lg-2 col-form-label fw-semibold fs-6">{{trans('lang.balance')}}</label>
                             <div class="col-lg-8 fv-row">
                                 <input type="hidden" id="cust_id" name="cust_id" value="" />

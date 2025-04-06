@@ -106,7 +106,7 @@ class Refund_causesController extends Controller
     {
         
         $rule = [
-            'cust_id' => 'required',
+            'name_en' => 'required',
         ];
 
         $validate = Validator::make($request->all(), $rule);
@@ -142,7 +142,7 @@ class Refund_causesController extends Controller
     public function update(Request $request)
     {
         $rule = [
-            'cust_id' => 'required',
+            'name_en' => 'required',
         ];
 
         $validate = Validator::make($request->all(), $rule);

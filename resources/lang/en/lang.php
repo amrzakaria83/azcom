@@ -207,6 +207,7 @@ return [
     "status_request" => "Status Request",
     "cust_collection" => "Customer Collection",
     "refund_cause" => "Refund Cause",
+    "returns" => "Returns",
 
     ###########   Dashboard Lang   ###########
 

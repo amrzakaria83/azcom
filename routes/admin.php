@@ -755,6 +755,17 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
             Route::post('/update', 'Refund_causesController@update')->name('update');
             
         });
+
+        Route::name('refund_sales.')->prefix('refund_sales')->group(function(){
+            Route::get('/','Refund_salesController@index')->name('index');
+            Route::get('/show/{id}','Refund_salesController@show')->name('show');
+            Route::post('/delete', 'Refund_salesController@destroy')->name('delete');
+            Route::get('/create','Refund_salesController@create')->name('create');
+            Route::post('/store','Refund_salesController@store')->name('store');
+            Route::get('/edit/{id}', 'Refund_salesController@edit')->name('edit');
+            Route::post('/update', 'Refund_salesController@update')->name('update');
+            
+        });
     });
     
 });

@@ -21,7 +21,7 @@
         <span class="h-20px border-gray-300 border-start mx-4"></span>
         <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
             <li class="breadcrumb-item text-muted px-2">
-                <a  href="#" class="text-muted text-hover-primary"></a>
+                <a  href="#" class="text-muted text-hover-primary">{{trans('lang.type_type')}}</a>
             </li>
             {{-- <li class="breadcrumb-item">
                 <span class="bullet bg-gray-300 w-5px h-2px"></span>
@@ -55,15 +55,15 @@
                     <div class="card-toolbar">
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end dbuttons">
-                            <a href="{{route('admin.cut_sales.create')}}" class="btn btn-sm btn-icon btn-primary btn-active-dark me-3 p-3">
+                            <a href="{{route('admin.type_visits.create')}}" class="btn btn-sm btn-icon btn-primary btn-active-dark me-3 p-3">
                                 <i class="bi bi-plus-square fs-1x"></i>
                             </a>
-                            <button type="button" class="btn btn-sm btn-icon btn-primary btn-active-dark me-3 p-3" data-bs-toggle="modal" data-bs-target="#kt_modal_filter">
+                            <!-- <button type="button" class="btn btn-sm btn-icon btn-primary btn-active-dark me-3 p-3" data-bs-toggle="modal" data-bs-target="#kt_modal_filter">
                                 <i class="bi bi-funnel-fill fs-1x"></i>
-                            </button>
-                            <button type="button" class="btn btn-sm btn-icon btn-danger btn-active-dark me-3 p-3" id="btn_delete" data-token="{{ csrf_token() }}">
+                            </button> -->
+                            <!-- <button type="button" class="btn btn-sm btn-icon btn-danger btn-active-dark me-3 p-3" id="btn_delete" data-token="{{ csrf_token() }}">
                                 <i class="bi bi-trash3-fill fs-1x"></i>
-                            </button>
+                            </button> -->
                         </div>
                     </div>
                     <!--end::Card toolbar-->
@@ -83,10 +83,6 @@
                                     </div>
                                 </th>
                                 <th class="min-w-125px text-start">{{trans('lang.name')}}</th>
-                                <!-- <th class="min-w-125px text-start">{{trans('lang.balance')}}</th> -->
-                                <th class="min-w-125px text-start">{{trans('lang.status')}}</th>
-                                <th class="min-w-125px text-start">{{trans('lang.phone')}}</th>
-                                <th class="min-w-125px text-start">{{trans('lang.area')}}</th>
                                 <th class="min-w-125px text-start">{{trans('lang.note')}}</th>
                                 <th class="min-w-125px text-start">{{trans('employee.is_active')}}</th>
                                 <th class="min-w-125px text-start">{{trans('employee.action')}}</th>
@@ -207,7 +203,7 @@
                 //{extend: 'colvis', className: 'btn secondary', text: 'إظهار / إخفاء الأعمدة '}
             ],
             ajax: {
-                url: "{{ route('admin.cut_sales.index') }}",
+                url: "{{ route('admin.refund_sales.index') }}",
                 data: function (d) {
                     d.is_active = $('#is_active').val(),
                     d.center_id = $('#center_id').val(),
@@ -217,10 +213,6 @@
             columns: [
                 {data: 'checkbox', name: 'checkbox'},
                 {data: 'name_en', name: 'name_en'},
-                // {data: 'value', name: 'value'},
-                {data: 'type_type', name: 'type_type'},
-                {data: 'phone', name: 'phone'},
-                {data: 'area_id', name: 'area_id'},
                 {data: 'note', name: 'note'},
                 {data: 'is_active', name: 'is_active'},
                 {data: 'actions', name: 'actions'},
@@ -261,7 +253,7 @@
                     if (isConfirm.value) {
                         $.ajax(
                         {
-                            url: "{{route('admin.employees.delete')}}",
+                            url: "{{route('admin.refund_sales.delete')}}",
                             type: 'post',
                             dataType: "JSON",
                             data: {
