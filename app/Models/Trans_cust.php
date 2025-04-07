@@ -25,7 +25,7 @@ class Trans_cust extends Model
     ];
     public function getcust()
     {
-        return $this->belongsTo(Customer::class, 'cust_id');
+        return $this->belongsTo(Cut_sale::class, 'cust_id');
     }
 
 }

@@ -208,6 +208,8 @@ return [
     "cust_collection" => "Customer Collection",
     "refund_cause" => "Refund Cause",
     "returns" => "Returns",
+    "transactions" => "Transactions",
+    "not_defined" => "Not Defined",
 
     ###########   Dashboard Lang   ###########
 

@@ -711,6 +711,7 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
             Route::post('/store','Trans_custsController@store')->name('store');
             Route::get('/edit/{id}', 'Trans_custsController@edit')->name('edit');
             Route::post('/update', 'Trans_custsController@update')->name('update');
+            Route::get('/showrefund_sale/{id}','Trans_custsController@showrefund_sale')->name('showrefund_sale');
             
         });
         Route::name('event_atts.')->prefix('event_atts')->group(function(){
@@ -764,6 +765,7 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
             Route::post('/store','Refund_salesController@store')->name('store');
             Route::get('/edit/{id}', 'Refund_salesController@edit')->name('edit');
             Route::post('/update', 'Refund_salesController@update')->name('update');
+           
             
         });
     });

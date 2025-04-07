@@ -148,81 +148,81 @@
                         </div>
 
                         <div class="col-lg-12 fv-row">
-    <div class="table-responsive">
-        <table class="table align-middle table-rounded table-striped table-row-dashed fs-6" id="kt_datatable_tabletemp">
-            <thead>
-                <tr class="text-start text-dark fw-bold fs-4 text-uppercase gs-0">
-                    <th class="min-w-125px text-center">{{trans('lang.products')}}</th>
-                    <th class="min-w-125px text-center">{{trans('lang.quantity')}}</th>
-                    <th class="min-w-125px text-center">{{trans('lang.sell_price')}} {{trans('lang.public')}} {{trans('lang.unit')}}</th>
-                    <th class="min-w-125px text-center">{{trans('lang.discount_rate')}} {{trans('lang.pharmacist')}}</th>
-                    <th class="min-w-125px text-center">{{trans('lang.sell_price')}} {{trans('lang.pharmacist')}} {{trans('lang.unit')}}</th>
-                    <th class="min-w-125px text-center">{{trans('lang.total')}} {{trans('lang.pharmacist')}}</th>
-                    <th class="min-w-125px text-center">Action</th>
-                </tr>
-            </thead>
-            <tbody class="text-gray-600 fw-bold text-center" >
-                <!-- Repeater list starts here -->
-                <tr id="kt_docs_repeater_basic" >
-                <tr data-repeater-list="kt_docs_repeater_basic">
-                    <!-- Repeater item (each row) -->
-                    <tr data-repeater-item>
-                        <td>
-                            <select data-placeholder="Select an option"  class="input-text form-control form-select mb-3 mb-lg-0 text-center product-select" id="product_id" name="product_id" data-kt-repeater="select2" data-control="select2">
-                                <option disabled selected>Select an option</option>
-                                @foreach (\App\Models\Product::where('status', 0)->get() as $contac)
-                                    <option value="{{$contac->id}}">{{$contac->name_en}}</option>
-                                @endforeach
-                            </select>
-                        </td>
-                        <td><input type="number" class="form-control mb-2 mb-md-0 text-center quantity-input"  placeholder="Number" value="1" data-kt-repeater="quantityproduc" id="quantityproduc" name="quantityproduc"/></td>
-                        <td><input type="number" class="form-control mb-2 mb-md-0 text-center price-input"  placeholder="Number" data-kt-repeater="sellpriceproduct" id="sellpriceproduct" name="sellpriceproduct"/></td>
-                        <td>
-                            <div class="input-group mb-0">
-                                <span class="input-group-text"><i class="fas fa-percentage"></i></span>
-                                <input type="number" class="form-control mb-2 mb-md-0 text-center percent-input"  placeholder="%" data-kt-repeater="percent" id="percent" name="percent"/>
+                            <div class="table-responsive">
+                                <table class="table align-middle table-rounded table-striped table-row-dashed fs-6" id="kt_datatable_tabletemp">
+                                    <thead>
+                                        <tr class="text-start text-dark fw-bold fs-4 text-uppercase gs-0">
+                                            <th class="min-w-125px text-center">{{trans('lang.products')}}</th>
+                                            <th class="min-w-125px text-center">{{trans('lang.quantity')}}</th>
+                                            <th class="min-w-125px text-center">{{trans('lang.sell_price')}} {{trans('lang.public')}} {{trans('lang.unit')}}</th>
+                                            <th class="min-w-125px text-center">{{trans('lang.discount_rate')}} {{trans('lang.pharmacist')}}</th>
+                                            <th class="min-w-125px text-center">{{trans('lang.sell_price')}} {{trans('lang.pharmacist')}} {{trans('lang.unit')}}</th>
+                                            <th class="min-w-125px text-center">{{trans('lang.total')}} {{trans('lang.pharmacist')}}</th>
+                                            <th class="min-w-125px text-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-gray-600 fw-bold text-center" >
+                                        <!-- Repeater list starts here -->
+                                        <tr id="kt_docs_repeater_basic" >
+                                        <tr data-repeater-list="kt_docs_repeater_basic">
+                                            <!-- Repeater item (each row) -->
+                                            <tr data-repeater-item>
+                                                <td>
+                                                    <select data-placeholder="Select an option"  class="input-text form-control form-select mb-3 mb-lg-0 text-center product-select" id="product_id" name="product_id" data-kt-repeater="select2" data-control="select2">
+                                                        <option disabled selected>Select an option</option>
+                                                        @foreach (\App\Models\Product::where('status', 0)->get() as $contac)
+                                                            <option value="{{$contac->id}}">{{$contac->name_en}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td><input type="number" class="form-control mb-2 mb-md-0 text-center quantity-input"  placeholder="Number" value="1" data-kt-repeater="quantityproduc" id="quantityproduc" name="quantityproduc"/></td>
+                                                <td><input type="number" class="form-control mb-2 mb-md-0 text-center price-input"  placeholder="Number" data-kt-repeater="sellpriceproduct" id="sellpriceproduct" name="sellpriceproduct"/></td>
+                                                <td>
+                                                    <div class="input-group mb-0">
+                                                        <span class="input-group-text"><i class="fas fa-percentage"></i></span>
+                                                        <input type="number" class="form-control mb-2 mb-md-0 text-center percent-input"  placeholder="%" data-kt-repeater="percent" id="percent" name="percent"/>
+                                                    </div>
+                                                </td>
+                                                <td><input type="number" class="form-control mb-2 mb-md-0 text-center price-ph-input"  placeholder="Number" data-kt-repeater="sellpriceph" id="sellpriceph" name="sellpriceph"/></td>
+                                                <td><input type="number" class="form-control mb-2 mb-md-0 text-center total-input"  placeholder="Number" value="0" data-kt-repeater="sellpricetotal" id="sellpricetotal" name="sellpricetotal" disabled/></td>
+                                                <td>
+                                                <input type="button" value="{{trans('lang.add')}}" id="add-item" class="btn btn-success"/>
+                                                    <!-- <input data-repeater-delete type="button" value="Delete" class="btn btn-sm btn-light-danger mt-3 mt-md-8"/> -->
+                                                </td>
+                                            </tr>
+                                            </tr>
+                                        </tr>
+                                        <!-- Repeater list ends here -->
+                                    </tbody>
+                                
+                                </table>
                             </div>
-                        </td>
-                        <td><input type="number" class="form-control mb-2 mb-md-0 text-center price-ph-input"  placeholder="Number" data-kt-repeater="sellpriceph" id="sellpriceph" name="sellpriceph"/></td>
-                        <td><input type="number" class="form-control mb-2 mb-md-0 text-center total-input"  placeholder="Number" value="0" data-kt-repeater="sellpricetotal" id="sellpricetotal" name="sellpricetotal" disabled/></td>
-                        <td>
-                        <input type="button" value="{{trans('lang.add')}}" id="add-item" class="btn btn-success"/>
-                            <!-- <input data-repeater-delete type="button" value="Delete" class="btn btn-sm btn-light-danger mt-3 mt-md-8"/> -->
-                        </td>
-                    </tr>
-                    </tr>
-                </tr>
-                <!-- Repeater list ends here -->
-            </tbody>
-           
-        </table>
-    </div>
-</div>
+                        </div>
                         <div class="row mb-6">
-                        <div class="table-responsive">
-        <table class="table align-middle table-rounded table-striped table-row-dashed fs-6" id="kt_datatable_tabletemp">
-            <thead>
-                <tr class="text-start text-dark fw-bold fs-4 text-uppercase gs-0">
-                    <th class="min-w-125px text-center">{{trans('lang.products')}}</th>
-                    <th class="min-w-125px text-center">{{trans('lang.quantity')}}</th>
-                    <th class="min-w-125px text-center">{{trans('lang.sell_price')}} {{trans('lang.public')}} {{trans('lang.unit')}}</th>
-                    <th class="min-w-125px text-center">{{trans('lang.discount_rate')}} {{trans('lang.pharmacist')}}</th>
-                    <th class="min-w-125px text-center">{{trans('lang.sell_price')}} {{trans('lang.pharmacist')}} {{trans('lang.unit')}}</th>
-                    <th class="min-w-125px text-center">{{trans('lang.total')}} {{trans('lang.pharmacist')}}</th>
-                    <th class="min-w-125px text-center">Action</th>
-                </tr>
-            </thead>
-            <input type="hidden" id="tempsaleparent" name="tempsaleparent" value="[]" />
+                            <div class="table-responsive">
+                                <table class="table align-middle table-rounded table-striped table-row-dashed fs-6" id="kt_datatable_tabletemp">
+                                    <thead>
+                                        <tr class="text-start text-dark fw-bold fs-4 text-uppercase gs-0">
+                                            <th class="min-w-125px text-center">{{trans('lang.products')}}</th>
+                                            <th class="min-w-125px text-center">{{trans('lang.quantity')}}</th>
+                                            <th class="min-w-125px text-center">{{trans('lang.sell_price')}} {{trans('lang.public')}} {{trans('lang.unit')}}</th>
+                                            <th class="min-w-125px text-center">{{trans('lang.discount_rate')}} {{trans('lang.pharmacist')}}</th>
+                                            <th class="min-w-125px text-center">{{trans('lang.sell_price')}} {{trans('lang.pharmacist')}} {{trans('lang.unit')}}</th>
+                                            <th class="min-w-125px text-center">{{trans('lang.total')}} {{trans('lang.pharmacist')}}</th>
+                                            <th class="min-w-125px text-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <input type="hidden" id="tempsaleparent" name="tempsaleparent" value="[]" />
 
-            <input type="hidden" id="parent_id" name="parent_id" value="" />
-            <tbody class="text-gray-600 fw-bold text-center" id="kt_datatable_tabletemptbody">
-            
+                                    <input type="hidden" id="parent_id" name="parent_id" value="" />
+                                    <tbody class="text-gray-600 fw-bold text-center" id="kt_datatable_tabletemptbody">
+                                    
 
-            </tbody>
-           
-        </table>
-    </div>
-</div>
+                                    </tbody>
+                                
+                                </table>
+                            </div>
+                        </div>
                         </div>
                     </div>
 

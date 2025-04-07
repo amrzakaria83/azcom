@@ -42,39 +42,88 @@
 
             <div class="card-body p-9">
 
-                <div class="row mb-8">
-                    <div class="col-xl-2">
-                        <div class="fs-6 fw-semibold">{{trans('lang.name')}} </div>
-                    </div>
-                    <div class="col-lg-9">
-                        <div class="fw-bold fs-5">{{$data->name_en}}</div>
-                    </div>
-                </div>
+           
+                <div class="row mb-6">
+                            <div class="table-responsive">
+                                <table class="table align-middle table-rounded table-striped table-row-dashed fs-6" id="kt_datatable_tabletemp">
+                                    <thead>
+                                        <tr class="text-start text-dark fw-bold fs-4 text-uppercase gs-0">
+                                            <th class="min-w-125px text-center">{{trans('lang.customer')}}</th>
+                                            <th class="min-w-125px text-center">{{trans('lang.refund_cause')}}</th>
+                                            <th class="min-w-125px text-center">{{trans('lang.note')}}</th>
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody class="text-gray-600 fw-bold text-center" id="kt_datatable_tabletemptbody">
+                                    @if(isset($datareffirst))
+                                        <tr>
+                                            <td>
+                                                {{$datareffirst->getcust->name_en}}
+                                            </td>
+                                            <td>
+                                            {{ $datareffirst->getrefcause->name_en ?? 'no' }}
+                                            </td>
+                                            <td>
+                                                {{$datareffirst->note}}
+                                            </td>
+                                        </tr>
+                                    @endif
 
-                <div class="row mb-8">
-                    <div class="col-xl-2">
-                        <div class="fs-6 fw-semibold">{{trans('lang.note')}} </div>
-                    </div>
-                    <div class="col-xl-9 fv-row">
-                        <div class="fw-bold fs-5">{{$data->note}}</div>
-                    </div>
-                </div>
+                                    </tbody>
+                                
+                                </table>
+                            </div>
+                        </div>
+                        <div class="separator separator-content border-dark my-15"><span class="w-250px fw-bold text-info fs-1">{{trans('lang.products')}}</span></div>
 
-                <div class="row mb-8">
-                    <div class="col-xl-2">
-                        <div class="fs-6 fw-semibold">{{trans('employee.is_active')}} </div>
-                    </div>
-                    <div class="col-lg-9">
-                        <!-- <div class="fw-bold fs-5">{{$data->is_active}}</div> -->
-                        @if($data->is_active === '0')
-                                <div class="badge badge-light-success fw-bold">{{trans('employee.active')}}</div>
-                            
-                                @else 
-                                <div class="badge badge-light-danger fw-bold">{{trans('employee.notactive')}} </div>
+                        <div class="row mb-6">
+                            <div class="table-responsive">
+                                <table class="table align-middle table-rounded table-striped table-row-dashed fs-6" id="kt_datatable_tabletemp">
+                                    <thead>
+                                        <tr class="text-start text-dark fw-bold fs-4 text-uppercase gs-0">
+                                            <th class="min-w-125px text-center">{{trans('lang.products')}}</th>
+                                            <th class="min-w-125px text-center">{{trans('lang.quantity')}}</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody class="text-gray-600 fw-bold text-center" id="kt_datatable_tabletemptbody">
+                                    @if(isset($datareffirst))
+                                        <tr>
+                                            <td>
+                                                {{$datareffirst->getprod->name_en}}
+                                            </td>
+                                            <td>
+                                                {{$datareffirst->approv_quantity_ref}}
+                                            </td>
+                                            
+                                        </tr>
+                                    @endif
+                                    @if(isset($dataref))
+                                    @foreach ($dataref as $item)
+                                        <tr>
+                                            <td>
+                                                {{$item->getprod->name_en}}
+                                            </td>
+                                            <td>
+                                                {{$item->approv_quantity_ref}}
+                                            </td>
+                                            
+                                        </tr>
+                                        @endforeach
+                                    @endif
 
-                            @endif 
-                    </div>
-                </div>
+                                    </tbody>
+                                
+                                </table>
+                            </div>
+                        </div>
+
+
+
+
+
+
 
             </div>
 
