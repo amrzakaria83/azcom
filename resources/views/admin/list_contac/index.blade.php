@@ -36,7 +36,7 @@
 @section('content')
     <!--begin::Container-->
     <div id="kt_app_content_container" class="app-container container-fluid">
-            <h1>{{trans('lang.nutrilist')}}-{{trans('lang.all')}}</h1>
+            <h1>{{trans('lang.all')}} {{trans('lang.nutrilists')}}</h1>
             <div class="card no-border">
                 <!--begin::Card header-->
                 <div class="card-header border-0 pt-6">

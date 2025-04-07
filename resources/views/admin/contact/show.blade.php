@@ -155,7 +155,7 @@
                     @foreach ($dataplace as $work)
                         <div class="row mb-8">
                             <div class="col-xl-2">
-                                <div class="fs-6 fw-semibold">{{trans('lang.work')}} {{trans('lang.place')}}</div>
+                                <div class="fs-6 fw-semibold">{{trans('lang.place')}} {{trans('lang.work')}}</div>
                             </div>
                             <div class="col-lg-9">
                                 <div class="fw-bold fs-5">
@@ -189,7 +189,7 @@
                     @else
                     <div class="row mb-8">
                         <div class="col-xl-9">
-                            <span class="fs-1 text-danger" >No {{trans('lang.work')}} {{trans('lang.place')}} </span>
+                            <span class="fs-1 text-danger" >No {{trans('lang.place')}} {{trans('lang.work')}} </span>
                         </div>
                     </div>
                 @endif

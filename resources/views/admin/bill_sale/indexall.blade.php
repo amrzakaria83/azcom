@@ -71,11 +71,11 @@
                 <!--end::Card header-->
                 <!--begin::Card body-->
                 <div class="card-body py-4">
-                    <h1>{{trans('lang.requests')}}-{{trans('lang.bill_of_sale')}}</h1>
+                    <h1>{{trans('lang.requests')}} {{trans('lang.bills_of_sale')}}</h1>
                     <div class="row mb-6">
 
                         <div class="col-sm-4">
-                            <label class="required fw-semibold fs-6 mb-2">{{trans('lang.start_from')}}</label>
+                            <label class="required fw-semibold fs-2 mb-2">{{trans('lang.start_from')}}</label>
                             <div class="position-relative d-flex align-items-center">
                                 <span class="svg-icon svg-icon-2 position-absolute mx-4">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -88,7 +88,7 @@
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <label class="required fw-semibold fs-6 mb-2">{{trans('lang.end_to')}}</label>
+                            <label class="required fw-semibold fs-2 mb-2">{{trans('lang.end_to')}}</label>
                             <div class="position-relative d-flex align-items-center">
                                 <span class="svg-icon svg-icon-2 position-absolute mx-4">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -105,7 +105,7 @@
                     </div>
                     <div class="row mb-6">
                         <div class="col-sm-4">
-                            <label class="col-sm-2 fw-semibold fs-6 mb-2">{{trans('lang.area')}}</label>
+                            <label class="col-sm-2 fw-semibold fs-2 mb-2">{{trans('lang.area')}}</label>
                                 <div class="col-sm-6 fv-row">
                                     <select  data-placeholder="Select an option" class="input-text form-control form-select mb-3 mb-lg-0 text-center" id="area_id" name="area_id[]" multiple="multiple" data-control="select2" >
                                         <option  disabled >Select an option</option>
@@ -116,7 +116,7 @@
                                 </div>
                         </div>
                         <div class="col-sm-4">
-                            <label class="col-sm-6 fw-semibold fs-6 mb-2">{{trans('lang.name')}}-{{trans('lang.customer')}}</label>
+                            <label class="col-sm-6 fw-semibold fs-2 mb-2">{{trans('lang.name')}}-{{trans('lang.customer')}}</label>
                                 <div class="col-sm-6 fv-row">
                                     <select  data-placeholder="Select an option" class="input-text form-control form-select mb-3 mb-lg-0 text-center" id="cut_sale_id" name="cut_sale_id" data-control="select2" >
                                         <option  disabled selected>Select an option</option>

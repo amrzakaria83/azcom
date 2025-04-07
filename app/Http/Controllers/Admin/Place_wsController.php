@@ -37,7 +37,7 @@ class Place_wsController extends Controller
                 })
                 ->addColumn('name_en', function($row){
                     $name_en = '<div class="d-flex flex-column"><a href="javascript:;" class="text-danger text-hover-primary mb-1 fs-2">'.$row->getcontact->name_en.'</a></div>';
-                    $name_en .= '<span>'.trans('lang.work').' '.trans('lang.place').'</span></div><br>';
+                    $name_en .= '<span>'.trans('lang.place').' '.trans('lang.work').'</span></div><br>';
                     $name_en .= '<span>'.$row->getcenter->name_en.'</span></div>';
                     $areaid = $row->getcenter->area_id ?? null;
                     $arfind = Area::find($areaid);

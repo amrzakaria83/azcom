@@ -638,7 +638,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.areas.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.area')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.areas')}}</span></a>
                                 </div>
                             </div>
                             @can('area new')

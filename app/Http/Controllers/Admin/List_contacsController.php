@@ -56,7 +56,7 @@ class List_contacsController extends Controller
                 ->addColumn('nameview', function($row){
                     $nameview = '<div class="ms-2">
                                 <a href="'.route('admin.list_contacs.indexview', $row->id).'" class="btn btn-lg btn-primary btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                    '.trans('lang.contact').trans('lang.view').'
+                                    '.trans('lang.view'). ' '.trans('lang.contact').'
                                 </a>
                             </div>';
                     return $nameview;
@@ -76,7 +76,7 @@ class List_contacsController extends Controller
                     $note = $row->note;
                     $note .= '<div class="ms-2">
                                 <a href="'.route('admin.list_contacs.addcontlist', $row->id).'" class="btn btn-lg btn-success btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                    '.trans('lang.contact').trans('lang.addnew').'
+                                    '.trans('lang.addnew'). ' '.trans('lang.contact').'
                                 <i class="bi bi-plus-square fs-1x"></i>
                                 </a>
                                 
@@ -96,9 +96,6 @@ class List_contacsController extends Controller
                 })
                 ->addColumn('actions', function($row){
                     $actions = '<div class="ms-2">
-                                <a href="'.route('admin.list_contacs.show', $row->id).'" class="btn btn-sm btn-icon btn-warning btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                    <i class="bi bi-eye-fill fs-1x"></i>
-                                </a>
                                 <a href="'.route('admin.list_contacs.edit', $row->id).'" class="btn btn-sm btn-icon btn-info btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
                                     <i class="bi bi-pencil-square fs-1x"></i>
                                 </a>
@@ -143,7 +140,6 @@ class List_contacsController extends Controller
         $rule = [
             'name_en' => 'required|string',
             'emplist_id' => 'required|numeric',
-            
         ];
 
         $validate = Validator::make($request->all(), $rule);
