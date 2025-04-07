@@ -59,7 +59,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="row mb-6">
+                        <div class="row mb-6" id="centers">
                             <label class="col-lg-2 col-form-label fw-semibold fs-6"> {{trans('lang.center')}}</label>
                             <div class="col-lg-8 d-flex align-items-center">
                                 <select   data-placeholder="Select an option" class=" input-text form-control  form-select  mb-3 mb-lg-0" id="center_id" name="center_id">
@@ -71,47 +71,7 @@
                             </div>
                         </div>
 
-                        <div class="row mb-6">
-                            <label class="col-lg-2 col-form-label required fw-semibold fs-3 text-info">{{trans('lang.name')}}</label>
-                            <div class="col-lg-8 fv-row">
-                                <input type="text" name="name_en" placeholder="{{trans('lang.name')}}" value="" id="name_en" required class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
-                            </div>
-                        </div>
-
-                        <div class="row mb-6">
-                            <label class="col-lg-2 col-form-label fw-semibold fs-6">{{trans('lang.phone')}}</label>
-                            <div class="col-lg-8 fv-row">
-                                <input type="text" name="phone" placeholder="{{trans('lang.phone')}}" value="" id="phone" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
-                            </div>
-                        </div>
-
-                        <div class="row mb-6">
-                            <label class="col-lg-2 col-form-label fw-semibold fs-6">{{trans('lang.payment_method')}}</label>
-                            <div class="col-lg-8 fv-row">
-                                <select  data-placeholder="Select an option" class=" input-text form-control  form-select  mb-3 mb-lg-0 text-center"  id="payment_method_id" name="payment_method_id"  >
-                                    <option  disabled >Select an option</option>
-                                        @foreach (\App\Models\Cust_payment_method::where('status',0)->get() as $item)
-                                            <option value="{{$item->id}}">{{$item->name_en}}</option>
-                                        @endforeach
-                                        <option value="add">{{trans('lang.add')}} {{trans('lang.payment_method')}}</option>
-                                </select> 
-                            </div>
-                        </div>
-
-                        <div class="row mb-6">
-                            <label class="col-lg-2 col-form-label fw-semibold fs-6">{{trans('lang.numb')}} {{trans('lang.tax')}} </label>
-                            <div class="col-lg-8 fv-row">
-                                <input type="text" name="tax_id" placeholder="{{trans('lang.tax')}}" value="" id="tax" class="form-control form-control-lg form-control-solid" />
-                            </div>
-                        </div>
-
-                        <div class="row mb-6">
-                            <label class="col-lg-2 col-form-label fw-semibold fs-6">{{trans('lang.address')}}</label>
-                            <div class="col-lg-8 fv-row">
-                                <input type="text" name="address" placeholder="{{trans('lang.address')}}" value="" id="address" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
-                            </div>
-                        </div>
-                        <div class="row mb-6">
+                        <div class="row mb-6" id="areas">
                             <label class="col-lg-2 col-form-label fw-semibold required fs-3 text-info">{{trans('lang.area')}} {{trans('lang.center')}} </label>
                             <div class="col-lg-8 fv-row">
                                 <select  data-placeholder="Select an option" class=" input-text form-control form-select  mb-3 mb-lg-0" id="area_id" name="area_id" data-control="select2" >
@@ -138,14 +98,56 @@
                             </div>
 
                         </div>
+
+                        <div class="row mb-6" id="name_ens">
+                            <label class="col-lg-2 col-form-label required fw-semibold fs-3 text-info">{{trans('lang.name')}}</label>
+                            <div class="col-lg-8 fv-row">
+                                <input type="text" name="name_en" placeholder="{{trans('lang.name')}}" value="" id="name_en" required class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-6" id="phones">
+                            <label class="col-lg-2 col-form-label fw-semibold fs-6">{{trans('lang.phone')}}</label>
+                            <div class="col-lg-8 fv-row">
+                                <input type="text" name="phone" placeholder="{{trans('lang.phone')}}" value="" id="phone" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
+                            </div>
+                        </div>
+
                         <div class="row mb-6">
+                            <label class="col-lg-2 col-form-label fw-semibold fs-6">{{trans('lang.payment_method')}}</label>
+                            <div class="col-lg-8 fv-row">
+                                <select  data-placeholder="Select an option" class=" input-text form-control  form-select  mb-3 mb-lg-0 text-center"  id="payment_method_id" name="payment_method_id"  >
+                                    <option  disabled >Select an option</option>
+                                        @foreach (\App\Models\Cust_payment_method::where('status',0)->get() as $item)
+                                            <option value="{{$item->id}}">{{$item->name_en}}</option>
+                                        @endforeach
+                                        <option value="add">{{trans('lang.add')}} {{trans('lang.payment_method')}}</option>
+                                </select> 
+                            </div>
+                        </div>
+
+                        <div class="row mb-6">
+                            <label class="col-lg-2 col-form-label fw-semibold fs-6">{{trans('lang.numb')}} {{trans('lang.tax')}} </label>
+                            <div class="col-lg-8 fv-row">
+                                <input type="text" name="tax_id" placeholder="{{trans('lang.tax')}}" value="" id="tax" class="form-control form-control-lg form-control-solid" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-6" id="addresss">
+                            <label class="col-lg-2 col-form-label fw-semibold fs-6">{{trans('lang.address')}}</label>
+                            <div class="col-lg-8 fv-row">
+                                <input type="text" name="address" placeholder="{{trans('lang.address')}}" value="" id="address" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-6" id="emails">
                             <label class="col-lg-2 col-form-label fw-semibold fs-6">{{trans('employee.email')}} </label>
                             <div class="col-lg-8 fv-row">
                                 <input type="text" name="email" placeholder="{{trans('employee.email')}}" value="" id="email" class="form-control form-control-lg form-control-solid" />
                             </div>
                         </div>
 
-                        <div class="row mb-6">
+                        <div class="row mb-6" id="notes">
                             <label class="col-lg-2 col-form-label fw-semibold fs-6">{{trans('lang.note')}}</label>
                             <div class="col-lg-8 fv-row">
                                 <input type="text" name="note" placeholder="{{trans('lang.note')}}" value="" id="note" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
@@ -315,16 +317,18 @@ defer
 <script>
     $(document).ready(function(){
         $('#name_en,#phone,#address,#email,#note,#area_id,#lat,#lng').prop('disabled', true);
-        $('#name_en,#phone,#address,#email,#note,#area_id,#lat,#lng').hide();
+        $('#name_en,#phone,#address,#email,#note,#area_id,#lat,#lng,#name_ens,#areas,#phones,#addresss,#emails,#notes').hide();
         $('#type_type').change(function() {
             var type_type = $(this).val();
             if(type_type === "1"){
-                $('#name_en,#phone,#address,#email,#note,#area_id,#lat,#lng').show();
+                $('#name_ens,#name_en,#phone,#address,#email,#note,#area_id,#lat,#lng,#areas,#phones,#addresss,#emails,#notes').show();
                 $('#center_id').hide();
+                $('#centers').hide();
                 $('#name_en,#phone,#address,#email,#note,#area_id,#lat,#lng').prop('disabled', false);
             } else {
                 $('#name_en,#phone,#address,#email,#note,#area_id,#lat,#lng').prop('disabled', true);
-                $('#name_en,#phone,#address,#email,#note,#area_id,#lat,#lng').hide();
+                $('#name_en,#phone,#address,#email,#note,#area_id,#lat,#lng,#name_ens,#areas,#phones,#addresss,#emails,#notes').hide();
+                $('#centers').show();
                 $('#center_id').show();
 
             }

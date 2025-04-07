@@ -20,13 +20,13 @@
         <span class="h-20px border-gray-300 border-start mx-4"></span>
         <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
             <li class="breadcrumb-item text-muted px-2">
-                <a  href="{{route('admin.refund_sales.index')}}" class="text-muted text-hover-primary">{{trans('lang.administrators')}}</a>
+                <a  href="{{route('admin.refund_sales.index')}}" class="text-muted text-hover-primary">{{trans('lang.returns')}}</a>
             </li>
             <li class="breadcrumb-item">
                 <span class="bullet bg-gray-300 w-5px h-2px"></span>
             </li>
             <li class="breadcrumb-item text-muted px-2">
-                {{trans('employee.profile')}}   
+                {{trans('lang.returns')}}   
             </li>
         </ul>
     </div>
@@ -118,12 +118,6 @@
                                 </table>
                             </div>
                         </div>
-
-
-
-
-
-
 
             </div>
 
