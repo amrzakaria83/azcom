@@ -29,7 +29,7 @@ return [
     "half_salary"=> "50 % of salary",
     "full_salary"=> "Full salary",
     "action" => "Action",
-    "type_type" => "Type",
+    "type_types" => "Types",
     "status" => "Status",
     "note" => "Note",
     "description" => "description",
@@ -50,7 +50,7 @@ return [
     "name" => "Name",
     "active" => "Active",
     "inactive" => "Inactive",
-    "addnew" => "Add New",
+    "addnew" => "Add",
     "add" => "Add",
     "delete" => "Delete",
 
@@ -152,13 +152,13 @@ return [
     "university_degree" => "University Degree",
     "ratings" => "Ratings",
     "rate" => "Rate",
-    "degree" => "Score",
+    "degree" => "Scores",
     "maternity_leave" => "Maternity Leave (no deduction)",
 
 
     "lowestdegree" => "Lowest Degree",
     "largestdegree" => "largest Degree",
-    "place" => "Place", 
+    "place" => "Places", 
     "work" => "Work",
 
     "relatives" => "Relatives",
@@ -206,7 +206,7 @@ return [
     "delivered" => "Delivered",
     "status_request" => "Status Request",
     "cust_collection" => "Customer Collection",
-    "refund_cause" => "Refund Cause",
+    "refund_causes" => "Refund Causes",
     "returns" => "Returns",
     "transactions" => "Transactions",
     "not_defined" => "Not Defined",

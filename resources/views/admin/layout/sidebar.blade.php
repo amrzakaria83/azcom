@@ -35,7 +35,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.plan_visits.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.plan')}}-{{trans('lang.visit')}}-{{trans('employee.add_new')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.plan')}} {{trans('lang.visit')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -44,7 +44,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.visits.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.visit')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.visit')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -53,7 +53,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.visits.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.visit')}}-{{trans('employee.add_new')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.visit')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -62,7 +62,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.visits.reportlist')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.report')}}-{{trans('lang.nutrilist')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.report')}} {{trans('lang.nutrilist')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -71,7 +71,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.visits.reportprod')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.report')}}-{{trans('lang.products')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.report')}} {{trans('lang.products')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -92,7 +92,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.list_contacs.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.nutrilist')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.nutrilist')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -101,7 +101,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.list_contacs.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.nutrilist')}}-{{trans('lang.addnew')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.nutrilist')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -132,7 +132,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.employees.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('employee.employee')}}-{{trans('employee.add_new')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('employee.employee')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -172,7 +172,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.contacts.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.contact')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.contact')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -181,7 +181,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.contacts.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.contact')}}-{{trans('lang.addnew')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.contact')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -190,7 +190,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.ratingcontacts.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.contact')}}-{{trans('lang.degree')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.degree')}} {{trans('lang.contact')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -199,7 +199,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.place_ws.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.contact')}}-{{trans('lang.place')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.place')}} {{trans('lang.contact')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -208,7 +208,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.place_ws.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.contact')}}-{{trans('lang.place')}}-{{trans('lang.addnew')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.place')}} {{trans('lang.contact')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -217,7 +217,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.contacts.add_contact_rate')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.ratings')}}-{{trans('lang.contact')}}-{{trans('lang.addnew')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.ratings')}} {{trans('lang.contact')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -226,7 +226,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.relativ_contacts.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.relatives')}}-{{trans('lang.addnew')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.relatives')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -235,7 +235,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.relativ_contacts.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.relatives')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.relatives')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -244,7 +244,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.typecontacts.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.type_type')}}-{{trans('lang.addnew')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.type_types')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -253,7 +253,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.typecontacts.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.type_type')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.type_types')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -274,7 +274,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.centers.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.center')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.center')}}</span></a>
                                 </div>
                             </div>
                             @can('center new')
@@ -282,7 +282,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.centers.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.center')}}-{{trans('lang.addnew')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.center')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -304,7 +304,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.bill_sales.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.request')}}-{{trans('lang.bill_of_sale')}}-{{trans('lang.addnew')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.request')}} {{trans('lang.bill_of_sale')}}</span></a>
                                 </div>
                             </div>
 
@@ -312,7 +312,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.bill_sales.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.requests')}}-{{trans('lang.bills_of_sale')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.requests')}} {{trans('lang.bills_of_sale')}}</span></a>
                                 </div>
                             </div>
 
@@ -320,7 +320,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.bill_sales.indexdelivered')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.bills_of_sale')}}-{{trans('lang.delivered')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.bills_of_sale')}} - {{trans('lang.delivered')}}</span></a>
                                 </div>
                             </div>
 
@@ -350,7 +350,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.sale_types.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.bills_of_sale')}}-{{trans('lang.type_type')}}-{{trans('lang.addnew')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.type_types')}} {{trans('lang.bills_of_sale')}}</span></a>
                                 </div>
                             </div>
 
@@ -358,7 +358,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.sale_types.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.bills_of_sale')}}-{{trans('lang.type_type')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.type_types')}} {{trans('lang.bills_of_sale')}}</span></a>
                                 </div>
                             </div>
 
@@ -379,7 +379,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.cut_sales.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.customers')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.customers')}}</span></a>
                                 </div>
                             </div>
                             
@@ -387,7 +387,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.cut_sales.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.customer')}}-{{trans('lang.addnew')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.customer')}}</span></a>
                                 </div>
                             </div>
 
@@ -395,7 +395,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.trans_custs.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.transactions')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.transactions')}}</span></a>
                                 </div>
                             </div>
 
@@ -424,7 +424,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.refund_sales.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.returns')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.returns')}}</span></a>
                                 </div>
                             </div>
                             
@@ -432,7 +432,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.refund_sales.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.returns')}}-{{trans('lang.addnew')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.returns')}}</span></a>
                                 </div>
                             </div>
                             
@@ -440,7 +440,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.refund_causes.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.refund_cause')}}-{{trans('lang.addnew')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.refund_causes')}}</span></a>
                                 </div>
                             </div>
 
@@ -448,7 +448,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.refund_causes.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.refund_cause')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.refund_causes')}}</span></a>
                                 </div>
                             </div>
                             <!--end::Menu item-->
@@ -467,7 +467,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.bill_sales.indexall')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.bills_of_sale')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.bills_of_sale')}}</span></a>
                                 </div>
                             </div>
                             
@@ -475,14 +475,14 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.emp_bill_sales.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.sales')}}-{{trans('employee.employees')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.sales')}} - {{trans('employee.employees')}}</span></a>
                                 </div>
                             </div>
                             <div class="menu-item px-3">
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                 <a class="menu-link" href="{{route('admin.emp_bill_sales.indexempsearch')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.sales')}}-{{trans('employee.employees')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.sales')}} {{trans('employee.employees')}}</span></a>
                                 </div>
                             </div>
                             <!-- <div class="menu-item px-3">
@@ -518,7 +518,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.vacationemps.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.vacation')}}-{{trans('lang.addnew')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.vacation')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -527,7 +527,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.vacationemps.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.vacation')}}-{{trans('lang.request')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.request')}} {{trans('lang.vacation')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -536,7 +536,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.vacationemps.indexall')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.vacation')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.vacation')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -557,7 +557,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.expense_requests.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.expense')}}-{{trans('lang.request')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.request')}} {{trans('lang.expense')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -566,7 +566,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.expense_requests.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.expense')}}-{{trans('lang.request')}}-{{trans('lang.addnew')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.request')}} {{trans('lang.expense')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -589,7 +589,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.products.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.products')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.products')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -598,7 +598,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.products.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.products')}}-{{trans('lang.addnew')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.products')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -608,7 +608,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.cycle_msg_prods.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.message')}}-{{trans('lang.products')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.message')}} {{trans('lang.products')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -617,7 +617,7 @@
                             <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                 <a class="menu-link" href="{{route('admin.cycle_msg_prods.create')}}">
                                 <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                <span class="menu-title">{{trans('lang.message')}}-{{trans('lang.products')}}-{{trans('lang.addnew')}}</span></a>
+                                <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.message')}} {{trans('lang.products')}}</span></a>
                             </div>
                         </div>
                         @endcan
@@ -638,7 +638,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.areas.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.area')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.area')}}</span></a>
                                 </div>
                             </div>
                             @can('area new')
@@ -646,7 +646,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.areas.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.area')}}-{{trans('lang.addnew')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.area')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -667,7 +667,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.specialtys.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.specialties')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.specialties')}}</span></a>
                                 </div>
                             </div>
                             @can('specialty new')
@@ -675,7 +675,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.specialtys.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.specialties')}}-{{trans('lang.addnew')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.specialties')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -696,7 +696,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.brand_gifts.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.brand_gifts')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.brand_gifts')}}</span></a>
                                 </div>
                             </div>
                             @can('brand gift new')
@@ -704,7 +704,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.brand_gifts.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.brand_gifts')}}-{{trans('lang.addnew')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.brand_gifts')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -725,7 +725,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.social_styls.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.social_styls')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.social_styls')}}</span></a>
                                 </div>
                             </div>
                             @can('social style new')
@@ -733,7 +733,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.social_styls.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.social_styls')}}-{{trans('lang.addnew')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.social_styls')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -754,7 +754,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.salefunnels.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.sale_funnel')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.sale_funnel')}}</span></a>
                                 </div>
                             </div>
                             @can('sale funnel new')
@@ -762,7 +762,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.salefunnels.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.sale_funnel')}}-{{trans('lang.addnew')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.sale_funnel')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -783,7 +783,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.ratings.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.ratings')}}-{{trans('lang.contact')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.ratings')}} {{trans('lang.contact')}}</span></a>
                                 </div>
                             </div>
                             @can('rating new')
@@ -791,7 +791,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.ratings.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.ratings')}}-{{trans('lang.contact')}}-{{trans('lang.addnew')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.ratings')}} {{trans('lang.contact')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -812,7 +812,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.events.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.events')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.events')}}</span></a>
                                 </div>
                             </div>
                             @can('event new')
@@ -820,7 +820,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.events.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.events')}}-{{trans('lang.addnew')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.events')}}</span></a>
                                 </div>
                             </div>
                             @endcan
@@ -841,7 +841,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.assistants.index')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.assistants')}}-{{trans('lang.all')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.assistants')}}</span></a>
                                 </div>
                             </div>
                             @can('assistant new')
@@ -849,7 +849,7 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.assistants.create')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.assistants')}}-{{trans('lang.addnew')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.assistants')}}</span></a>
                                 </div>
                             </div>
                             @endcan
