@@ -154,7 +154,7 @@
                                     <option disabled >Select an option</option>
                                         @if(isset($datatype))
                                             @foreach ($datatype as $item)
-                                            <option value="{{$item->id}}" @if($data->typecont_id == $item->id) selected @else disabled @endif>{{$item->name_en}}</option>
+                                            <option value="{{$item->id}}" @if($data->typecont_id == $item->id) selected @endif>{{$item->name_en}}</option>
                                             @endforeach
                                         @endif
                                 </select>

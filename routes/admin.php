@@ -659,7 +659,7 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
         });
 
         Route::name('bill_sales.')->prefix('bill_sales')->group(function(){
-            Route::get('/','Bill_sale_headersController@index')->name('index');// can
+            Route::get('/','Bill_sale_headersController@index')->name('index')->can('sale_requests');// can
             Route::get('/show/{id}','Bill_sale_headersController@show')->name('show');
             Route::post('/delete', 'Bill_sale_headersController@destroy')->name('delete');
             Route::get('/create','Bill_sale_headersController@create')->name('create');// can
@@ -668,25 +668,25 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
             Route::post('/update', 'Bill_sale_headersController@update')->name('update');// can
             Route::get('/editsalehead/{id}', 'Bill_sale_headersController@editsalehead')->name('editsalehead');// can
             Route::post('/storepermonesale','Bill_sale_headersController@storepermonesale')->name('storepermonesale');// can
-            Route::get('/indexall','Bill_sale_headersController@indexall')->name('indexall'); // can
+            Route::get('/indexall','Bill_sale_headersController@indexall')->name('indexall')->can('sale bills'); // can
             Route::get('/indexdelivered','Bill_sale_headersController@indexdelivered')->name('indexdelivered'); // can
             Route::get('/getprodname/{id?}','Bill_sale_headersController@getprodname')->name('getprodname');
             Route::get('/inactivesale/{id}', 'Bill_sale_headersController@inactivesale')->name('inactivesale');
             Route::get('/activesale/{id}', 'Bill_sale_headersController@activesale')->name('activesale');
-            Route::get('/deliveredesale/{id}', 'Bill_sale_headersController@deliveredesale')->name('deliveredesale');
+            Route::get('/deliveredesale/{id}', 'Bill_sale_headersController@deliveredesale')->name('deliveredesale')->can('sale_delivered');
 
 
         });
 
         Route::name('emp_bill_sales.')->prefix('emp_bill_sales')->group(function(){
-            Route::get('/','Emp_bill_salesController@index')->name('index');
+            Route::get('/','Emp_bill_salesController@index')->name('index')->can('sale bills employee');
             Route::get('/show/{id}','Emp_bill_salesController@show')->name('show');
             Route::post('/delete', 'Emp_bill_salesController@destroy')->name('delete');
             Route::get('/create','Emp_bill_salesController@create')->name('create');
             Route::post('/store','Emp_bill_salesController@store')->name('store');
             Route::get('/edit/{id}', 'Emp_bill_salesController@edit')->name('edit');
             Route::post('/update', 'Emp_bill_salesController@update')->name('update');
-            Route::get('/indexempsearch','Emp_bill_salesController@indexempsearch')->name('indexempsearch');
+            Route::get('/indexempsearch','Emp_bill_salesController@indexempsearch')->name('indexempsearch')->can('all sale bills employee');
             Route::get('/indexemp/{from_time?}/{to_date?}','Emp_bill_salesController@indexemp')->name('indexemp');
             Route::get('/inactiveempsale/{id}', 'Emp_bill_salesController@inactiveempsale')->name('inactiveempsale');
 

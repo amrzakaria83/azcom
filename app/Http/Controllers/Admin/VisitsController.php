@@ -68,7 +68,8 @@ class VisitsController extends Controller
                 ->addColumn('contact_id', function($row){
                     if ($row->contact_id != null){
                         // $color = Type_contact::find($row->contact_id)->favcolor;
-                        $color = Type_contact::find($row->getcontact->typecont_id)->favcolor;
+                        // $color = Type_contact::find($row->getcontact->typecont_id)->favcolor;
+                        $color = optional(Type_contact::find($row->typecont_id))->favcolor;
                         $contact_id = '<a href="'.route('admin.contacts.show', $row->getcontact->id).'"><span style="color: '. $color.'!important;">'.$row->getcontact->name_en.'</span><br>';
                         $contact_id .= '<span style="color: '. $color.'!important;">'.trans('lang.contact').'</span></a><br>';
                         $contact_id .= '<span >'.$row->gettype->name_en.'</span><br>';

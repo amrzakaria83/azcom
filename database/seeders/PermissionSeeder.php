@@ -14,6 +14,8 @@ class PermissionSeeder extends Seeder
      */
     public function run(): void
     {
+    
+    
         $arrayOfPermission = [
             'visit plan',
             'visit plan new',
@@ -109,11 +111,21 @@ class PermissionSeeder extends Seeder
             'event edit',
             'event delete',
             'sale',
+            'sale_requests', //
+            'sale_delivered', //
             'sale report',
+            'sale bills',//
+            'sale bills employee',//
+            'all sale bills employee',//
             'all role',
             'role new',
             'role edit',
             'role delete',
+            // added by az
+            // 'all sale reports',
+            // 'role new',
+            // 'role edit',
+            // 'role delete',
             'setting' 
         ];
 

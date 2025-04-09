@@ -41,7 +41,7 @@ class ContactsController extends Controller
                     return $checkbox;
                 })
                 ->addColumn('name', function($row){
-                    $color = Type_contact::find($row->typecont_id)->favcolor; // Safe null check
+                    $color = optional(Type_contact::find($row->typecont_id))->favcolor;
                     $name = '<div class="d-flex flex-column" ><a href='.route('admin.contacts.show', $row->id).'" class="text-gray-800 text-hover-primary mb-0" style="color: '. $color.'!important;">'.$row->name_en.'</a></div>';
                     if($row->birth_date){
                         $currentTime = Carbon::now();

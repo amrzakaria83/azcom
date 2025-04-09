@@ -307,7 +307,7 @@
                                     <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.request')}} {{trans('lang.bill_of_sale')}}</span></a>
                                 </div>
                             </div>
-
+                            @can('sale_requests')
                             <div class="menu-item px-3">
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.bill_sales.index')}}">
@@ -315,7 +315,8 @@
                                     <span class="menu-title">{{trans('lang.all')}} {{trans('lang.requests')}} {{trans('lang.bills_of_sale')}}</span></a>
                                 </div>
                             </div>
-
+                            @endcan
+                            @can('sale_delivered')
                             <div class="menu-item px-3">
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.bill_sales.indexdelivered')}}">
@@ -323,7 +324,7 @@
                                     <span class="menu-title">{{trans('lang.all')}} {{trans('lang.bills_of_sale')}} - {{trans('lang.delivered')}}</span></a>
                                 </div>
                             </div>
-
+                            @endcan
                             <!-- <div class="menu-item px-3">
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.bill_sales.indexall')}}">
@@ -368,93 +369,104 @@
             @endcan
             
             <div class="menu-item">
-                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="hover">
+                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center" data-kt-menu-trigger="hover">
                     <span class="menu-icon">
                         <!-- <i class="fonticon-setting fs-2"></i> -->
                     </span>
-                    <span class="menu-title">{{trans('lang.customers')}}</span></button>
-                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-auto min-w-200 mw-300px" data-kt-menu="true">
-                            <!--begin::Menu item-->
-                            <div class="menu-item px-3">
-                                <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
-                                    <a class="menu-link" href="{{route('admin.cut_sales.index')}}">
-                                    <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.customers')}}</span></a>
-                                </div>
-                            </div>
-                            
-                            <div class="menu-item px-3">
-                                <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
-                                    <a class="menu-link" href="{{route('admin.cut_sales.create')}}">
-                                    <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.customer')}}</span></a>
-                                </div>
-                            </div>
-
-                            <div class="menu-item px-3">
-                                <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
-                                    <a class="menu-link" href="{{route('admin.trans_custs.index')}}">
-                                    <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.transactions')}}</span></a>
-                                </div>
-                            </div>
-
-                            <div class="menu-item px-3">
-                                <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
-                                    <a class="menu-link" href="{{route('admin.cust_collections.create')}}">
-                                    <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.cust_collection')}}</span></a>
-                                </div>
-                            </div>
-                            
-                            <!--end::Menu item-->
+                    <span class="menu-title">{{trans('lang.customers')}}</span>
+                </button>
+                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-auto min-w-200 mw-300px" data-kt-menu="true">
+                    <!-- Customers Section -->
+                    <div class="menu-item px-3">
+                        <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
+                            <span class="menu-title text-uppercase fs-7 fw-bold text-muted">{{trans('lang.customers')}}</span>
+                        </div>
                     </div>
-            </div>
-
-            <div class="menu-item">
-                <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="hover">
-                    <span class="menu-icon">
-                        <!-- <i class="fonticon-setting fs-2"></i> -->
-                    </span>
-                    <span class="menu-title">{{trans('lang.returns')}} {{trans('lang.customers')}}</span></button>
-                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-auto min-w-200 mw-300px" data-kt-menu="true">
-                            <!--begin::Menu item-->
-
-                            <div class="menu-item px-3">
-                                <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
-                                    <a class="menu-link" href="{{route('admin.refund_sales.index')}}">
-                                    <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.returns')}}</span></a>
-                                </div>
-                            </div>
-                            
-                            <div class="menu-item px-3">
-                                <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
-                                    <a class="menu-link" href="{{route('admin.refund_sales.create')}}">
-                                    <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.returns')}}</span></a>
-                                </div>
-                            </div>
-                            
-                            <div class="menu-item px-3">
-                                <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
-                                    <a class="menu-link" href="{{route('admin.refund_causes.create')}}">
-                                    <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.refund_causes')}}</span></a>
-                                </div>
-                            </div>
-
-                            <div class="menu-item px-3">
-                                <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
-                                    <a class="menu-link" href="{{route('admin.refund_causes.index')}}">
-                                    <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.all')}} {{trans('lang.refund_causes')}}</span></a>
-                                </div>
-                            </div>
-                            <!--end::Menu item-->
+                    
+                    <div class="menu-item px-3">
+                        <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
+                            <a class="menu-link" href="{{route('admin.cut_sales.index')}}">
+                                <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
+                                <span class="menu-title">{{trans('lang.all')}} {{trans('lang.customers')}}</span>
+                            </a>
+                        </div>
                     </div>
+                    
+                    <div class="menu-item px-3">
+                        <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
+                            <a class="menu-link" href="{{route('admin.cut_sales.create')}}">
+                                <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
+                                <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.customer')}}</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="menu-item px-3">
+                        <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
+                            <a class="menu-link" href="{{route('admin.trans_custs.index')}}">
+                                <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
+                                <span class="menu-title">{{trans('lang.all')}} {{trans('lang.transactions')}}</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="menu-item px-3">
+                        <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
+                            <a class="menu-link" href="{{route('admin.cust_collections.create')}}">
+                                <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
+                                <span class="menu-title">{{trans('lang.cust_collection')}}</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Separator -->
+                    <div class="separator my-2"></div>
+                    
+                    <!-- Returns Section -->
+                    <div class="menu-item px-3">
+                        <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
+                            <span class="menu-title text-uppercase fs-7 fw-bold text-muted">{{trans('lang.returns')}}</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item px-3">
+                        <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
+                            <a class="menu-link" href="{{route('admin.refund_sales.index')}}">
+                                <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
+                                <span class="menu-title">{{trans('lang.all')}} {{trans('lang.returns')}}</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-item px-3">
+                        <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
+                            <a class="menu-link" href="{{route('admin.refund_sales.create')}}">
+                                <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
+                                <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.returns')}}</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-item px-3">
+                        <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
+                            <a class="menu-link" href="{{route('admin.refund_causes.create')}}">
+                                <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
+                                <span class="menu-title">{{trans('lang.addnew')}} {{trans('lang.refund_causes')}}</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="menu-item px-3">
+                        <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
+                            <a class="menu-link" href="{{route('admin.refund_causes.index')}}">
+                                <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
+                                <span class="menu-title">{{trans('lang.all')}} {{trans('lang.refund_causes')}}</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
+            @can('sale report')
             <div class="menu-item">
                 <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="hover">
                     <span class="menu-icon">
@@ -462,7 +474,7 @@
                     </span>
                     <span class="menu-title">{{trans('lang.reports')}}- {{trans('lang.sales')}}</span></button>
                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-auto min-w-200 mw-300px" data-kt-menu="true">
-
+                            @can('sale bills')
                             <div class="menu-item px-3">
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.bill_sales.indexall')}}">
@@ -470,7 +482,8 @@
                                     <span class="menu-title">{{trans('lang.all')}} {{trans('lang.bills_of_sale')}}</span></a>
                                 </div>
                             </div>
-                            
+                            @endcan
+                            @can('sale bills employee')
                             <div class="menu-item px-3">
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.emp_bill_sales.index')}}">
@@ -478,6 +491,8 @@
                                     <span class="menu-title">{{trans('lang.sales')}} - {{trans('employee.employees')}}</span></a>
                                 </div>
                             </div>
+                            @endcan
+                            @can('all sale bills employee')
                             <div class="menu-item px-3">
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                 <a class="menu-link" href="{{route('admin.emp_bill_sales.indexempsearch')}}">
@@ -485,25 +500,11 @@
                                     <span class="menu-title">{{trans('lang.all')}} {{trans('lang.sales')}} {{trans('employee.employees')}}</span></a>
                                 </div>
                             </div>
-                            <!-- <div class="menu-item px-3">
-                                <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
-                                    <a class="menu-link" href="{{route('admin.sale_types.create')}}">
-                                    <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.bills_of_sale')}}-{{trans('lang.type_type')}}-{{trans('lang.addnew')}}</span></a>
-                                </div>
-                            </div>
+                            @endcan
 
-                            <div class="menu-item px-3">
-                                <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
-                                    <a class="menu-link" href="{{route('admin.sale_types.index')}}">
-                                    <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.bills_of_sale')}}-{{trans('lang.type_type')}}-{{trans('lang.all')}}</span></a>
-                                </div>
-                            </div> -->
-                            <!--end::Menu item-->
                     </div>
             </div>
-            
+            @endcan
             
             <div class="menu-item">
                 <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="hover">
