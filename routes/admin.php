@@ -394,10 +394,10 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
         });
 
         Route::name('cut_sales.')->prefix('cut_sales')->group(function(){
-            Route::get('/','Cut_salesController@index')->name('index'); // can
+            Route::get('/','Cut_salesController@index')->name('index')->can('all customers'); // can
             Route::get('/show/{id}','Cut_salesController@show')->name('show'); // can
             Route::post('/delete', 'Cut_salesController@destroy')->name('delete'); // can
-            Route::get('/create','Cut_salesController@create')->name('create'); // can
+            Route::get('/create','Cut_salesController@create')->name('create')->can('customer new'); // can
             Route::post('/store','Cut_salesController@store')->name('store'); // can
             Route::get('/edit/{id}', 'Cut_salesController@edit')->name('edit'); // can
             Route::post('/update', 'Cut_salesController@update')->name('update'); // can

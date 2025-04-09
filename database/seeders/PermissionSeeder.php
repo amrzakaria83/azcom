@@ -117,6 +117,10 @@ class PermissionSeeder extends Seeder
             'sale bills',//
             'sale bills employee',//
             'all sale bills employee',//
+            'all customers',//
+            'customer new',//
+            'all trans customers',//
+            'cust collection',//
             'all role',
             'role new',
             'role edit',

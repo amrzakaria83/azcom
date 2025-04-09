@@ -367,7 +367,7 @@
                     </div>
             </div>
             @endcan
-            
+            @can('all customers')
             <div class="menu-item">
                 <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center" data-kt-menu-trigger="hover">
                     <span class="menu-icon">
@@ -382,7 +382,7 @@
                             <span class="menu-title text-uppercase fs-7 fw-bold text-muted">{{trans('lang.customers')}}</span>
                         </div>
                     </div>
-                    
+                    @can('all customers')
                     <div class="menu-item px-3">
                         <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                             <a class="menu-link" href="{{route('admin.cut_sales.index')}}">
@@ -391,7 +391,8 @@
                             </a>
                         </div>
                     </div>
-                    
+                    @endcan
+                    @can('customer new')
                     <div class="menu-item px-3">
                         <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                             <a class="menu-link" href="{{route('admin.cut_sales.create')}}">
@@ -400,7 +401,8 @@
                             </a>
                         </div>
                     </div>
-
+                    @endcan
+                    @can('all trans customers')
                     <div class="menu-item px-3">
                         <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                             <a class="menu-link" href="{{route('admin.trans_custs.index')}}">
@@ -409,7 +411,8 @@
                             </a>
                         </div>
                     </div>
-
+                    @endcan
+                    @can('cust collection')
                     <div class="menu-item px-3">
                         <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                             <a class="menu-link" href="{{route('admin.cust_collections.create')}}">
@@ -418,7 +421,7 @@
                             </a>
                         </div>
                     </div>
-                    
+                    @endcan
                     <!-- Separator -->
                     <div class="separator my-2"></div>
                     
@@ -466,6 +469,7 @@
                     </div>
                 </div>
             </div>
+            @endcan
             @can('sale report')
             <div class="menu-item">
                 <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="hover">
