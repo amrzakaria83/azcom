@@ -761,7 +761,7 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
             Route::get('/','Refund_salesController@index')->name('index');
             Route::get('/show/{id}','Refund_salesController@show')->name('show');
             Route::post('/delete', 'Refund_salesController@destroy')->name('delete');
-            Route::get('/create','Refund_salesController@create')->name('create');
+            Route::get('/create','Refund_salesController@create')->name('create')->can('customers return new');
             Route::post('/store','Refund_salesController@store')->name('store');
             Route::get('/edit/{id}', 'Refund_salesController@edit')->name('edit');
             Route::post('/update', 'Refund_salesController@update')->name('update');

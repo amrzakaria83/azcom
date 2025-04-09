@@ -111,6 +111,10 @@ class PermissionSeeder extends Seeder
             'event edit',
             'event delete',
             'sale',
+            'sale details',//
+            'sale new',//
+            'sale edit',//
+            'sale delete',//
             'sale_requests', //
             'sale_delivered', //
             'sale report',
@@ -118,9 +122,25 @@ class PermissionSeeder extends Seeder
             'sale bills employee',//
             'all sale bills employee',//
             'all customers',//
+            'customer details',//
             'customer new',//
+            'customer edit',//
+            'customer delete',//
             'all trans customers',//
+            'trans customers details',//
+            'trans customers new',//
+            'trans customers edit',//
+            'trans customers delete',//
             'cust collection',//
+            'cust collection details',//
+            'cust collection new',//
+            'cust collection edit',//
+            'cust collection delete',//
+            'all customers return',//
+            'customers return details',//
+            'customers return new',//
+            'customers return edit',//
+            'customers return delete',//
             'all role',
             'role new',
             'role edit',

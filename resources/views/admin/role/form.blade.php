@@ -172,14 +172,20 @@ if (isset($data)) {
                             <!--end::Checkbox-->
                             <!--begin::Checkbox-->
                             <label class="form-check form-check-sm form-check-custom form-check-solid me-3 me-lg-10">
+                                <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('customer details')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('customer details')) ? 'checked' : '':'' }} name="permissions[]" />
+                                <span class="form-check-label">Show </span>
+                            </label>
+                            <!--end::Checkbox-->
+                            <!--begin::Checkbox-->
+                            <label class="form-check form-check-sm form-check-custom form-check-solid me-3 me-lg-10">
                                 <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('customer new')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('customer new')) ? 'checked' : '':'' }} name="permissions[]" />
-                                <span class="form-check-label">{{trans('lang.addnew')}} {{trans('lang.customers')}}</span>
+                                <span class="form-check-label">Create </span>
                             </label>
                             <!--end::Checkbox-->
                             <!--begin::Checkbox-->
                             <label class="form-check form-check-sm form-check-custom form-check-solid me-3 me-lg-10">
                                 <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('all trans customers')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('all trans customers')) ? 'checked' : '':'' }} name="permissions[]" />
-                                <span class="form-check-label">show {{trans('lang.all')}} {{trans('lang.transactions')}}</span>
+                                <span class="form-check-label">Show {{trans('lang.all')}} {{trans('lang.transactions')}}</span>
                             </label>
                             <!--end::Checkbox-->
                             <!--begin::Checkbox-->
@@ -189,6 +195,37 @@ if (isset($data)) {
                             </label>
                             <!--end::Checkbox-->
                             
+                        </div>
+                        <!--end::Wrapper-->
+                    </td>
+                    <!--end::Input group-->
+                </tr>
+                <tr>
+                    <!--begin::Label-->
+                    <td class="text-gray-800">{{trans('lang.returns')}} {{trans('lang.customers')}}</td>
+                    <!--end::Label-->
+                    <!--begin::Input group-->
+                    <td>
+                        <!--begin::Wrapper-->
+                        <div class="d-flex">
+                            <!--begin::Checkbox-->
+                            <label class="form-check form-check-sm form-check-custom form-check-solid me-3 me-lg-10">
+                                <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('all customers return')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('all customers return')) ? 'checked' : '':'' }} name="permissions[]" />
+                                <span class="form-check-label">List</span>
+                            </label>
+                            <label class="form-check form-check-custom form-check-solid me-3 me-lg-10">
+                                <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('customers return details')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('customers return details')) ? 'checked' : '':'' }} name="permissions[]" />
+                                <span class="form-check-label">Show</span>
+                            </label>
+                            <label class="form-check form-check-custom form-check-solid me-3 me-lg-10">
+                                <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('customers return new')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('customers return new')) ? 'checked' : '':'' }} name="permissions[]" />
+                                <span class="form-check-label">Create</span>
+                            </label>
+                            <label class="form-check form-check-custom form-check-solid me-3 me-lg-10">
+                                <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('customers return edit')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('customers return edit')) ? 'checked' : '':'' }} name="permissions[]" />
+                                <span class="form-check-label">Update</span>
+                            </label>
+                            <!--end::Checkbox-->
                         </div>
                         <!--end::Wrapper-->
                     </td>

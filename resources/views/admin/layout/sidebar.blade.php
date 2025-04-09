@@ -422,6 +422,7 @@
                         </div>
                     </div>
                     @endcan
+                    @can('all customers return')
                     <!-- Separator -->
                     <div class="separator my-2"></div>
                     
@@ -440,7 +441,7 @@
                             </a>
                         </div>
                     </div>
-                    
+                    @can('customers return new')
                     <div class="menu-item px-3">
                         <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                             <a class="menu-link" href="{{route('admin.refund_sales.create')}}">
@@ -449,7 +450,7 @@
                             </a>
                         </div>
                     </div>
-                    
+                    @endcan
                     <div class="menu-item px-3">
                         <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                             <a class="menu-link" href="{{route('admin.refund_causes.create')}}">
@@ -467,6 +468,7 @@
                             </a>
                         </div>
                     </div>
+                    @endcan
                 </div>
             </div>
             @endcan
