@@ -15,6 +15,7 @@ use App\Models\Bill_sale_detail;
 use App\Models\Temp_sale_rec;
 use App\Models\Cut_sale;
 use App\Models\Governorate;
+use App\Models\City;
 use DataTables;
 use Validator;
 use Carbon\Carbon;
@@ -891,6 +892,179 @@ class Bill_sale_headersController extends Controller
         ]);
 
         return redirect()->back()->with('message', 'Modified successfully')->with('status', 'success');
+    }
+    public function reportsaleeg(Request $request)
+
+    {
+        
+        $fromdata = $request->get('from_time') 
+        ? Carbon::parse($request->get('from_time'))->startOfDay()
+        : Carbon::now()->subMonth()->firstOfMonth()->startOfDay();
+        
+        $todata = $request->get('to_date') 
+        ? Carbon::parse($request->get('to_date'))->endOfDay()  // Changed to endOfDay()
+        : Carbon::now()->endOfDay();
+
+        
+       
+        $results = Bill_sale_header::whereIn('status_requ', [1,5,6,7,8])//1 = approved  5 = deliverd - 6 = Under collection - 7 = some paied - 8 = total paied
+        ->whereDate('valued_time', '>=', $fromdata)
+        ->whereDate('valued_time', '<=', $todata)  // Changed to <=
+        ->get()
+        ->map(function($item) {
+            try {
+                $gov = $item->getcust->getarea->getcity->getgovernorate;
+                // $city = optional(optional(optional($item->getcust)->getarea)->getcity);
+                return [
+                    'gov_id' => $gov->id,
+                    'gov_name' => $gov->governorate_name_en,
+                    'amount' => $item->approv_sellprice,
+                    'cut_sale_id' => $item->cut_sale_id, // Include the cut_sale_id for counting
+                    'bill_id' => $item->id // Include the bill ID for counting
+
+
+                ];
+            } catch (\Exception $e) {
+                return null;
+            }
+        })
+        ->filter()
+        ->groupBy('gov_id')
+        ->map(function($group) {
+
+             // Get unique cut_sale_id count
+        $uniqueCutSales = $group->pluck('cut_sale_id')->unique()->count();
+            return [
+                'id' => $group->first()['gov_id'],
+                'governorate_name_en' => $group->first()['gov_name'],
+                'total_sales' => $group->sum('amount'),
+                'unique_customers' => $uniqueCutSales, // Add count of unique cut_sale_id
+                'total_bills' => $group->count() // Count of all bill records for this governorate
+
+
+            ];
+        });
+        $sortedResults = $results->sortByDesc('total_sales');
+        $totalResults = $results->sum('total_sales');
+        $totalcusts = $results->sum('unique_customers');
+        // dd($totalcusts );
+        return view('admin.bill_sale.reportsaleeg',compact('results','totalResults','totalcusts','sortedResults','fromdata','todata'));
+    }
+    public function reportsalecity(Request $request)
+
+    {
+        
+        $fromdata = $request->get('from_time') 
+        ? Carbon::parse($request->get('from_time'))->startOfDay()
+        : Carbon::now()->subMonth()->firstOfMonth()->startOfDay();
+        
+        $todata = $request->get('to_date') 
+        ? Carbon::parse($request->get('to_date'))->endOfDay()  // Changed to endOfDay()
+        : Carbon::now()->endOfDay();
+
+        
+       
+        $results = Bill_sale_header::whereIn('status_requ', [1,5,6,7,8])//1 = approved  5 = deliverd - 6 = Under collection - 7 = some paied - 8 = total paied
+        ->whereDate('valued_time', '>=', $fromdata)
+        ->whereDate('valued_time', '<=', $todata)  // Changed to <=
+        ->get()
+        ->map(function($item) {
+            try {
+                $gov = $item->getcust->getarea->getcity;
+                // $city = optional(optional(optional($item->getcust)->getarea)->getcity);
+                return [
+                    'gov_id' => $gov->id,
+                    'city' => $gov, // Include the City model object
+                    'gov_name' => $gov->city_name_en,
+                    'amount' => $item->approv_sellprice,
+                    'cut_sale_id' => $item->cut_sale_id, // Include the cut_sale_id for counting
+                    'bill_id' => $item->id // Include the bill ID for counting
+
+
+                ];
+            } catch (\Exception $e) {
+                return null;
+            }
+        })
+        ->filter()
+        ->groupBy('gov_id')
+        ->map(function($group) {
+
+             // Get unique cut_sale_id count
+        $uniqueCutSales = $group->pluck('cut_sale_id')->unique()->count();
+            return [
+                'id' => $group->first()['gov_id'],
+                'city_name_en' => $group->first()['gov_name'],
+                'total_sales' => $group->sum('amount'),
+                'unique_customers' => $uniqueCutSales, // Add count of unique cut_sale_id
+                'total_bills' => $group->count() // Count of all bill records for this governorate
+
+
+            ];
+        });
+        $sortedResults = $results->sortByDesc('total_sales');
+        $totalResults = $results->sum('total_sales');
+        $totalcusts = $results->sum('unique_customers');
+        // dd($totalResults );
+        return view('admin.bill_sale.reportsalecity',compact('results','totalResults','totalcusts','sortedResults','fromdata','todata'));
+    }
+    public function reportsalearea(Request $request)
+
+    {
+        
+        $fromdata = $request->get('from_time') 
+        ? Carbon::parse($request->get('from_time'))->startOfDay()
+        : Carbon::now()->subMonth()->firstOfMonth()->startOfDay();
+        
+        $todata = $request->get('to_date') 
+        ? Carbon::parse($request->get('to_date'))->endOfDay()  // Changed to endOfDay()
+        : Carbon::now()->endOfDay();
+
+        
+       
+        $results = Bill_sale_header::whereIn('status_requ', [1,5,6,7,8])//1 = approved  5 = deliverd - 6 = Under collection - 7 = some paied - 8 = total paied
+        ->whereDate('valued_time', '>=', $fromdata)
+        ->whereDate('valued_time', '<=', $todata)  // Changed to <=
+        ->get()
+        ->map(function($item) {
+            try {
+                $gov = $item->getcust->getarea;
+                // $city = optional(optional(optional($item->getcust)->getarea)->getcity);
+                return [
+                    'gov_id' => $gov->id,
+                    'city' => $gov, // Include the City model object
+                    'gov_name' => $gov->name_en,
+                    'amount' => $item->approv_sellprice,
+                    'cut_sale_id' => $item->cut_sale_id, // Include the cut_sale_id for counting
+                    'bill_id' => $item->id // Include the bill ID for counting
+
+
+                ];
+            } catch (\Exception $e) {
+                return null;
+            }
+        })
+        ->filter()
+        ->groupBy('gov_id')
+        ->map(function($group) {
+
+             // Get unique cut_sale_id count
+        $uniqueCutSales = $group->pluck('cut_sale_id')->unique()->count();
+            return [
+                'id' => $group->first()['gov_id'],
+                'name_en' => $group->first()['gov_name'],
+                'total_sales' => $group->sum('amount'),
+                'unique_customers' => $uniqueCutSales, // Add count of unique cut_sale_id
+                'total_bills' => $group->count() // Count of all bill records for this governorate
+
+
+            ];
+        });
+        $sortedResults = $results->sortByDesc('total_sales');
+        $totalResults = $results->sum('total_sales');
+        $totalcusts = $results->sum('unique_customers');
+        // dd($totalResults );
+        return view('admin.bill_sale.reportsalearea',compact('results','totalResults','totalcusts','sortedResults','fromdata','todata'));
     }
  
 }

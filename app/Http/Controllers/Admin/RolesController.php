@@ -27,6 +27,7 @@ class RolesController extends Controller
 
         if ($request->ajax()) {
             $data = $this->objectModel::query();
+            // $data = $data->where('id' ,'>', 1);
             $data = $data->orderBy('id', 'DESC');
 
             return Datatables::of($data)

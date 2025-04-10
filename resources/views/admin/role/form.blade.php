@@ -190,7 +190,7 @@ if (isset($data)) {
                             <!--end::Checkbox-->
                             <!--begin::Checkbox-->
                             <label class="form-check form-check-sm form-check-custom form-check-solid me-3 me-lg-10">
-                                <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('cust collection')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('cust collection')) ? 'checked' : '':'' }} name="permissions[]" />
+                                <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('cust collection new')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('cust collection new')) ? 'checked' : '':'' }} name="permissions[]" />
                                 <span class="form-check-label">{{trans('lang.addnew')}} {{trans('lang.cust_collection')}}</span>
                             </label>
                             <!--end::Checkbox-->
@@ -248,19 +248,37 @@ if (isset($data)) {
                             <!--begin::Checkbox-->
                             <label class="form-check form-check-sm form-check-custom form-check-solid me-3 me-lg-10">
                                 <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('sale bills')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('sale bills')) ? 'checked' : '':'' }} name="permissions[]" />
-                                <span class="form-check-label">show {{trans('lang.all')}} {{trans('lang.bills_of_sale')}}</span>
+                                <span class="form-check-label">{{trans('lang.all')}} {{trans('lang.bills_of_sale')}}</span>
                             </label>
                             <!--end::Checkbox-->
                             <!--begin::Checkbox-->
                             <label class="form-check form-check-sm form-check-custom form-check-solid me-3 me-lg-10">
                                 <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('sale bills employee')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('sale bills employee')) ? 'checked' : '':'' }} name="permissions[]" />
-                                <span class="form-check-label">show {{trans('lang.sales')}} - {{trans('employee.employees')}}</span>
+                                <span class="form-check-label">{{trans('lang.sales')}} - {{trans('employee.employees')}}</span>
                             </label>
                             <!--end::Checkbox-->
                             <!--begin::Checkbox-->
                             <label class="form-check form-check-sm form-check-custom form-check-solid me-3 me-lg-10">
                                 <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('all sale bills employee')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('all sale bills employee')) ? 'checked' : '':'' }} name="permissions[]" />
-                                <span class="form-check-label">show {{trans('lang.all')}} {{trans('lang.sales')}} {{trans('employee.employees')}}</span>
+                                <span class="form-check-label">{{trans('lang.all')}} {{trans('lang.sales')}} {{trans('employee.employees')}}</span>
+                            </label>
+                            <!--end::Checkbox-->
+                            <!--begin::Checkbox-->
+                            <label class="form-check form-check-sm form-check-custom form-check-solid me-3 me-lg-10">
+                                <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('sale report governorates')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('sale report governorates')) ? 'checked' : '':'' }} name="permissions[]" />
+                                <span class="form-check-label">{{trans('lang.all')}} {{trans('lang.sales')}} - {{trans('lang.governorates')}}</span>
+                            </label>
+                            <!--end::Checkbox-->
+                            <!--begin::Checkbox-->
+                            <label class="form-check form-check-sm form-check-custom form-check-solid me-3 me-lg-10">
+                                <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('sale report cities')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('sale report cities')) ? 'checked' : '':'' }} name="permissions[]" />
+                                <span class="form-check-label">{{trans('lang.all')}} {{trans('lang.sales')}} - {{trans('lang.cities')}}</span>
+                            </label>
+                            <!--end::Checkbox-->
+                            <!--begin::Checkbox-->
+                            <label class="form-check form-check-sm form-check-custom form-check-solid me-3 me-lg-10">
+                                <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('sale report areas')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('sale report areas')) ? 'checked' : '':'' }} name="permissions[]" />
+                                <span class="form-check-label">{{trans('lang.all')}} {{trans('lang.sales')}} - {{trans('lang.areas')}}</span>
                             </label>
                             <!--end::Checkbox-->
                             

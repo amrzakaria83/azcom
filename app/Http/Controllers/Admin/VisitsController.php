@@ -67,20 +67,12 @@ class VisitsController extends Controller
                 })
                 ->addColumn('contact_id', function($row){
                     if ($row->contact_id != null){
-                        // $color = Type_contact::find($row->contact_id)->favcolor;
-                        // $color = Type_contact::find($row->getcontact->typecont_id)->favcolor;
+                        
                         $color = optional(Type_contact::find($row->typecont_id))->favcolor;
                         $contact_id = '<a href="'.route('admin.contacts.show', $row->getcontact->id).'"><span style="color: '. $color.'!important;">'.$row->getcontact->name_en.'</span><br>';
                         $contact_id .= '<span style="color: '. $color.'!important;">'.trans('lang.contact').'</span></a><br>';
                         $contact_id .= '<span >'.$row->gettype->name_en.'</span><br>';
-                        // $spa = json_decode($row->getcontact->speciality_id);
-                        // if (!empty($spa)) {
-                        //     $spa = Specialty::whereIn('id', $spa)->get();
-                        //     // $spa .= implode('<span>-', $spa->pluck('name_en')->toArray());
-                        //     foreach ($spa as $spality) {
-                        //         $contact_id .= '<span >'.$spality->name_en.'</span><br>';
-                        //     }
-                        // }
+                       
                        
 
                     } elseif($row->center_id != null){

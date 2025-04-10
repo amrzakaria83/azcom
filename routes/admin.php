@@ -674,6 +674,9 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
             Route::get('/inactivesale/{id}', 'Bill_sale_headersController@inactivesale')->name('inactivesale');
             Route::get('/activesale/{id}', 'Bill_sale_headersController@activesale')->name('activesale');
             Route::get('/deliveredesale/{id}', 'Bill_sale_headersController@deliveredesale')->name('deliveredesale')->can('sale_delivered');
+            Route::get('/reportsaleeg','Bill_sale_headersController@reportsaleeg')->name('reportsaleeg')->can('sale report governorates');// can
+            Route::get('/reportsalecity','Bill_sale_headersController@reportsalecity')->name('reportsalecity')->can('sale report cities');// can
+            Route::get('/reportsalearea','Bill_sale_headersController@reportsalearea')->name('reportsalearea')->can('sale report areas');// can
 
 
         });

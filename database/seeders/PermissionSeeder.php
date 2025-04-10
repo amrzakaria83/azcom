@@ -118,6 +118,9 @@ class PermissionSeeder extends Seeder
             'sale_requests', //
             'sale_delivered', //
             'sale report',
+            'sale report governorates', //
+            'sale report cities', //
+            'sale report areas', //
             'sale bills',//
             'sale bills employee',//
             'all sale bills employee',//
