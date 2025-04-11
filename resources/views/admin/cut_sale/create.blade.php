@@ -229,7 +229,7 @@
                                         <div class="row mb-6">
                                             <label class="col-lg-4 col-form-label fw-semibold fs-6">{{trans('lang.note')}}</label>
                                             <div class="col-lg-8 fv-row">
-                                                <input type="text" id="note" name="note" placeholder="{{trans('lang.note')}}" value="" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 text-center text-dark" />
+                                                <input type="text" name="note" placeholder="{{trans('lang.note')}}" value="" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 text-center text-dark" />
                                             </div>
                                         </div>
                                         

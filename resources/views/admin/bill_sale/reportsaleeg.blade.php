@@ -79,7 +79,7 @@
                 <h1>
                 <span>{{trans('lang.total')}}</span>
                 <span>{{trans('lang.value')}} : </span>
-                <span class="text-danger" style="padding-left: 100px;">({{$totalResults}})</span>
+                <span class="text-danger" style="padding-left: 50px;padding-right: 50px;">({{$totalResults}})</span>
                 <span>{{trans('lang.total')}}</span>
                 <span>{{trans('lang.customers')}} : </span>
                 <span class="text-success">({{$totalcusts}})</span>

@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             GovernoratesTableSeeder::class,
             Type_visitsTableSeeder::class,
             Sale_typesTableSeeder::class,
+            Cust_payment_methodsTableSeeder::class,
             // ModelHasRolesTableSeeder::class,
 
         ]);

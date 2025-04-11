@@ -517,7 +517,7 @@
                             </div>
                             @endcan
                             @can('sale report cities')
-                             <div class="menu-item px-3">
+                            <div class="menu-item px-3">
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.bill_sales.reportsalecity')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
