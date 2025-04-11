@@ -677,7 +677,7 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
             Route::get('/reportsaleeg','Bill_sale_headersController@reportsaleeg')->name('reportsaleeg')->can('sale report governorates');//
             Route::get('/reportsalecity','Bill_sale_headersController@reportsalecity')->name('reportsalecity')->can('sale report cities');//
             Route::get('/reportsalearea','Bill_sale_headersController@reportsalearea')->name('reportsalearea')->can('sale report areas');//
-            Route::get('/reportsaleprodarea','Bill_sale_headersController@reportsaleprodarea')->name('reportsaleprodarea');// can
+            Route::get('/reportsaleprodarea','Bill_sale_headersController@reportsaleprodarea')->name('reportsaleprodarea')->can('sale area unit');//
 
 
         });

@@ -534,7 +534,7 @@
                                 </div>
                             </div>
                             @endcan
-                            
+                            @can('sale area unit')
                             <div class="menu-item px-3">
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.bill_sales.reportsaleprodarea')}}">
@@ -542,6 +542,7 @@
                                     <span class="menu-title">{{trans('lang.sales')}} - {{trans('lang.areas')}} - {{trans('lang.unit')}}</span></a>
                                 </div>
                             </div>
+                            @endcan
                             <!-- <div class="menu-item">
                                 <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="click">
                                 <span class="menu-icon">

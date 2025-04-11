@@ -35,7 +35,16 @@ class DatabaseSeeder extends Seeder
             Type_visitsTableSeeder::class,
             Sale_typesTableSeeder::class,
             Cust_payment_methodsTableSeeder::class,
+            Type_centersTableSeeder::class,
+            SocialStylesTableSeeder::class,
             // ModelHasRolesTableSeeder::class,
+            // for trying
+            AreasTableSeeder::class,
+            CentersTableSeeder::class,
+            ProductsTableSeeder::class,
+            TypeContactsTableSeeder::class,
+            SpecialtiesTableSeeder::class,
+            ContactsTableSeeder::class,
 
         ]);
     }

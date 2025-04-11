@@ -54,77 +54,6 @@ if (isset($data)) {
                     </td>
                 </tr>
                 <!--end::Table row-->
-                <!--begin::Table row-->
-                
-                <tr>
-                    <!--begin::Label-->
-                    <td class="text-gray-800">Visit plan </td>
-                    <!--end::Label-->
-                    <!--begin::Input group-->
-                    <td>
-                        <!--begin::Wrapper-->
-                        <div class="d-flex">
-                            <!--begin::Checkbox-->
-                            <label class="form-check form-check-sm form-check-custom form-check-solid me-3 me-lg-10">
-                                <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('visit plan')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('visit plan')) ? 'checked' : '':'' }} name="permissions[]" />
-                                <span class="form-check-label">List</span>
-                            </label>
-                            <label class="form-check form-check-custom form-check-solid me-3 me-lg-10">
-                                <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('visit plan new')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('visit plan new')) ? 'checked' : '':'' }} name="permissions[]" />
-                                <span class="form-check-label">Create</span>
-                            </label>
-                            <!--end::Checkbox-->
-                        </div>
-                        <!--end::Wrapper-->
-                    </td>
-                    <!--end::Input group-->
-                </tr>
-                <tr>
-                    <!--begin::Label-->
-                    <td class="text-gray-800">Visit </td>
-                    <!--end::Label-->
-                    <!--begin::Input group-->
-                    <td>
-                        <!--begin::Wrapper-->
-                        <div class="d-flex">
-                            <!--begin::Checkbox-->
-                            <label class="form-check form-check-sm form-check-custom form-check-solid me-3 me-lg-10">
-                                <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('visit')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('visit')) ? 'checked' : '':'' }} name="permissions[]" />
-                                <span class="form-check-label">List</span>
-                            </label>
-                            <label class="form-check form-check-custom form-check-solid me-3 me-lg-10">
-                                <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('visit new')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('visit new')) ? 'checked' : '':'' }} name="permissions[]" />
-                                <span class="form-check-label">Create</span>
-                            </label>
-                            <!--end::Checkbox-->
-                        </div>
-                        <!--end::Wrapper-->
-                    </td>
-                    <!--end::Input group-->
-                </tr>
-                <tr>
-                    <!--begin::Label-->
-                    <td class="text-gray-800">Report </td>
-                    <!--end::Label-->
-                    <!--begin::Input group-->
-                    <td>
-                        <!--begin::Wrapper-->
-                        <div class="d-flex">
-                            <!--begin::Checkbox-->
-                            <label class="form-check form-check-sm form-check-custom form-check-solid me-3 me-lg-10">
-                                <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('report list')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('report list')) ? 'checked' : '':'' }} name="permissions[]" />
-                                <span class="form-check-label">report list</span>
-                            </label>
-                            <label class="form-check form-check-custom form-check-solid me-3 me-lg-10">
-                                <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('report product')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('report product')) ? 'checked' : '':'' }} name="permissions[]" />
-                                <span class="form-check-label">report product</span>
-                            </label>
-                            <!--end::Checkbox-->
-                        </div>
-                        <!--end::Wrapper-->
-                    </td>
-                    <!--end::Input group-->
-                </tr>
                 <tr>
                     <!--begin::Label-->
                     <td class="text-gray-800">{{trans('lang.sales')}}</td>
@@ -281,12 +210,90 @@ if (isset($data)) {
                                 <span class="form-check-label">{{trans('lang.all')}} {{trans('lang.sales')}} - {{trans('lang.areas')}}</span>
                             </label>
                             <!--end::Checkbox-->
+                            <!--begin::Checkbox-->
+                            <label class="form-check form-check-sm form-check-custom form-check-solid me-3 me-lg-10">
+                                <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('sale area unit')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('sale area unit')) ? 'checked' : '':'' }} name="permissions[]" />
+                                <span class="form-check-label">{{trans('lang.sales')}} - {{trans('lang.areas')}} - {{trans('lang.unit')}}</span>
+                            </label>
+                            <!--end::Checkbox-->
                             
                         </div>
                         <!--end::Wrapper-->
                     </td>
                     <!--end::Input group-->
                 </tr>
+                <!--begin::Table row-->
+                
+                <tr>
+                    <!--begin::Label-->
+                    <td class="text-gray-800">Visit plan </td>
+                    <!--end::Label-->
+                    <!--begin::Input group-->
+                    <td>
+                        <!--begin::Wrapper-->
+                        <div class="d-flex">
+                            <!--begin::Checkbox-->
+                            <label class="form-check form-check-sm form-check-custom form-check-solid me-3 me-lg-10">
+                                <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('visit plan')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('visit plan')) ? 'checked' : '':'' }} name="permissions[]" />
+                                <span class="form-check-label">List</span>
+                            </label>
+                            <label class="form-check form-check-custom form-check-solid me-3 me-lg-10">
+                                <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('visit plan new')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('visit plan new')) ? 'checked' : '':'' }} name="permissions[]" />
+                                <span class="form-check-label">Create</span>
+                            </label>
+                            <!--end::Checkbox-->
+                        </div>
+                        <!--end::Wrapper-->
+                    </td>
+                    <!--end::Input group-->
+                </tr>
+                <tr>
+                    <!--begin::Label-->
+                    <td class="text-gray-800">Visit </td>
+                    <!--end::Label-->
+                    <!--begin::Input group-->
+                    <td>
+                        <!--begin::Wrapper-->
+                        <div class="d-flex">
+                            <!--begin::Checkbox-->
+                            <label class="form-check form-check-sm form-check-custom form-check-solid me-3 me-lg-10">
+                                <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('visit')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('visit')) ? 'checked' : '':'' }} name="permissions[]" />
+                                <span class="form-check-label">List</span>
+                            </label>
+                            <label class="form-check form-check-custom form-check-solid me-3 me-lg-10">
+                                <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('visit new')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('visit new')) ? 'checked' : '':'' }} name="permissions[]" />
+                                <span class="form-check-label">Create</span>
+                            </label>
+                            <!--end::Checkbox-->
+                        </div>
+                        <!--end::Wrapper-->
+                    </td>
+                    <!--end::Input group-->
+                </tr>
+                <tr>
+                    <!--begin::Label-->
+                    <td class="text-gray-800">Report </td>
+                    <!--end::Label-->
+                    <!--begin::Input group-->
+                    <td>
+                        <!--begin::Wrapper-->
+                        <div class="d-flex">
+                            <!--begin::Checkbox-->
+                            <label class="form-check form-check-sm form-check-custom form-check-solid me-3 me-lg-10">
+                                <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('report list')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('report list')) ? 'checked' : '':'' }} name="permissions[]" />
+                                <span class="form-check-label">report list</span>
+                            </label>
+                            <label class="form-check form-check-custom form-check-solid me-3 me-lg-10">
+                                <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('report product')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('report product')) ? 'checked' : '':'' }} name="permissions[]" />
+                                <span class="form-check-label">report product</span>
+                            </label>
+                            <!--end::Checkbox-->
+                        </div>
+                        <!--end::Wrapper-->
+                    </td>
+                    <!--end::Input group-->
+                </tr>
+
                 <tr>
                     <!--begin::Label-->
                     <td class="text-gray-800">List </td>
