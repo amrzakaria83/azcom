@@ -659,7 +659,7 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
         });
 
         Route::name('bill_sales.')->prefix('bill_sales')->group(function(){
-            Route::get('/','Bill_sale_headersController@index')->name('index')->can('sale_requests');// can
+            Route::get('/','Bill_sale_headersController@index')->name('index')->can('sale_requests');// 
             Route::get('/show/{id}','Bill_sale_headersController@show')->name('show');
             Route::post('/delete', 'Bill_sale_headersController@destroy')->name('delete');
             Route::get('/create','Bill_sale_headersController@create')->name('create');// can
@@ -668,15 +668,15 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
             Route::post('/update', 'Bill_sale_headersController@update')->name('update');// can
             Route::get('/editsalehead/{id}', 'Bill_sale_headersController@editsalehead')->name('editsalehead');// can
             Route::post('/storepermonesale','Bill_sale_headersController@storepermonesale')->name('storepermonesale');// can
-            Route::get('/indexall','Bill_sale_headersController@indexall')->name('indexall')->can('sale bills'); // can
+            Route::get('/indexall','Bill_sale_headersController@indexall')->name('indexall')->can('sale bills'); // 
             Route::get('/indexdelivered','Bill_sale_headersController@indexdelivered')->name('indexdelivered'); // can
             Route::get('/getprodname/{id?}','Bill_sale_headersController@getprodname')->name('getprodname');
             Route::get('/inactivesale/{id}', 'Bill_sale_headersController@inactivesale')->name('inactivesale');
             Route::get('/activesale/{id}', 'Bill_sale_headersController@activesale')->name('activesale');
             Route::get('/deliveredesale/{id}', 'Bill_sale_headersController@deliveredesale')->name('deliveredesale')->can('sale_delivered');
-            Route::get('/reportsaleeg','Bill_sale_headersController@reportsaleeg')->name('reportsaleeg')->can('sale report governorates');// can
-            Route::get('/reportsalecity','Bill_sale_headersController@reportsalecity')->name('reportsalecity')->can('sale report cities');// can
-            Route::get('/reportsalearea','Bill_sale_headersController@reportsalearea')->name('reportsalearea')->can('sale report areas');// can
+            Route::get('/reportsaleeg','Bill_sale_headersController@reportsaleeg')->name('reportsaleeg')->can('sale report governorates');//
+            Route::get('/reportsalecity','Bill_sale_headersController@reportsalecity')->name('reportsalecity')->can('sale report cities');//
+            Route::get('/reportsalearea','Bill_sale_headersController@reportsalearea')->name('reportsalearea')->can('sale report areas');//
             Route::get('/reportsaleprodarea','Bill_sale_headersController@reportsaleprodarea')->name('reportsaleprodarea');// can
 
 

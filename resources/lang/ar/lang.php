@@ -206,6 +206,7 @@ return [
 
     "cust_collection" => "تحصيل عميل",
     "refund_causes" => "أسباب ارتجاع",
+    "refund_cause" => "سبب ارتجاع",
     "returns" => "مرتجعات",
     "transactions" => "معاملات",
     "not_defined" => "غير معرف",

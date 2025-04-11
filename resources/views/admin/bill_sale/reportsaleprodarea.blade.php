@@ -40,11 +40,6 @@
     <div class="card">
         <div class="card-body p-9">
 
-        {{-- <h1>
-            {{$fromdata}} 
-            {{$todata}}
-        </h1> --}}
-        
                 <div class="row mb-6">
 
                     <div class="col-sm-4">
@@ -74,32 +69,9 @@
                         </div>
                     </div>
                 </div>
-                @foreach($results as $product)
-                <h1>{{ $product['product_name'] }} - {{trans('lang.total')}} {{trans('lang.sales')}}: {{ $product['total_product_sales'] }} {{trans('lang.unit')}}</h1>
                 
-                @foreach($product['governorates'] as $gov)
+                @if(isset($results))
                 
-                    <p>
-                        <span>{{trans('lang.area')}} : </span>
-                        <span>{{ $gov['gov_name'] }}</span>
-                        <span>{{trans('lang.total')}} {{trans('lang.sales')}}: {{ $gov['total_sales'] }} {{trans('lang.unit')}}, </span>
-                        <span>{{trans('lang.counttotal')}} {{trans('lang.customers')}}: {{ $gov['unique_customers'] }}</span>
-                    </p>
-                @endforeach
-            @endforeach
-                @if(isset($sortedResults))
-                {{-- @if(isset($totalResults))
-                <div class="row mb-6">
-                <h1>
-                <span>{{trans('lang.total')}}</span>
-                <span>{{trans('lang.value')}} : </span>
-                <span class="text-danger" style="padding-left: 50px;padding-right: 50px;">({{$totalResults}})</span>
-                <span>{{trans('lang.total')}}</span>
-                <span>{{trans('lang.customers')}} : </span>
-                <span class="text-success">({{$totalcusts}})</span>
-                </h1>
-                </div>
-                @endif --}}
                 <div class="row mb-6">
                              <!--begin::Table-->
                     <table class="table align-middle table-rounded table-striped table-row-dashed fs-6" id="kt_datatable_table">
@@ -116,33 +88,38 @@
                                 <th class="min-w-125px text-center">{{trans('lang.total')}} {{trans('lang.sales')}}</th>
                                 <th class="min-w-125px text-center">{{trans('lang.percentage')}} {{trans('lang.sales')}}</th>
                                 <th class="min-w-125px text-center">{{trans('lang.counttotal')}} {{trans('lang.customers')}}</th>
-                                <th class="min-w-125px text-center">{{trans('lang.counttotal')}} {{trans('lang.bills_of_sale')}}</th>
+                                <!-- <th class="min-w-125px text-center">{{trans('lang.counttotal')}} {{trans('lang.bills_of_sale')}}</th> -->
                                 <th class="min-w-125px text-center">{{trans('lang.city')}}</th>
                                 <th class="min-w-125px text-center">{{trans('lang.governorate')}}</th>
                                 
                                 
                             </tr>
-                            <!--end::Table row-->
+                            <!--end::Table row--> 
                         </thead>
                         <!--end::Table head-->
                         <!--begin::Table body-->
                         <tbody class="text-gray-600 fw-bold text-center">
-                        @foreach ($sortedResults as $gov)
+                        @foreach($results as $product)
+                        <tr>
+                            <td colspan="3"><span class="text-info">{{ $product['product_name'] }}</span> - {{trans('lang.total')}} {{trans('lang.sales')}}: {{ $product['total_product_sales'] }} {{trans('lang.unit')}}</td>
+                            @foreach($product['governorates'] as $gov)
                             <tr>
                                 <td></td>
-                                <td>{{ $gov['name_en'] }}</td>
+                                <td>{{ $gov['gov_name'] }}</td>
                                 <td>{{ $gov['total_sales'] }}</td>
                                 <td class="text-info">{{ round(($gov['total_sales'] / $totalResults) * 100,2) }} %</td>
                                 <td>{{ $gov['unique_customers'] }}</td>
-                                <td>{{ $gov['total_bills'] }}</td>
+                                <!-- <td></td> -->
                                 @php
-                                    $city_name = \App\Models\Area::find($gov['id'])->getcity->city_name_en;
-                                    $govname = \App\Models\Area::find($gov['id'])->getcity->getgovernorate->governorate_name_en;
+                                    $city_name = \App\Models\Area::find($gov['gov_id'])->getcity->city_name_en;
+                                    $govname = \App\Models\Area::find($gov['gov_id'])->getcity->getgovernorate->governorate_name_en;
                                 @endphp
                                 <td>{{ $city_name }}</td>
                                 <td>{{ $govname }}</td>
 
                             </tr>
+                            @endforeach
+                        </tr>
                             @endforeach
                         </tbody>
                         <!--end::Table body-->

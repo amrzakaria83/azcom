@@ -212,6 +212,7 @@ return [
     "status_request" => "Status Request",
     "cust_collection" => "Customer Collection",
     "refund_causes" => "Refund Causes",
+    "refund_cause" => "Refund Cause",
     "returns" => "Returns",
     "transactions" => "Transactions",
     "not_defined" => "Not Defined",
