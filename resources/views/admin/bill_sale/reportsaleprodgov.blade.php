@@ -84,13 +84,12 @@
                                         <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_datatable_table .form-check-input" value="1" />
                                     </div>
                                 </th>
-                                <th class="min-w-125px text-center">{{trans('lang.area')}}</th>
+                                <th class="min-w-125px text-center">{{trans('lang.governorate')}}</th>
                                 <th class="min-w-125px text-center">{{trans('lang.total')}} {{trans('lang.sales')}}</th>
                                 <th class="min-w-125px text-center">{{trans('lang.percentage')}} {{trans('lang.sales')}}</th>
                                 <th class="min-w-125px text-center">{{trans('lang.counttotal')}} {{trans('lang.customers')}}</th>
                                 <!-- <th class="min-w-125px text-center">{{trans('lang.counttotal')}} {{trans('lang.bills_of_sale')}}</th> -->
-                                <th class="min-w-125px text-center">{{trans('lang.city')}}</th>
-                                <th class="min-w-125px text-center">{{trans('lang.governorate')}}</th>
+                                
                                 
                                 
                             </tr>
@@ -101,9 +100,8 @@
                         <tbody class="text-gray-600 fw-bold text-center">
                         @foreach($results as $product)
                         <tr>
-                            <td colspan="2"><span class="text-info">{{ $product['product_name'] }}</span></td>
+                            <td colspan="2"><span class="text-info">{{ $product['product_name'] }}</span> </td>
                             <td class="text-danger">{{ $product['total_product_sales'] }}</td>
-
                             @foreach($product['governorates'] as $gov)
                             <tr>
                                 <td></td>
@@ -111,13 +109,7 @@
                                 <td>{{ $gov['total_sales'] }}</td>
                                 <td class="text-info">{{ round(($gov['total_sales'] / $product['total_product_sales']) * 100,2) }} %</td>
                                 <td>{{ $gov['unique_customers'] }}</td>
-                                <!-- <td></td> -->
-                                @php
-                                    $city_name = \App\Models\Area::find($gov['gov_id'])->getcity->city_name_en;
-                                    $govname = \App\Models\Area::find($gov['gov_id'])->getcity->getgovernorate->governorate_name_en;
-                                @endphp
-                                <td>{{ $city_name }}</td>
-                                <td>{{ $govname }}</td>
+                                
 
                             </tr>
                             @endforeach

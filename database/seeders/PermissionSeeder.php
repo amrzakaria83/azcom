@@ -122,6 +122,7 @@ class PermissionSeeder extends Seeder
             'sale report cities', //
             'sale report areas', //
             'sale area unit', // 
+            'sale governorates unit', // 
             'sale bills',//
             'sale bills employee',//
             'all sale bills employee',//

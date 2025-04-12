@@ -16,6 +16,7 @@ class Type_centersTableSeeder extends Seeder
     {
         $typeis = [
             [1, '1', 'Hospital', 0],
+            [2, '1', 'Poly-clinic', 0],
         ];
 
         foreach ($typeis as $type) {
