@@ -539,7 +539,16 @@
                                 <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
                                     <a class="menu-link" href="{{route('admin.bill_sales.reportsaleprodarea')}}">
                                     <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
-                                    <span class="menu-title">{{trans('lang.sales')}} - {{trans('lang.areas')}} - {{trans('lang.unit')}}</span></a>
+                                    <span class="menu-title">{{trans('lang.sales')}} - {{trans('lang.areas')}} - {{trans('lang.units')}}</span></a>
+                                </div>
+                            </div>
+                            @endcan
+                            @can('sale governorates unit')
+                            <div class="menu-item px-3">
+                                <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
+                                    <a class="menu-link" href="{{route('admin.bill_sales.reportsaleprodgov')}}">
+                                    <span class="menu-icon"><i class="fonticon-setting fs-2"></i></span>
+                                    <span class="menu-title">{{trans('lang.sales')}} - {{trans('lang.governorates')}} - {{trans('lang.units')}}</span></a>
                                 </div>
                             </div>
                             @endcan

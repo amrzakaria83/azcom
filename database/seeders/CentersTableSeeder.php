@@ -18,7 +18,7 @@ class CentersTableSeeder extends Seeder
             [
                 'id' => 1,
                 'emp_id' => 1,
-                'type_id' => 1,
+                'type_id' => 2,
                 'area_id' => 2,
                 'name_en' => 'Mohamed Elzonkoly Clinic (Etay)',
                 'phone' => '0453331212',
@@ -62,7 +62,7 @@ class CentersTableSeeder extends Seeder
             [
                 'id' => 3,
                 'emp_id' => 1,
-                'type_id' => 1,
+                'type_id' => 2,
                 'area_id' => 1,
                 'name_en' => 'Tamer Hassan Clinic',
                 'phone' => '034819380',
@@ -128,7 +128,7 @@ class CentersTableSeeder extends Seeder
             [
                 'id' => 6,
                 'emp_id' => 1,
-                'type_id' => 1,
+                'type_id' => 2,
                 'area_id' => 7,
                 'name_en' => 'center 3',
                 'phone' => '01559963440',

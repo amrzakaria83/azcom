@@ -390,6 +390,8 @@ $(document).ready(function () {
         const sale_type_id = $('#sale_type_id').val();
         if (!cut_sale_id || !sale_type_id ) {
             alert('برجاء تحديد العميل وطريقة البيع');
+            location.reload();
+            return false; // Stop execution
         }
         // Gather form data
         const formData = {
