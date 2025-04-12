@@ -108,7 +108,7 @@
                     </div>
                     <div class="row mb-6">
 
-                        <div class="col-sm-2">
+                        <div class="col-sm-4">
                             <label class="required fw-semibold fs-6 mb-2">{{trans('lang.start_from')}} {{trans('lang.valued_date')}}</label>
                             <div class="position-relative d-flex align-items-center">
                                 <span class="svg-icon svg-icon-2 position-absolute mx-4">
@@ -121,7 +121,7 @@
                                 <input class="form-control form-control-solid ps-12" name="from_date" placeholder="{{trans('lang.start_from')}}" id="kt_datepicker_1" />
                             </div>
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-4">
                             <label class="required fw-semibold fs-6 mb-2">{{trans('lang.end_to')}} {{trans('lang.valued_date')}}</label>
                             <div class="position-relative d-flex align-items-center">
                                 <span class="svg-icon svg-icon-2 position-absolute mx-4">

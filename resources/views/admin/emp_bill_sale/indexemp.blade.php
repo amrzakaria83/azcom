@@ -123,7 +123,7 @@
                         </div>
                     <div class="row mb-6">
 
-                        <div class="col-sm-2">
+                        <div class="col-sm-4">
                             <label class="required fw-semibold fs-6 mb-2">{{trans('lang.start_from')}}</label>
                             <div class="position-relative d-flex align-items-center">
                                 <span class="svg-icon svg-icon-2 position-absolute mx-4">
@@ -136,7 +136,7 @@
                                 <input class="form-control form-control-solid ps-12" name="from_date" placeholder="{{trans('lang.start_from')}}" id="kt_datepicker_1" />
                             </div>
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-4">
                             <label class="required fw-semibold fs-6 mb-2">{{trans('lang.end_to')}}</label>
                             <div class="position-relative d-flex align-items-center">
                                 <span class="svg-icon svg-icon-2 position-absolute mx-4">
@@ -149,7 +149,7 @@
                                 <input class="form-control form-control-solid ps-12" name="to_date" placeholder="{{trans('lang.end_to')}}" id="kt_datepicker_2" />
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-2">
                             <label class="col-sm-8 fw-semibold fs-6 mb-2"></label>
                                 <div class="col-sm-8 d-flex align-items-center">
                                     <button type="button" class="btn btn-success btn-lg " id="searchbtn" >
@@ -157,7 +157,7 @@
                                     </button> 
                                 </div> 
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-2">
                             <label class="col-sm-8 fw-semibold fs-6 mb-2"></label>
                                 <div class="col-sm-8 d-flex align-items-center">
                                     <a href="{{route('admin.emp_bill_sales.indexempsearch')}}" class="btn btn-primary btn-lg " id="searchbtn" >

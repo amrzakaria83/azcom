@@ -104,9 +104,9 @@
 
                     </div>
                     <div class="row mb-6">
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <label class="col-sm-2 fw-semibold fs-2 mb-2">{{trans('lang.area')}}</label>
-                                <div class="col-sm-6 fv-row">
+                                <div class="col-sm-12 fv-row">
                                     <select  data-placeholder="Select an option" class="input-text form-control form-select mb-3 mb-lg-0 text-center" id="area_id" name="area_id[]" multiple="multiple" data-control="select2" >
                                         <option  disabled >Select an option</option>
                                             @foreach (\App\Models\Area::where('status' , 0)->get() as $asd)
@@ -117,7 +117,7 @@
                         </div>
                         <div class="col-sm-4">
                             <label class="col-sm-6 fw-semibold fs-2 mb-2">{{trans('lang.name')}}-{{trans('lang.customer')}}</label>
-                                <div class="col-sm-6 fv-row">
+                                <div class="col-sm-12 fv-row">
                                     <select  data-placeholder="Select an option" class="input-text form-control form-select mb-3 mb-lg-0 text-center" id="cut_sale_id" name="cut_sale_id" data-control="select2" >
                                         <option  disabled selected>Select an option</option>
                                             @foreach (\App\Models\Cut_sale::where('status' , 0)->get() as $asd)

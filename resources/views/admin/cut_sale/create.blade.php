@@ -163,20 +163,20 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="row mb-6">
+                        <div class="row mb-6" id="divlat">
                             <label class="col-lg-2 col-form-label required fw-semibold fs-3 text-info">lat</label>
                             <div class="col-lg-8 fv-row">
                                 <input type="text" name="lat" id="lat" placeholder="lat" value="" required class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
                             </div>
                         </div>
 
-                        <div class="row mb-6">
+                        <div class="row mb-6" id="divlng">
                             <label class="col-lg-2 col-form-label required fw-semibold fs-3 text-info">lng</label>
                             <div class="col-lg-8 fv-row">
                                 <input type="text" name="lng" id="lng" placeholder="lng" value="" required class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
                             </div>
                         </div>
-                        <div class="row mb-6">
+                        <div class="row mb-6" id="maps">
 
                         <div id="map" style="height: 300px;"></div>
                         </div>
@@ -317,17 +317,17 @@ defer
 <script>
     $(document).ready(function(){
         $('#name_en,#phone,#address,#email,#note,#area_id,#lat,#lng').prop('disabled', true);
-        $('#name_en,#phone,#address,#email,#note,#area_id,#lat,#lng,#name_ens,#areas,#phones,#addresss,#emails,#notes').hide();
+        $('#name_en,#phone,#address,#email,#note,#area_id,#lat,#lng,#name_ens,#areas,#phones,#addresss,#emails,#notes,#divlat,#divlng,#maps').hide();
         $('#type_type').change(function() {
             var type_type = $(this).val();
             if(type_type === "1"){
-                $('#name_ens,#name_en,#phone,#address,#email,#note,#area_id,#lat,#lng,#areas,#phones,#addresss,#emails,#notes').show();
+                $('#name_ens,#name_en,#phone,#address,#email,#note,#area_id,#lat,#lng,#areas,#phones,#addresss,#emails,#notes,#divlat,#divlng,#maps').show();
                 $('#center_id').hide();
                 $('#centers').hide();
                 $('#name_en,#phone,#address,#email,#note,#area_id,#lat,#lng').prop('disabled', false);
             } else {
                 $('#name_en,#phone,#address,#email,#note,#area_id,#lat,#lng').prop('disabled', true);
-                $('#name_en,#phone,#address,#email,#note,#area_id,#lat,#lng,#name_ens,#areas,#phones,#addresss,#emails,#notes').hide();
+                $('#name_en,#phone,#address,#email,#note,#area_id,#lat,#lng,#name_ens,#areas,#phones,#addresss,#emails,#notes,#divlat,#divlng,#maps').hide();
                 $('#centers').show();
                 $('#center_id').show();
 
