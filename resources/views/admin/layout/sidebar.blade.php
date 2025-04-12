@@ -543,14 +543,14 @@
                                 </div>
                             </div>
                             @endcan
-                            <!-- <div class="menu-item">
+                            {{-- <div class="menu-item">
                                 <button class="btn btn-primary rotate container fw-bold fs-2 justify-content-center"  data-kt-menu-trigger="click">
                                 <span class="menu-icon">
                                     <i class="fonticon-setting fs-1"></i>
                                 </span>
                                 <span class="menu-title">{{trans('lang.sales')}} - {{trans('lang.areas')}} - {{trans('lang.unit')}}</span></button>
                                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-auto min-w-200 mw-300px"      
-                                
+                                data-kt-menu-placement="left-start" data-kt-menu-offset="50px, 0"
                                  data-kt-menu="true">
                                         <div class="menu-item px-3">
                                             <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-1">
@@ -561,7 +561,7 @@
                                         </div>
                                         
                                     </div>
-                            </div> -->
+                            </div> --}}
 
                     </div>
             </div>
