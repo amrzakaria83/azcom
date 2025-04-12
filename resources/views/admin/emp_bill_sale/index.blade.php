@@ -147,10 +147,16 @@
                                     </div>
                                 </th> --}}
                                 <th class="min-w-125px text-center">{{trans('lang.name')}} {{trans('employee.employees')}}</th>
+                                <th class="min-w-125px text-center">{{trans('lang.products')}}</th>
+                                <th class="min-w-125px text-center">{{trans('lang.quantity')}}</th>
                                 <th class="min-w-125px text-center">{{trans('lang.value')}}</th>
-                                <th class="min-w-125px text-center">%</th>
+                                <th class="min-w-125px text-center">{{trans('lang.percentage')}}</th>
                                 <th class="min-w-125px text-center">{{trans('lang.type_type')}}</th>
-                                <th class="min-w-125px text-center">{{trans('lang.name')}}-{{trans('lang.customer')}}</th>
+                                <th class="min-w-125px text-center">{{trans('lang.valued_date')}}</th>
+                                <th class="min-w-125px text-center">{{trans('lang.customer')}}</th>
+                                <th class="min-w-125px text-center">{{trans('lang.created_at')}}</th>
+                                <th class="min-w-125px text-center">{{trans('lang.total')}} {{trans('lang.value')}}</th>
+                                <th class="min-w-125px text-center">{{trans('lang.total')}} {{trans('lang.quantity')}}</th>
                                 {{-- <th class="min-w-125px text-center">{{trans('employee.is_active')}}</th>
                                 <th class="min-w-125px text-center">{{trans('employee.action')}}</th> --}}
                             </tr>
