@@ -16,6 +16,7 @@ use App\Models\Temp_sale_rec;
 use App\Models\Cut_sale;
 use App\Models\Governorate;
 use App\Models\City;
+use App\Models\Area;
 use DataTables;
 use Validator;
 use Carbon\Carbon;
@@ -950,6 +951,246 @@ class Bill_sale_headersController extends Controller
         // dd($totalcusts );
         return view('admin.bill_sale.reportsaleeg',compact('results','totalResults','totalcusts','sortedResults','fromdata','todata'));
     }
+    public function indexallgov(Request $request,$govid)
+    {
+        
+        // $datacust = Cut_sale::whereIN('id', $dataarea)->pluck('id');
+        // $gov = Bill_sale_header::whereIn('cut_sale_id',$datacust)->get();
+        // } else {
+        //     $gov = Bill_sale_header::all();
+        // }
+        // dd($govid);
+        
+        if ($request->ajax()) {
+        $datacity = City::where('governorate_id',$govid)->pluck('id');
+        $dataarea = Area::whereIn('egy_or_uea_id', $datacity)->pluck('id');
+        $datacust = Cut_sale::whereIN('id', $dataarea)->pluck('id');
+            dd($datacust);
+            $data = Bill_sale_header::query()
+            ->whereIn('cut_sale_id', $datacust)
+            ->orderBy('id', 'DESC');
+
+            return Datatables::of($data)
+                ->addColumn('checkbox', function($row){
+                    $checkbox = '<div class="form-check form-check-sm p-3 form-check-custom form-check-solid">
+                                    <input class="form-check-input" type="checkbox" value="'.$row->id.'" />
+                                </div>';
+                    return $checkbox;
+                })
+                ->addColumn('name_en', function($row){
+                    $reqstatus = $row->status_requ;
+                    if ($reqstatus !== 0){
+                        $name_en = '<div class="d-flex flex-column">
+                        <a href="'.route('admin.emp_bill_sales.edit', $row->id).'" 
+                        class="text-gray-800 text-hover-primary mb-1">'.$row->getcust->name_en.'</a><div>';
+                    } else {
+                        $name_en = '<div class="d-flex flex-column">
+                        <a href="javascript:;" 
+                        class="text-gray-800 text-hover-primary mb-1">'.$row->getcust->name_en.'</a><div>';
+                    }
+                    
+                    $name_en .= '<a href="' . route('admin.emp_bill_sales.edit', $row->id) . '" class="text-gray-800 text-hover-primary mb-1"><span class="fs-6">' . e($row->getcust->phone) . '</span></a><br>';
+                    $name_en .= '<a href="' . route('admin.emp_bill_sales.edit', $row->id) . '" class="text-gray-800 text-hover-primary mb-1"><span class="fs-6">' . e($row->getcust->address) . '</span></a>';
+                    // $name_en .= '<span class="fs-6">'.$row->getcust->address.'</span>';
+                    // $name_en .= '<span class="fs-6">'.$row->getcust->note.'</span>';
+
+                    return $name_en;
+                })
+                ->addColumn('status_requ', function($row){
+                    $status_requ = '';
+                    $reqstatus = $row->status_requ;
+                    if($reqstatus === 0 ){
+                        $status_requ .='<a href="'.route('admin.bill_sales.editsalehead', $row->id).'" class="" data-kt-menu-trigger="click" data-kt-menu-placement="">';
+                        $status_requ .='<span class="text-info fs-3">'.trans('lang.request').'</span>';
+                         $status_requ .= '</a>';
+                    } elseif($reqstatus === 1){
+                        $status_requ .='<span class="text-success fs-3">'.trans('lang.approved').'</span>';
+
+                    } elseif($reqstatus === 2){
+                        $status_requ .='<span class="text-danger fs-3">'.trans('lang.reject_some').'</span>';
+
+                    } elseif($reqstatus === 3){
+                        $status_requ .='<span class="text-danger fs-3">'.trans('lang.reject').'</span>';
+
+                    } elseif($reqstatus === 4){
+                        $status_requ .='<span class="text-info fs-3">'.trans('lang.under_delevery').'</span>';
+
+                    } elseif($reqstatus === 5){
+                        $status_requ .='<span class="text-info fs-3">'.trans('lang.delivered').'</span>';
+
+                    } elseif($reqstatus === 6){
+                        $status_requ .='<span class="text-info fs-3">'.trans('lang.some_paied').'</span>';
+
+                    } elseif($reqstatus === 6){
+                        $status_requ .='<span class="text-success fs-3">'.trans('lang.total_paied').'</span>';
+
+                    } else {
+                        $status_requ .='<span class="text-danger fs-3">'.trans('lang.other').'</span>';
+
+                    }
+                    
+
+                    return $status_requ;
+                })
+                ->addColumn('note', function($row){
+                    $note = '';
+                    if($row->note != null){
+
+                        $note .='<br><span class="text-gray-600 fs-3">'.$row->note.'</span>';
+                    }
+                    if($row->note1 != null){
+
+                        $note .='<br><span class="text-gray-600 fs-3">'.$row->note1.'</span>';
+                    }
+                    if($row->note2 != null){
+
+                        $note .='<br><span class="text-gray-600 fs-3">'.$row->note2.'</span>';
+                    }
+                    if($row->note3 != null){
+
+                        $note .='<br><span class="text-gray-600 fs-3">'.$row->note3.'</span>';
+                    }
+                    return $note;
+                })
+                ->addColumn('status_order', function($row){
+                    $status_order = '';
+                    if($row->status_order != null){
+
+                        $status_order .='<br><span class="text-info fs-3">'.$row->status_order.'</span>';
+                    }
+                    if($row->method_for_payment != null){
+
+                        $status_order .='<br><span class="text-danger fs-3">'.$row->method_for_payment.'</span>';
+                    }
+
+                    return $status_order;
+                })
+                ->addColumn('area_id', function($row){
+                    // Check if the relationship exists and is not null
+                    if ($row->getcust && $row->getcust->getarea) {
+                        $area = $row->getcust->getarea->name_en;
+                        if (!empty($area)) {
+                            $area_id = '<span class="text-success fs-3">' . $area . '</span><br>';
+                            if ($row->getcust->getarea->country_id === "EGY"){
+                                $area_id .= '<span class="text-info">'.$row->getcust->getarea->getcity->city_name_en.'</span><br>';
+                                $gov = $row->getcust->getarea->getcity->governorate_id;
+                                $namgov = Governorate::find($gov);
+                                $area_id .= '<span>'.trans('lang.governorate').':'.$namgov->governorate_name_en.'</span><br>';
+                                $area_id .= '<span>'.trans('lang.egypt').'</span>';
+                            } elseif ($row->getcust->getarea->country_id === "UAE"){
+                                $area_id .= '<span class="text-info">'.$row->getcust->getarea->getcity->name_en.'</span><br>';
+                                $area_id .= '<span>'.trans('lang.uae').'</span>';
+                            }
+                        } else {
+                            $area_id = '<span class="text-danger fs-3">Not recognized</span>';
+                        }
+                    } else {
+                        $area_id = '<span class="text-danger fs-3">Not recognized</span>';
+                    }
+                    
+                    return $area_id;
+                })
+                ->addColumn('description', function($row){
+
+                    $description = '<span class="text-info fs-3">'.date('Y-m-d', strtotime($row->valued_time)).'</span><br>';
+                    $description .= '<span class="fs-6">'.date('Y-m-d', strtotime($row->created_at)).'</span>';
+                    
+                    return $description;
+                })
+                ->addColumn('totalsellprice', function($row){
+
+                    $totalsellprice = '<span class="text-info fs-3">'.round($row->totalsellprice).'</span><br>';
+                    
+                    return $totalsellprice;
+                })
+                ->addColumn('approv_sellprice', function($row){
+
+                    $approv = $row->approv_sellprice;
+                    if (!empty($approv)) {
+                    $approv_sellprice = '<span class="text-success fs-3">'.round($approv).'</span>';
+                    } else {
+                        $approv_sellprice = '<span class="text-danger fs-3">Not recognized</span>';
+                    }
+                    return $approv_sellprice;
+                })
+                ->addColumn('countprod', function($row){
+                    $prodcoun = Bill_sale_detail::where('bill_sale_header_id' , $row->id)->count();
+                    if($prodcoun != null){
+                        $countprod = '<span class="text-success fs-3">'.$prodcoun.'</span><br>';
+                    } else{
+                        $countprod = '<span class="text-success fs-3">0</span><br>';
+                    }
+                    
+                    
+                    return $countprod;
+                })
+                ->addColumn('status', function($row){
+                    if($row->status == 0 ) {
+                        $status = '<div class="badge badge-light-success fw-bold">مقعل</div>';
+                    } else {
+                        $status = '<div class="badge badge-light-danger fw-bold">غير مفعل</div>';
+                    }
+                    
+                    return $status;
+                })
+                ->addColumn('is_active', function($row){
+
+                    if($row->status == 0) {
+                        $is_active = '<div class="badge badge-light-success fw-bold">'.trans('employee.active').'</div>';
+                        // $is_active .= '<div><button type="button" class="btn btn-success btn-sm col-6" data-bs-toggle="modal" data-bs-target="#kt_modal_1b" data-center-id="'. $row->id .'" data-centername="'. $row->name_en .'">
+                        //     '.trans('lang.work_hours').'
+                        //     </button></div> ';
+                    } else {
+                        $is_active = '<div class="badge badge-light-danger fw-bold">'.trans('employee.notactive').'</div>';
+                    }
+                    // $is_active .= $row->note;
+
+                    return $is_active;
+                })
+                ->addColumn('actions', function($row){
+                    $actions = '<div class="ms-2">
+                                <a href="'.route('admin.bill_sales.show', $row->id).'" class="btn btn-sm btn-icon btn-warning btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                    <i class="bi bi-eye-fill fs-1x"></i>
+                                </a>
+                                <a href="'.route('admin.emp_bill_sales.edit', $row->id).'" class="btn btn-sm btn-icon btn-info btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                    <i class="bi bi-pencil-square fs-1x"></i>
+                                </a>
+                            </div>';
+                    return $actions;
+                })
+                // ->filter(function ($instance) use ($request) {
+                //     if (!empty($request->get('from_time') || $request->get('to_date'))) {
+                //         $instance->whereDate('valued_time', '>=', $request->get('from_time'));
+                //         $instance->whereDate('valued_time', '<=', $request->get('to_date'));
+                //     }
+                //     if (!empty($request->get('cut_sale_id')))
+                //     {
+                //     $instance->where(function ($query) use ($request) {
+                //         $query->where('cut_sale_id', $request->get('cut_sale_id'));
+                //     });
+                //     }
+                //     if (!empty($request->get('area_id'))) {
+                //         $instance->whereHas('getcust', function ($query) use ($request) {
+                //             $query->whereIn('area_id', $request->get('area_id'));
+                //         });
+                //     }
+                //     if ($request->get('status') == '0' || $request->get('status') == '1') {
+                //         $instance->where('status', $request->get('status'));
+                //     }
+                //     if (!empty($request->get('search'))) {
+                //             $instance->where(function($w) use($request){
+                //             $search = $request->get('search');
+                //             $w->orWhere('name_en', 'LIKE', "%$search%")
+                //             ->orWhere('phone', 'LIKE', "%$search%")
+                //             ->orWhere('email', 'LIKE', "%$search%");
+                //         });
+                //     }
+                // })
+                ->rawColumns(['name_en','description','note','status_order','status_requ','area_id','status','countprod','totalsellprice','approv_sellprice','is_active','checkbox','actions'])
+                ->make(true);
+        }
+        return view('admin.bill_sale.indexall');
+    }
     public function reportsalecity(Request $request)
 
     {
@@ -1132,7 +1373,7 @@ class Bill_sale_headersController extends Controller
             : Carbon::now()->endOfDay();
 
         $results = Bill_sale_detail::with(['getprod', 'getheader.getcust.getarea'])
-            ->whereIn('status_requ', [0,1,5,6,7,8])
+            ->whereIn('status_requ', [0,1,5,6,7,8])//0= requsted- 1 = approved  5 = deliverd - 6 = Under collection - 7 = some paied - 8 = total paied
             // Uncomment this when you want to filter by date
             ->whereHas('getheader', function($q) use ($fromdata, $todata) {
                 $q->whereDate('valued_time', '>=', $fromdata)
@@ -1203,7 +1444,7 @@ class Bill_sale_headersController extends Controller
             : Carbon::now()->endOfDay();
 
         $results = Bill_sale_detail::with(['getprod', 'getheader.getcust.getarea'])
-            ->whereIn('status_requ', [0,1,5,6,7,8])
+            ->whereIn('status_requ', [0,1,5,6,7,8])//0= requsted- 1 = approved  5 = deliverd - 6 = Under collection - 7 = some paied - 8 = total paied
             // Uncomment this when you want to filter by date
             ->whereHas('getheader', function($q) use ($fromdata, $todata) {
                 $q->whereDate('valued_time', '>=', $fromdata)

@@ -670,6 +670,7 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
             Route::post('/storepermonesale','Bill_sale_headersController@storepermonesale')->name('storepermonesale');// can
             Route::get('/indexall','Bill_sale_headersController@indexall')->name('indexall')->can('sale bills'); // 
             Route::get('/indexdelivered','Bill_sale_headersController@indexdelivered')->name('indexdelivered'); // can
+            Route::get('/indexallgov/{govid?}','Bill_sale_headersController@indexallgov')->name('indexallgov'); // can
             Route::get('/getprodname/{id?}','Bill_sale_headersController@getprodname')->name('getprodname');
             Route::get('/inactivesale/{id}', 'Bill_sale_headersController@inactivesale')->name('inactivesale');
             Route::get('/activesale/{id}', 'Bill_sale_headersController@activesale')->name('activesale');
