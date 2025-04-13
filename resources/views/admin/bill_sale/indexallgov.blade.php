@@ -236,7 +236,7 @@
 </script>
 <script>
     $(function () {
-      
+
         var table = $('#kt_datatable_table').DataTable({
             processing: false,
             serverSide: true,

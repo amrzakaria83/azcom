@@ -113,8 +113,12 @@
                         <tbody class="text-gray-600 fw-bold text-center">
                         @foreach ($sortedResults as $gov)
                             <tr>
-                                <td></td>
-                                <td>{{ $gov['governorate_name_en'] }}</td>
+                                <td>{{$gov['id']}}</td>
+                                <td>
+                                    <a href="{{route('admin.bill_sales.indexallgov', $gov['id'])}}">
+                                    {{ $gov['governorate_name_en'] }}
+                                </a>
+                                </td>
                                 <td>{{ $gov['total_sales'] }}</td>
                                 <td class="text-info">{{ round(($gov['total_sales'] / $totalResults) * 100,2) }} %</td>
                                 <td>{{ $gov['unique_customers'] }}</td>

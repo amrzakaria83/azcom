@@ -948,7 +948,7 @@ class Bill_sale_headersController extends Controller
         $sortedResults = $results->sortByDesc('total_sales');
         $totalResults = $results->sum('total_sales');
         $totalcusts = $results->sum('unique_customers');
-        // dd($totalcusts );
+        // dd($sortedResults );
         return view('admin.bill_sale.reportsaleeg',compact('results','totalResults','totalcusts','sortedResults','fromdata','todata'));
     }
     public function indexallgov(Request $request,$govid)
@@ -965,7 +965,7 @@ class Bill_sale_headersController extends Controller
         $datacity = City::where('governorate_id',$govid)->pluck('id');
         $dataarea = Area::whereIn('egy_or_uea_id', $datacity)->pluck('id');
         $datacust = Cut_sale::whereIN('id', $dataarea)->pluck('id');
-            dd($datacust);
+            
             $data = Bill_sale_header::query()
             ->whereIn('cut_sale_id', $datacust)
             ->orderBy('id', 'DESC');
@@ -1189,7 +1189,7 @@ class Bill_sale_headersController extends Controller
                 ->rawColumns(['name_en','description','note','status_order','status_requ','area_id','status','countprod','totalsellprice','approv_sellprice','is_active','checkbox','actions'])
                 ->make(true);
         }
-        return view('admin.bill_sale.indexall');
+        return view('admin.bill_sale.indexallgov');
     }
     public function reportsalecity(Request $request)
 
