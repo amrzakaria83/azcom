@@ -15,9 +15,11 @@ class Hierarchy_emp extends Model
         'type_hierarchy', // 0 = main - 1 = middle - 2 = end hierarchy
         'parent_id',
         'above_hierarchy', //json emp_id
-        'bellow_hierarchy', //json emp_id
+        'bellow_hierarchy', //json emp_id 
         'status_area', //0 = area active - 1 = area notactive
         'area', //json area_id
+        'status_prod', //0 = prod active - 1 = prod notactive
+        'prod', //json prod_id
         'status',
     ];
     public function getemp()

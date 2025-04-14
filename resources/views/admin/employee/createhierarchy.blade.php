@@ -80,17 +80,17 @@
                             </div>
 
                             <div class="row mb-6">
-                            <label class="col-lg-2 col-form-label required text-info fw-semibold fs-6">{{trans('lang.have')}} {{trans('lang.area')}}</label>
-                            <div class="col-lg-8 fv-row">
-                                <select   data-placeholder="Select an option" class=" input-text form-control  form-select  mb-3 mb-lg-0" id="status_area" name="status_area">
-                                <option selected disabled>Select an option</option>
-                                <option value="0">{{trans('employee.active')}}</option>
-                                <option value="1">{{trans('employee.notactive')}}</option>
-                                </select>
+                                <label class="col-lg-2 col-form-label required text-info fw-semibold fs-6">{{trans('lang.have')}} {{trans('lang.area')}}</label>
+                                <div class="col-lg-8 fv-row">
+                                    <select   data-placeholder="Select an option" class=" input-text form-control  form-select  mb-3 mb-lg-0" id="status_area" name="status_area">
+                                    <option selected disabled>Select an option</option>
+                                    <option value="0">{{trans('employee.active')}}</option>
+                                    <option value="1">{{trans('employee.notactive')}}</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="row mb-6">
+                            <div class="row mb-6">
                                 <label class="col-lg-2 col-form-label fw-semibold fs-6">{{trans('lang.area')}}</label>
                                 <div class="col-lg-8 fv-row">
                                     <select  data-placeholder="Select an option" class="input-text form-control  form-select  mb-3 mb-lg-0" name="area[]" id="area" data-allow-clear="true"  multiple="multiple" data-control="select2" >
@@ -116,7 +116,29 @@
                                         </select>
                                 </div>
                             </div>
+                            <div class="row mb-6">
+                                <label class="col-lg-2 col-form-label required text-info fw-semibold fs-6">{{trans('lang.have')}} {{trans('lang.products')}}</label>
+                                <div class="col-lg-8 fv-row">
+                                    <select   data-placeholder="Select an option" class=" input-text form-control  form-select  mb-3 mb-lg-0" id="status_prod" name="status_prod">
+                                    <option selected disabled>Select an option</option>
+                                    <option value="0">{{trans('employee.active')}}</option>
+                                    <option value="1">{{trans('employee.notactive')}}</option>
+                                    </select>
+                                </div>
+                            </div>
 
+                        <div class="row mb-6">
+                            <label class="col-lg-2 col-form-label fw-semibold fs-6"> {{trans('lang.status')}}</label>
+                            <div class="col-lg-8 d-flex align-items-center">
+                                <select data-placeholder="Select an option"  class="input-text form-control form-select mb-3 mb-lg-0 text-center product-select" id="prod" name="prod[]" data-allow-clear="true"  multiple="multiple" data-control="select2">
+                                    <option disabled selected>Select an option</option>
+                                    @foreach (\App\Models\Product::where('status', 0)->get() as $prod)
+                                        <option value="{{$prod->id}}">{{$prod->name_en}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        
                         <div class="row mb-0">
                             <label class="col-lg-2 col-form-label fw-semibold fs-6"> {{trans('lang.status')}}</label>
                             <div class="col-lg-8 d-flex align-items-center">
@@ -127,8 +149,7 @@
                                 </select>
                             </div>
                         </div>
-
-                    </div>
+                </div>
 
                     <div class="card-footer d-flex justify-content-end py-6 px-9">
                         <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">{{trans('employee.save')}}</button>
@@ -148,6 +169,7 @@
 $(document).ready(function() {
     $('#above_hierarchy').prop('disabled', true);
     $('#area').prop('disabled', true);
+    $('#prod').prop('disabled', true);
     });
 
 </script>
@@ -180,7 +202,16 @@ $(document).ready(function() {
 
     })
 
+    $('#status_prod').change(function() {
+        var selectedarea = $(this).val();
+        if(selectedarea == 0){
+            $('#prod').prop('disabled', false);
+        }
+        if(selectedarea == 1){
+            $('#prod').prop('disabled', true);
+        }
 
+    })
 </script>
 
 @endsection

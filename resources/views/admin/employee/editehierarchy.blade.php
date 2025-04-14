@@ -124,6 +124,33 @@
                                         </select>
                                 </div>
                             </div>
+                            <div class="row mb-6">
+                                <label class="col-lg-2 col-form-label required text-info fw-semibold fs-6">{{trans('lang.have')}} {{trans('lang.products')}}</label>
+                                <div class="col-lg-8 fv-row">
+                                    <select   data-placeholder="Select an option" class=" input-text form-control  form-select  mb-3 mb-lg-0" id="status_prod" name="status_prod">
+                                    <option selected disabled>Select an option</option>
+                                    <option value="0" @if($data->status_prod == 0) selected @endif>{{trans('employee.active')}}</option>
+                                    <option value="1" @if($data->status_prod == 0) selected @endif>{{trans('employee.notactive')}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        <div class="row mb-6">
+                            <label class="col-lg-2 col-form-label fw-semibold fs-6"> {{trans('lang.status')}}</label>
+                            <div class="col-lg-8 d-flex align-items-center">
+                                <select data-placeholder="Select an option"  class="input-text form-control form-select mb-3 mb-lg-0 text-center product-select" id="prod" name="prod[]" data-allow-clear="true"  multiple="multiple" data-control="select2">
+                                    @if(!empty(json_decode($data->prod)))
+                                                @foreach (\App\Models\Product::where('status', 0)->get() as $item)
+                                                    <option value="{{$item->id}}" @if(in_array($item->id, json_decode($data->prod))) selected @endif>{{$item->name_en}}</option>
+                                                @endforeach
+                                                @else
+                                                    @foreach (\App\Models\Product::where('status', 0)->get() as $item)
+                                                        <option value="{{$item->id}}" >{{$item->name_en}}</option>
+                                                    @endforeach
+                                            @endif
+                                </select>
+                            </div>
+                        </div>
                         <div class="row mb-0">
                             <label class="col-lg-2 col-form-label fw-semibold fs-6"> {{trans('lang.status')}}</label>
                             <div class="col-lg-8 d-flex align-items-center">
@@ -153,6 +180,7 @@
 $(document).ready(function() {
     var edittype = $('#type_hierarchy').val();
     var editarea = $('#status_area').val();
+    var editprod = $('#status_prod').val();
     if (edittype == 0){
         $('#bellow_hierarchy').prop('disabled', false);
         $('#above_hierarchy').prop('disabled', true);
@@ -170,6 +198,12 @@ $(document).ready(function() {
         }
         if(editarea == 1){
             $('#area').prop('disabled', true);
+        }
+        if(editprod == 0){
+            $('#prod').prop('disabled', false);
+        }
+        if(editprod == 1){
+            $('#prod').prop('disabled', true);
         }
     // $('#above_hierarchy').prop('disabled', true);
     // $('#bellow_hierarchy').prop('disabled', true);
@@ -202,6 +236,15 @@ $(document).ready(function() {
         }
         if(selectedarea == 1){
             $('#area').prop('disabled', true);
+        }
+    })
+    $('#status_prod').change(function() {
+        var selectedarea = $(this).val();
+        if(selectedarea == 0){
+            $('#prod').prop('disabled', false);
+        }
+        if(selectedarea == 1){
+            $('#prod').prop('disabled', true);
         }
     })
 </script>

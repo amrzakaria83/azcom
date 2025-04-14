@@ -357,6 +357,8 @@ class EmployeesController extends Controller
             'above_hierarchy' =>  $request->above_hierarchy,
             'status_area' => $request->status_area,
             'area' => json_encode($request->area) ?? null,
+            'status_prod' => $request->status_prod,
+            'prod' => json_encode($request->prod) ?? null,
             'status' => $request->status ?? 0,
             
         ]);
