@@ -131,7 +131,7 @@
                             <label class="col-lg-2 col-form-label fw-semibold fs-6"> {{trans('lang.status')}}</label>
                             <div class="col-lg-8 d-flex align-items-center">
                                 <select data-placeholder="Select an option"  class="input-text form-control form-select mb-3 mb-lg-0 text-center product-select" id="prod" name="prod[]" data-allow-clear="true"  multiple="multiple" data-control="select2">
-                                    <option disabled selected>Select an option</option>
+                                    
                                     @foreach (\App\Models\Product::where('status', 0)->get() as $prod)
                                         <option value="{{$prod->id}}">{{$prod->name_en}}</option>
                                     @endforeach

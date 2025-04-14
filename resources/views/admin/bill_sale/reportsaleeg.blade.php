@@ -113,7 +113,7 @@
                         <tbody class="text-gray-600 fw-bold text-center">
                         @foreach ($sortedResults as $gov)
                             <tr>
-                                <td>{{$gov['id']}}</td>
+                                <td></td>
                                 <td>
                                     <a href="{{route('admin.bill_sales.indexallgov', $gov['id'])}}">
                                     {{ $gov['governorate_name_en'] }}
