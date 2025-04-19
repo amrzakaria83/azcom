@@ -26,4 +26,8 @@ class Area extends Model
         return $this->belongsTo(Emirate::class, 'egy_or_uea_id');
     }
     }
+    public function country()
+{
+    return $this->belongsTo(Country::class, 'country_id');
+}
 }

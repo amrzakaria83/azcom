@@ -231,7 +231,10 @@
 <script src="{{asset('dash/assets/plugins/custom/datatables/dataTables.buttons.min.js')}}"></script>
 <script src="{{asset('dash/assets/plugins/custom/datatables/buttons.print.min.js')}}"></script>
 <script>
-    // Initialize date pickers
+   
+
+    $(document).ready(function () {
+    // Initialize datepickers with proper format
     $("#kt_datepicker_1").flatpickr({
         defaultDate: new Date(new Date().setMonth(new Date().getMonth() - 1)),
         dateFormat: "Y-m-d"
@@ -242,60 +245,43 @@
         dateFormat: "Y-m-d"
     });
 
-    $(document).ready(function () {
-            // Get the governorate ID from somewhere (could be a hidden input)
-    var govId = $('#govid').val();
-        // Initialize DataTable
-        var table = $('#kt_datatable_table').DataTable({
-            processing: false,
-            serverSide: true,
-            searching: false,
-            autoWidth: false,
-            responsive: true,
-            pageLength: 30,
-            ordering: false, // Disable sorting
-            dom: "<'row'<'col-sm-12 col-md-6 dbuttons'B><'col-sm-12 col-md-6'f>>" +
-                 "<'row'<'col-sm-12'tr>>" +
-                 "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-            buttons: [
-                {
-                    extend: 'excel',
-                    className: 'btn btn-sm btn-icon btn-success btn-active-dark me-3 p-3',
-                    text: '<i class="bi bi-file-earmark-spreadsheet fs-1x"></i>',
-                    exportOptions: {
-                        columns: ':visible'
-                    }
-                }
-            ],
-            ajax: {
-                url: "{{ route('admin.bill_sales.indexallgov', ['govid' => '__GOV_ID__']) }}".replace('__GOV_ID__', govId),
-                
-                data: function (d) {
-                    d.from_time = $('#kt_datepicker_1').val();
-                    d.to_date = $('#kt_datepicker_2').val();
-                    d.search = $('#search').val();
-                    // Uncomment these if needed
-                    // d.is_active = $('#is_active').val();
-                    // d.cut_sale_id = $('#cut_sale_id').val();
-                    // d.govid = $('#govid').val();
-                }
+    // Get governorate ID from URL or hidden field
+    var pathArray = window.location.pathname.split('/');
+    var govId = pathArray[pathArray.length - 1] || $('#govid').val();
+
+    var table = $('#kt_datatable_table').DataTable({
+        processing: true,
+        serverSide: true,
+        searching: false,
+        responsive: true,
+        pageLength: 30,
+        ordering: false,
+        ajax: {
+            url: "{{ route('admin.bill_sales.indexallgov', ['govid' => '']) }}/" + govId,
+            data: function (d) {
+                d.from_time = $('#kt_datepicker_1').val();
+                d.to_date = $('#kt_datepicker_2').val();
+                d.search = $('#search').val();
             },
-            columns: [
-                {data: 'checkbox', name: 'checkbox', orderable: false, searchable: false},
-                {data: 'name_en', name: 'name_en'},
-                {data: 'totalsellprice', name: 'totalsellprice'},
-                {data: 'status_requ', name: 'status_requ'},
-                {data: 'description', name: 'description'},
-                {data: 'countprod', name: 'countprod'},
-                {data: 'status_order', name: 'status_order'},
-                {data: 'note', name: 'note'},
-                {data: 'is_active', name: 'is_active'},
-                {data: 'actions', name: 'actions', orderable: false, searchable: false},
-            ],
-            language: {
-                url: "//cdn.datatables.net/plug-ins/1.10.25/i18n/Arabic.json" // Arabic translation
+            error: function(xhr, error, thrown) {
+                if (xhr.status === 500) {
+                    toastr.error('Server error occurred. Please try again later.');
+                }
             }
-        });
+        },
+        columns: [
+            {data: 'checkbox', name: 'checkbox'},
+            {data: 'name_en', name: 'name_en'},
+            {data: 'totalsellprice', name: 'totalsellprice'},
+            {data: 'status_requ', name: 'status_requ'},
+            {data: 'description', name: 'description'},
+            {data: 'countprod', name: 'countprod'},
+            {data: 'status_order', name: 'status_order'},
+            {data: 'note', name: 'note'},
+            {data: 'is_active', name: 'is_active'},
+            {data: 'actions', name: 'actions'},
+        ]
+    });
 
         // Move buttons to the correct container
         table.buttons().container().appendTo($('.dbuttons'));

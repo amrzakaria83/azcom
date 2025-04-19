@@ -104,7 +104,6 @@
                                 <th class="min-w-125px text-center">{{trans('lang.counttotal')}} {{trans('lang.customers')}}</th>
                                 <th class="min-w-125px text-center">{{trans('lang.counttotal')}} {{trans('lang.bills_of_sale')}}</th>
                                 
-                                
                             </tr>
                             <!--end::Table row-->
                         </thead>
@@ -115,9 +114,9 @@
                             <tr>
                                 <td></td>
                                 <td>
-                                    <a href="{{route('admin.bill_sales.indexallgov', $gov['id'])}}">
+                                    <!-- <a href="{{route('admin.bill_sales.indexallgov', $gov['id'])}}"> -->
                                     {{ $gov['governorate_name_en'] }}
-                                </a>
+                                <!-- </a> -->
                                 </td>
                                 <td>{{ $gov['total_sales'] }}</td>
                                 <td class="text-info">{{ round(($gov['total_sales'] / $totalResults) * 100,2) }} %</td>
