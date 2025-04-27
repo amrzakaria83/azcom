@@ -225,7 +225,7 @@ class Bill_sale_headersController extends Controller
 
     public function show($id)
     {
-        $data = Emp_sale::find($id);
+        $data = Bill_sale_header::find($id);
         return view('admin.bill_sale.show', compact('data'));
     }
 
@@ -262,7 +262,7 @@ class Bill_sale_headersController extends Controller
             'status_requ' =>  0,// 0 = request - 1 = approved - 2 = somecancell - 3 = all cancel - 4 = under deliverd - 5 = deliverd - 6 = Under collection - 7 = some paied - 8 = total paied 
             'status' =>  0,
                 ]);
-            $itemsreq = json_decode($request->tempsaleparent);
+            $itemsreq = json_decode($request->tempsaleparent); 
             
             $itemsreqtotoalprice = collect($itemsreq)->sum('totalsellprice');
 

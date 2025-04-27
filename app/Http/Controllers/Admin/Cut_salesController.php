@@ -21,7 +21,7 @@ class Cut_salesController extends Controller
 {
 
     public function index(Request $request)
-    {
+    { 
         $data = Cut_sale::get();
 
         if ($request->ajax()) {

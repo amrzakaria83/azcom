@@ -31,7 +31,7 @@ class Trans_custsController extends Controller
                     return $checkbox;
                 })
                 ->addColumn('name_en', function($row){
-                    $name_en = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->getcust->name_en.'</a></div>';
+                    $name_en = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->getcust->name_en ?? ''.'</a></div>';
                     return $name_en;
                 })
                 ->addColumn('model_name', function($row){

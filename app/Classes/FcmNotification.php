@@ -42,8 +42,8 @@ class FcmNotification {
                 'type_id' => $this->type_id
             ], // optional
         ]);
-        
-        if (count($deviceTokens) == 0) {
+
+        if (count($deviceTokens) == 0 || $deviceTokens[0] == null) {
             return false ;
         }
         

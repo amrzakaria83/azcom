@@ -28,6 +28,16 @@ use App\Models\Center;
 use App\Http\Resources\CenterResource;
 use App\Models\List_contac;
 use App\Models\Social_styl;
+use App\Models\Cut_sale;
+use App\Http\Resources\CustomerResource;
+use App\Models\Sale_type;
+use App\Models\Bill_sale_header;
+use App\Models\Bill_sale_detail;
+use App\Models\Cust_collection;
+use App\Models\Trans_cust;
+use App\Models\Refund_sale;
+use App\Http\Resources\TransactionResource;
+use App\Models\Refund_cause;
 
 use App\Models\Contact;
 
@@ -779,6 +789,251 @@ class ApiController extends Controller
         }
 
         
+        
+    }
+
+    public function getCustomerSale()
+    {
+        $token = request()->header('token');
+        $user = $this->check_api_token($token);
+        if (!$user) {
+            return response(['status' => 403, 'msg' => trans('auth.not_login'), 'data' => NULL]);
+        }
+
+        $data = Cut_sale::where('status' , 0)->orderBy('id', 'DESC')->get();
+
+        $results = CustomerResource::collection($data)->response()->getData();
+
+        if(count($data) == 0) {
+            return response(['status' => 401, 'msg' => trans('lang.nodata'), 'data' => null]);
+        } else {
+            return response(['status' => 200, 'msg' => trans('lang.successful'), 'data' => $results]);
+        }
+        
+    }
+
+    public function getTypeSale()
+    {
+        $token = request()->header('token');
+        $user = $this->check_api_token($token);
+        if (!$user) {
+            return response(['status' => 403, 'msg' => trans('auth.not_login'), 'data' => NULL]);
+        }
+
+        $data = Sale_type::where('status' , 0)->orderBy('id', 'DESC')->get();
+
+        if(count($data) == 0) {
+            return response(['status' => 401, 'msg' => trans('lang.nodata'), 'data' => null]);
+        } else {
+            return response(['status' => 200, 'msg' => trans('lang.successful'), 'data' => $data]);
+        }
+        
+    }
+
+    public function requestInvoice(Request $request)
+    {
+
+        $token = request()->header('token');
+        $user = $this->check_api_token($token);
+        if (!$user) {
+            return response(['status' => 403, 'msg' => trans('auth.not_login'), 'data' => NULL]);
+        }
+
+        $rule = [
+            'sale_type_id' => 'required|numeric'
+        ];
+        $validate = Validator::make($request->all(), $rule);
+
+        if ($validate->fails()) {
+
+            return response(['status' => 401, 'msg' => $validate->messages()->first(), 'data' => NULL]);
+        } else {
+
+            $row = Bill_sale_header::create([
+                'emp_id' => $request->emp_id,
+                'cut_sale_id' => $request->cut_sale_id,
+                'sale_type_id' => $request->sale_type_id,
+                'valued_time' => $request->valued_time,
+                'note' => $request->note,
+                'status_order' => $request->status_order,
+            ]);
+            
+            $totalsellprice = 0 ;
+            foreach ( $request->product_id as $index => $product_id) {
+                $product = Product::find($product_id);
+
+                $azrow = Bill_sale_detail::create([
+                    'emp_id' => $request->emp_id,
+                    'product_id' => $product_id,
+                    'bill_sale_header_id' => $row->id,
+                    'quantityproduc' => $request->qty[$index],
+                    'sellpriceproduct' => $product->sell_price,
+                    'percent' => $request->percent[$index],
+                    'status_requ' => 0,
+                ]);
+                $totalsellprice = $totalsellprice + $product->sell_price;
+            }
+
+            $row->update([
+                'totalsellprice' => $totalsellprice,
+            ]);
+                    
+            return response(['status' => 200, 'msg' => trans('lang.successful'), 'data' => $row]);
+
+        }
+
+    }
+
+    public function requestCutomerCollection(Request $request)
+    {
+
+        $token = request()->header('token');
+        $user = $this->check_api_token($token);
+        if (!$user) {
+            return response(['status' => 403, 'msg' => trans('auth.not_login'), 'data' => NULL]);
+        }
+
+        $rule = [
+            'emp_id' => 'required',
+            'cust_id' => 'required',
+            'value' => 'required',
+        ];
+        $validate = Validator::make($request->all(), $rule);
+
+        if ($validate->fails()) {
+
+            return response(['status' => 401, 'msg' => $validate->messages()->first(), 'data' => NULL]);
+        } else {
+
+            $row = Cust_collection::create([
+                'emp_id' => $request->emp_id,
+                'cust_id' => $request->cust_id,
+                'value' => $request->value,
+                'note' => $request->note,
+                'status' => 0 ,
+            ]);
+
+            
+            $trans_cust = Trans_cust::create([
+                'emp_id' => $request->emp_id,
+                'cust_id' => $row->cust_id,
+                'model_name' => 'Cust_collection',
+                'id_model' => $row->id,
+                'total_value' => $row->value,
+                'status_trans' => 1, // 0 = increased creadite - 1 = decreased creadite 
+                'note' => $request->note,
+                'status' => 0 ,
+            ]);
+            $custsal = Cut_sale::find($row->cust_id);
+            $custsal->update([
+                'value' => $custsal->value - $row->value,
+            ]);
+                    
+            return response(['status' => 200, 'msg' => trans('lang.successful'), 'data' => $row]);
+
+        }
+
+    }
+
+    public function getTransaction($employee_id)
+    {
+        $token = request()->header('token');
+        $user = $this->check_api_token($token);
+        if (!$user) {
+            return response(['status' => 403, 'msg' => trans('auth.not_login'), 'data' => NULL]);
+        }
+
+        $data = Trans_cust::where('emp_id' , $employee_id)->orderBy('id', 'DESC')->paginate(10);
+
+        $results = TransactionResource::collection($data)->response()->getData();
+
+        if(count($data) == 0) {
+            return response(['status' => 401, 'msg' => trans('lang.nodata'), 'data' => null]);
+        } else {
+            return response(['status' => 200, 'msg' => trans('lang.successful'), 'data' => $results]);
+        }
+        
+    }
+
+    public function requestRefund(Request $request)
+    {
+
+        $token = request()->header('token');
+        $user = $this->check_api_token($token);
+        if (!$user) {
+            return response(['status' => 403, 'msg' => trans('auth.not_login'), 'data' => NULL]);
+        }
+
+        $rule = [
+            'emp_id' => 'required',
+            'cut_sale_id' => 'required',
+            'refund_causes_id' => 'required'
+        ];
+        $validate = Validator::make($request->all(), $rule);
+
+        if ($validate->fails()) {
+
+            return response(['status' => 401, 'msg' => $validate->messages()->first(), 'data' => NULL]);
+        } else {
+
+            $totalValue = 0;
+            foreach ( $request->product_id as $index => $product_id) {
+
+                $refundSale = Refund_sale::create([
+                    'emp_id' => $request->emp_id,
+                    'cust_id' => $request->cut_sale_id,
+                    'refund_causes_id' => $request->refund_causes_id,
+                    'note' => $request->note,
+                    'prod_id' => $product_id,
+                    'approv_quantity_ref' => $request->qty[$index],
+                    'value' => $request->price[$index],
+                    'status_requ_ref' => 1,
+                    'status_requ' => 0,
+                ]);
+                $totalValue = $totalValue + $refundSale->value;
+            }
+
+            // Get customer record
+            $customer = Cut_sale::findOrFail($request->cut_sale_id);
+
+            $trans_cust = Trans_cust::create([
+                'emp_id' => $request->emp_id,
+                'cust_id' => $customer->id,
+                'model_name' => 'Refund_sale',
+                'id_model' => $refundSale->id,
+                'total_value' => $totalValue,
+                'status_trans' => 1, // 0 = increased creadite - 1 = decreased creadite 
+                'note' => $request->note,
+                'value_befor' => $customer->value,
+                'status' => 0 ,
+            ]);
+
+            // Update customer balance
+            $customer->update([
+                'value' => $customer->value - $totalValue,
+            ]);
+                    
+            return response(['status' => 200, 'msg' => trans('lang.successful'), 'data' => $refundSale]);
+
+        }
+
+    }
+
+    public function getReasons()
+    {
+        $token = request()->header('token');
+        $user = $this->check_api_token($token);
+        if (!$user) {
+            return response(['status' => 403, 'msg' => trans('auth.not_login'), 'data' => NULL]);
+        }
+
+        $data = Refund_cause::where('status' , 0)->orderBy('id', 'DESC')->get();
+
+        if(count($data) == 0) {
+            return response(['status' => 401, 'msg' => trans('lang.nodata'), 'data' => null]);
+        } else {
+            return response(['status' => 200, 'msg' => trans('lang.successful'), 'data' => $data]);
+        }
         
     }
 }

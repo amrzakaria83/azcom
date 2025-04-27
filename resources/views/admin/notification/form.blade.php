@@ -22,7 +22,7 @@
 <div class="row mb-6">
     <label class="col-lg-2 col-form-label required fw-semibold fs-6">{{trans('notification.description')}}</label>
     <div class="col-lg-8 fv-row">
-        <textarea name="body" id="kt_docs_tinymce_basic">
+        <textarea name="body" id="" class="form-control">
             {{old('body',$data->body ?? '')}}
         </textarea>
     </div>
