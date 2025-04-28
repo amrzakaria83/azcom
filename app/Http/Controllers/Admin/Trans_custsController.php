@@ -75,6 +75,12 @@ class Trans_custsController extends Controller
                     
                     return $note;
                 })
+                ->addColumn('emp_id', function($row){
+
+                    $emp_id = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->getemp->name_en ?? ''.'</a></div>';
+                    
+                    return $emp_id;
+                })
 
                 ->addColumn('type', function($row){
                     if($row->type == 'dash') {
@@ -130,7 +136,7 @@ class Trans_custsController extends Controller
                     //     });
                     // }
                 })
-                ->rawColumns(['name_en','note','created_at','total_value','model_name','type','is_active','checkbox','actions'])
+                ->rawColumns(['name_en','note','created_at','total_value','emp_id','model_name','type','is_active','checkbox','actions'])
                 ->make(true);
         }
         return view('admin.trans_cust.index');

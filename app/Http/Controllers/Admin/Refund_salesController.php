@@ -18,82 +18,168 @@ use Illuminate\Support\Facades\Auth;
 
 class Refund_salesController extends Controller
 {
-
     public function index(Request $request)
     {
-        $data = Refund_sale::get(); 
-
         if ($request->ajax()) {
-            $data = Refund_sale::query();
-            $data = $data->orderBy('id', 'DESC');
+            $data = Refund_sale::query()
+                ->with(['getprod', 'getcust', 'getheader', 'getrefcause'])
+                ->whereNotNull('parent_id')
+                ->orderBy('id', 'DESC');
 
             return Datatables::of($data)
                 ->addColumn('checkbox', function($row){
-                    $checkbox = '<div class="form-check form-check-sm p-3 form-check-custom form-check-solid">
-                                    <input class="form-check-input" type="checkbox" value="'.$row->id.'" />
-                                </div>';
-                    return $checkbox;
+                    return '<div class="form-check form-check-sm p-3 form-check-custom form-check-solid">
+                        <input class="form-check-input" type="checkbox" value="'.$row->id.'" />
+                    </div>';
                 })
                 ->addColumn('name_en', function($row){
-                    $name_en = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->name_en.'</a></div>';
-                    return $name_en;
+                    // Changed to show customer name instead of non-existent name_en
+                    $customerName = $row->getcust->name ?? 'N/A';
+                    return '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$customerName.'</a></div>';
                 })
                 ->addColumn('note', function($row){
-
-                    $note = $row->note;
-                    
-                    return $note;
+                    return $row->note;
                 })
                 ->addColumn('type', function($row){
-                    if($row->type == 'dash') {
-                        $type = '<div class="badge badge-light-info fw-bold">'.trans('refund_sale.administrator').'</div>';
-                    } else {
-                        $type = '<div class="badge badge-light-primary fw-bold">'.trans('refund_sale.teacher').' </div>';
+                    // Changed to match your refund status field
+                    switch($row->status_requ_ref) {
+                        case 0: 
+                            return '<div class="badge badge-light-info fw-bold">'.trans('refund_sale.request').'</div>';
+                        case 1:
+                            return '<div class="badge badge-light-primary fw-bold">'.trans('refund_sale.approved').'</div>';
+                        case 2:
+                            return '<div class="badge badge-light-warning fw-bold">'.trans('refund_sale.partial_cancel').'</div>';
+                        case 3:
+                            return '<div class="badge badge-light-danger fw-bold">'.trans('refund_sale.canceled').'</div>';
+                        case 4:
+                            return '<div class="badge badge-light-success fw-bold">'.trans('refund_sale.completed').'</div>';
+                        default:
+                            return '<div class="badge badge-light-secondary fw-bold">'.trans('refund_sale.unknown').'</div>';
                     }
-                    
-                    return $type;
                 })
                 ->addColumn('is_active', function($row){
+                    // Changed to match your status field (assuming 0 is active)
                     if($row->status == 0) {
-                        $is_active = '<div class="badge badge-light-success fw-bold">'.trans('employee.active').'</div>';
+                        return '<div class="badge badge-light-success fw-bold">'.trans('employee.active').'</div>';
                     } else {
-                        $is_active = '<div class="badge badge-light-danger fw-bold">'.trans('employee.notactive').'</div>';
+                        return '<div class="badge badge-light-danger fw-bold">'.trans('employee.notactive').'</div>';
                     }
-                    
-                    return $is_active;
                 })
                 ->addColumn('actions', function($row){
-                    $actions = '<div class="ms-2">
-                                <a href="'.route('admin.refund_sales.show', $row->id).'" class="btn btn-sm btn-icon btn-warning btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                    <i class="bi bi-eye-fill fs-1x"></i>
-                                </a>
-                                <a href="'.route('admin.refund_sales.edit', $row->id).'" class="btn btn-sm btn-icon btn-info btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                    <i class="bi bi-pencil-square fs-1x"></i>
-                                </a>
-                            </div>';
-                    return $actions;
+                    return '<div class="ms-2">
+                        <a href="'.route('admin.refund_sales.show', $row->id).'" class="btn btn-sm btn-icon btn-warning btn-active-dark me-2">
+                            <i class="bi bi-eye-fill fs-1x"></i>
+                        </a>
+                        <a href="'.route('admin.refund_sales.edit', $row->id).'" class="btn btn-sm btn-icon btn-info btn-active-dark me-2">
+                            <i class="bi bi-pencil-square fs-1x"></i>
+                        </a>
+                    </div>';
                 })
                 ->filter(function ($instance) use ($request) {
-                    if ($request->get('is_active') == '0' || $request->get('is_active') == '1') {
-                        $instance->where('is_active', $request->get('is_active'));
+                    if ($request->has('status') && in_array($request->get('status'), ['0', '1'])) {
+                        $instance->where('status', $request->get('status'));
                     }
-                    if ($request->get('type')) {
-                        $instance->where('type', $request->get('type'));
+                    if ($request->has('status_requ_ref')) {
+                        $instance->where('status_requ_ref', $request->get('status_requ_ref'));
                     }
                     if (!empty($request->get('search'))) {
-                            $instance->where(function($w) use($request){
+                        $instance->where(function($w) use($request){
                             $search = $request->get('search');
-                            $w->orWhere('name_en', 'LIKE', "%$search%")
+                            $w->orWhereHas('getcust', function($q) use ($search) {
+                                $q->where('name', 'LIKE', "%$search%");
+                            })
                             ->orWhere('note', 'LIKE', "%$search%")
-                            ->orWhere('email', 'LIKE', "%$search%");
+                            ->orWhereHas('getprod', function($q) use ($search) {
+                                $q->where('name_en', 'LIKE', "%$search%");
+                            });
                         });
                     }
                 })
-                ->rawColumns(['name_en','note','type','is_active','checkbox','actions'])
+                ->rawColumns(['name_en', 'note', 'type', 'is_active', 'checkbox', 'actions'])
                 ->make(true);
         }
         return view('admin.refund_sale.index');
     }
+
+    // public function index(Request $request)
+    // {
+
+    //     if ($request->ajax()) {
+            
+
+    //         $data = Refund_sale::query()
+    //         ->with(['getprod', 'getcust', 'getheader', 'getrefcause'])
+    //         ->whereNotNull('parent_id')
+    //         ->groupBy(['parent_id', 'cust_id'])
+    //         ->orderBy('id', 'DESC');
+
+    //         return Datatables::of($data)
+    //             ->addColumn('checkbox', function($row){
+    //                 $checkbox = '<div class="form-check form-check-sm p-3 form-check-custom form-check-solid">
+    //                                 <input class="form-check-input" type="checkbox" value="'.$row->id.'" />
+    //                             </div>';
+    //                 return $checkbox;
+    //             })
+    //             ->addColumn('name_en', function($row){
+    //                 $name_en = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->name_en.'</a></div>';
+    //                 return $name_en;
+    //             })
+    //             ->addColumn('note', function($row){
+
+    //                 $note = $row->note;
+                    
+    //                 return $note;
+    //             })
+    //             ->addColumn('type', function($row){
+    //                 if($row->type == 'dash') {
+    //                     $type = '<div class="badge badge-light-info fw-bold">'.trans('refund_sale.administrator').'</div>';
+    //                 } else {
+    //                     $type = '<div class="badge badge-light-primary fw-bold">'.trans('refund_sale.teacher').' </div>';
+    //                 }
+                    
+    //                 return $type;
+    //             })
+    //             ->addColumn('is_active', function($row){
+    //                 if($row->status == 0) {
+    //                     $is_active = '<div class="badge badge-light-success fw-bold">'.trans('employee.active').'</div>';
+    //                 } else {
+    //                     $is_active = '<div class="badge badge-light-danger fw-bold">'.trans('employee.notactive').'</div>';
+    //                 }
+                    
+    //                 return $is_active;
+    //             })
+    //             ->addColumn('actions', function($row){
+    //                 $actions = '<div class="ms-2">
+    //                             <a href="'.route('admin.refund_sales.show', $row->id).'" class="btn btn-sm btn-icon btn-warning btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+    //                                 <i class="bi bi-eye-fill fs-1x"></i>
+    //                             </a>
+    //                             <a href="'.route('admin.refund_sales.edit', $row->id).'" class="btn btn-sm btn-icon btn-info btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+    //                                 <i class="bi bi-pencil-square fs-1x"></i>
+    //                             </a>
+    //                         </div>';
+    //                 return $actions;
+    //             })
+    //             ->filter(function ($instance) use ($request) {
+    //                 if ($request->get('is_active') == '0' || $request->get('is_active') == '1') {
+    //                     $instance->where('is_active', $request->get('is_active'));
+    //                 }
+    //                 if ($request->get('type')) {
+    //                     $instance->where('type', $request->get('type'));
+    //                 }
+    //                 if (!empty($request->get('search'))) {
+    //                         $instance->where(function($w) use($request){
+    //                         $search = $request->get('search');
+    //                         $w->orWhere('name_en', 'LIKE', "%$search%")
+    //                         ->orWhere('note', 'LIKE', "%$search%")
+    //                         ->orWhere('email', 'LIKE', "%$search%");
+    //                     });
+    //                 }
+    //             })
+    //             ->rawColumns(['name_en','note','type','is_active','checkbox','actions'])
+    //             ->make(true);
+    //     }
+    //     return view('admin.refund_sale.index');
+    // }
 
     public function show($id)
     {

@@ -27,5 +27,9 @@ class Trans_cust extends Model
     {
         return $this->belongsTo(Cut_sale::class, 'cust_id');
     }
+    public function getemp()
+    {
+        return $this->belongsTo(Employee::class, 'emp_id');
+    }
 
 }

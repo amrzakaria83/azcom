@@ -85,6 +85,7 @@
                                 <th class="min-w-125px text-start">{{trans('lang.name')}}</th>
                                 <th class="min-w-125px text-start">{{trans('lang.type_type')}}</th>
                                 <th class="min-w-125px text-start">{{trans('lang.value')}}</th>
+                                <th class="min-w-125px text-start">{{trans('employee.name')}} {{trans('employee.employee')}}</th>
                                 <th class="min-w-125px text-start">{{trans('lang.created_at')}}</th>
                                 <th class="min-w-125px text-start">{{trans('lang.note')}}</th>
                                 <!-- <th class="min-w-125px text-start">{{trans('employee.is_active')}}</th> -->
@@ -218,6 +219,7 @@
                 {data: 'name_en', name: 'name_en'},
                 {data: 'model_name', name: 'model_name'},
                 {data: 'total_value', name: 'total_value'},
+                {data: 'emp_id', name: 'emp_id'},
                 {data: 'created_at', name: 'created_at'},
                 {data: 'note', name: 'note'},
                 // {data: 'is_active', name: 'is_active'},

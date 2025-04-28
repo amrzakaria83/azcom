@@ -17,7 +17,7 @@ class Refund_sale extends Model
         'approv_quantity_ref',
         'approv_sellpriceproduct_ref',
         'approv_percent_ref',
-        'status_requ_ref', // 0 = request - 1 = approved - 2 = somecancell - 3 = all cancel - 4 = done 
+        'status_requ_ref', // 0 = request - 1 = approved - 2 = somecancell - 3 = all cancel - 4 = done
         'refund_causes_id',//refund_causes
         'parent_id',
         'value',
