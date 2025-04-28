@@ -11,6 +11,7 @@ class Bill_sale_header extends Model
     use HasFactory, SoftDeletes;
     protected $fillable = [
         'emp_id', // emp_add
+        'manger_update_id', // manger_update_id
         'cut_sale_id',
         'sale_type_id',
         'valued_time',
@@ -37,6 +38,10 @@ class Bill_sale_header extends Model
     public function getemp()
     {
         return $this->belongsTo(Employee::class, 'emp_id');
+    }
+    public function getmanger()
+    {
+        return $this->belongsTo(Employee::class, 'manger_update_id');
     }
 
 }

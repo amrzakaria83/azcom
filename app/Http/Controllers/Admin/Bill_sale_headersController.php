@@ -17,6 +17,8 @@ use App\Models\Cut_sale;
 use App\Models\Governorate;
 use App\Models\City;
 use App\Models\Area;
+use App\Classes\FcmNotification;
+use App\Models\Notification;
 use DataTables;
 use Validator;
 use Carbon\Carbon;
@@ -674,7 +676,7 @@ class Bill_sale_headersController extends Controller
        
         $data = Bill_sale_header::find($idsale);
         $data->update([
-            'emp_id' => Auth::guard('admin')->user()->id,
+            'manger_update_id' => Auth::guard('admin')->user()->id,
             'status' => 0,
         ]);
 
@@ -685,7 +687,7 @@ class Bill_sale_headersController extends Controller
        
         $data = Bill_sale_header::find($idsale);
         $data->update([
-            'emp_id' => Auth::guard('admin')->user()->id,
+            'manger_update_id' => Auth::guard('admin')->user()->id,
             'status' => 1,
             'status_requ' => 3,
         ]);
@@ -888,10 +890,23 @@ class Bill_sale_headersController extends Controller
        
         $data = Bill_sale_header::find($idsale);
         $data->update([
-            'emp_id' => Auth::guard('admin')->user()->id,
+            'manger_update_id' => Auth::guard('admin')->user()->id,
             'status_requ' => 5,// 0 = request - 1 = approved - 2 = somecancell - 3 = all cancel - 4 = under deliverd - 5 = deliverd - 6 = Under collection - 7 = some paied - 8 = total paied
         ]);
+            
+            $token = [];
+            foreach (Employee::where('id', $data->emp_id)->get() as $key => $emp) {
+                if ($emp->token != null) {
+                    $token[] = $emp->fc_token;
+                }
+            }
+            $title = trans('lang.deliverd') . ' ' . trans('bill_of_sale');
+            $body = trans('customer') . ': <span>' . $data->getcust->name_en . '</span><br>';
 
+            $send_noti = new FcmNotification($token, $title, htmlspecialchars(trim(strip_tags($body))),
+             "other", 0, $data->emp_id);
+            $send_noti->sendNotification(); 
+            
         return redirect()->back()->with('message', 'Modified successfully')->with('status', 'success');
     }
     public function reportsaleeg(Request $request)
