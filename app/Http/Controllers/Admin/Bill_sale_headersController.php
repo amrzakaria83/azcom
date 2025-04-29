@@ -921,8 +921,6 @@ class Bill_sale_headersController extends Controller
         ? Carbon::parse($request->get('to_date'))->endOfDay()  // Changed to endOfDay()
         : Carbon::now()->endOfDay();
 
-        
-       
         $results = Bill_sale_header::whereIn('status_requ', [1,5,6,7,8])//1 = approved  5 = deliverd - 6 = Under collection - 7 = some paied - 8 = total paied
         ->whereDate('valued_time', '>=', $fromdata)
         ->whereDate('valued_time', '<=', $todata)  // Changed to <=
