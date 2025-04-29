@@ -23,9 +23,13 @@ class Refund_salesController extends Controller
         if ($request->ajax()) {
             $data = Refund_sale::query()
                 ->with(['getprod', 'getcust', 'getheader', 'getrefcause'])
-                ->whereNotNull('parent_id')
+                // Show only parent records (self-referencing) and their children
+                ->where(function($query) {
+                    $query->whereColumn('parent_id', 'id') // Parent records (self-reference)
+                          ->orWhereNotNull('parent_id');     // Child records
+                })
                 ->orderBy('id', 'DESC');
-
+    
             return Datatables::of($data)
                 ->addColumn('checkbox', function($row){
                     return '<div class="form-check form-check-sm p-3 form-check-custom form-check-solid">
@@ -33,32 +37,34 @@ class Refund_salesController extends Controller
                     </div>';
                 })
                 ->addColumn('name_en', function($row){
-                    // Changed to show customer name instead of non-existent name_en
-                    $customerName = $row->getcust->name ?? 'N/A';
+                    $customerName = $row->getcust->name_en ?? 'N/A';
+                    
+                    // Add indicator for parent/child
+                    // $parentIndicator = ($row->parent_id == $row->id) 
+                    //     ? ' <span class="badge badge-primary">'.$prodName.'</span>' 
+                    //     : ' <span class="badge badge-secondary">'.$prodName.'</span>';
                     return '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$customerName.'</a></div>';
                 })
-                ->addColumn('note', function($row){
-                    return $row->note;
+                ->addColumn('prod_id', function($row){
+                    $prodName = $row->getprod->name_en ?? 'N/A';
+                    return '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$prodName.'</a></div>';
                 })
-                ->addColumn('type', function($row){
-                    // Changed to match your refund status field
-                    switch($row->status_requ_ref) {
-                        case 0: 
-                            return '<div class="badge badge-light-info fw-bold">'.trans('refund_sale.request').'</div>';
-                        case 1:
-                            return '<div class="badge badge-light-primary fw-bold">'.trans('refund_sale.approved').'</div>';
-                        case 2:
-                            return '<div class="badge badge-light-warning fw-bold">'.trans('refund_sale.partial_cancel').'</div>';
-                        case 3:
-                            return '<div class="badge badge-light-danger fw-bold">'.trans('refund_sale.canceled').'</div>';
-                        case 4:
-                            return '<div class="badge badge-light-success fw-bold">'.trans('refund_sale.completed').'</div>';
-                        default:
-                            return '<div class="badge badge-light-secondary fw-bold">'.trans('refund_sale.unknown').'</div>';
-                    }
+                ->addColumn('note', function($row){
+                    return $row->approv_quantity_ref;
+                })
+                ->addColumn('created_at', function($row){
+                    $created_at = '<span class="text-info fs-3">'.date('Y-m-d', strtotime($row->created_at)).'</span><br>';
+                    return $created_at;
+                })
+                ->addColumn('approv_sellpriceproduct_ref', function($row){
+                    $approv_sellpriceproduct_ref = '<span class="text-info fs-3">'.$row->approv_sellpriceproduct_ref.'</span><br>';
+                    return $approv_sellpriceproduct_ref;
+                })
+                ->addColumn('refund_causes_id', function($row){
+                    $refund_causes_id = '<span class="text-info fs-3">'.$row->getrefcause->name_en ?? 'N/A'.'</span><br>';
+                    return $refund_causes_id;
                 })
                 ->addColumn('is_active', function($row){
-                    // Changed to match your status field (assuming 0 is active)
                     if($row->status == 0) {
                         return '<div class="badge badge-light-success fw-bold">'.trans('employee.active').'</div>';
                     } else {
@@ -86,16 +92,25 @@ class Refund_salesController extends Controller
                         $instance->where(function($w) use($request){
                             $search = $request->get('search');
                             $w->orWhereHas('getcust', function($q) use ($search) {
-                                $q->where('name', 'LIKE', "%$search%");
+                                $q->where('name_en', 'LIKE', "%$search%");
                             })
-                            ->orWhere('note', 'LIKE', "%$search%")
+                            ->orWhere('prod_id', 'LIKE', "%$search%")
                             ->orWhereHas('getprod', function($q) use ($search) {
                                 $q->where('name_en', 'LIKE', "%$search%");
                             });
                         });
                     }
+                    // Add filter for parent/child records
+                    if ($request->has('record_type')) {
+                        if ($request->get('record_type') == 'parent') {
+                            $instance->whereColumn('parent_id', 'id');
+                        } elseif ($request->get('record_type') == 'child') {
+                            $instance->whereNotNull('parent_id')
+                                    ->whereColumn('parent_id', '!=', 'id');
+                        }
+                    }
                 })
-                ->rawColumns(['name_en', 'note', 'type', 'is_active', 'checkbox', 'actions'])
+                ->rawColumns(['name_en', 'note', 'type','created_at', 'refund_causes_id', 'approv_sellpriceproduct_ref', 'prod_id', 'is_active', 'checkbox', 'actions'])
                 ->make(true);
         }
         return view('admin.refund_sale.index');
@@ -242,6 +257,7 @@ class Refund_salesController extends Controller
                 // Set parent ID for first item
                 if ($key === 0) {
                     $parentId = $refundSale->id;
+                    $refundSale->update(['parent_id' => $parentId]);
                     // For single item, set parent to itself
                     if ($isSingleItem) {
                         $refundSale->update(['parent_id' => $parentId]);

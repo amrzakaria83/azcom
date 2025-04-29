@@ -47,7 +47,7 @@
                     <input type="hidden" id="parent_id" name="parent_id" value="" />
                     <input type="hidden" id="cust_id" name="cust_id" value="" />
                     <div class="row mb-6">
-                            <label class="col-lg-2 col-form-label fw-semibold fs-6">{{trans('lang.customer')}}</label>
+                            <label class="col-lg-2 col-form-label fw-semibold fs-6 text-info required">{{trans('lang.customer')}}</label>
                             <div class="col-lg-5 fv-row">
                                 <select  data-placeholder="Select an option" class="input-text form-control form-select mb-3 mb-lg-0 text-center" id="cut_sale" name="cut_sale" data-control="select2" >
                                         <option  disabled selected>Select an option</option>
@@ -56,7 +56,7 @@
                                             @endforeach
                                 </select>
                             </div>
-                            <label class="col-sm-2 col-form-label fw-semibold fs-6">{{trans('lang.refund_cause')}}</label>
+                            <label class="col-sm-2 col-form-label fw-semibold fs-6 text-info required">{{trans('lang.refund_cause')}}</label>
 
                             <div class="col-lg-3 fv-row">
                                 <select  data-placeholder="Select an option" class="input-text form-control form-select mb-3 mb-lg-0 text-center" id="refund_causes_id" name="refund_causes_id"  >

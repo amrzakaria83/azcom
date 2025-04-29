@@ -83,9 +83,13 @@
                                     </div>
                                 </th>
                                 <th class="min-w-125px text-start">{{trans('lang.name')}}</th>
-                                <th class="min-w-125px text-start">{{trans('lang.note')}}</th>
-                                <th class="min-w-125px text-start">{{trans('employee.is_active')}}</th>
-                                <th class="min-w-125px text-start">{{trans('employee.action')}}</th>
+                                <th class="min-w-125px text-start">{{trans('lang.products')}}</th>
+                                <th class="min-w-125px text-start">{{trans('lang.quantity')}}</th>
+                                <th class="min-w-125px text-start">{{trans('lang.sell_price')}}</th>
+                                <th class="min-w-125px text-start">{{trans('lang.refund_cause')}}</th>
+                                <th class="min-w-125px text-start">{{trans('lang.created_at')}}</th>
+                                <!-- <th class="min-w-125px text-start">{{trans('employee.is_active')}}</th>
+                                <th class="min-w-125px text-start">{{trans('employee.action')}}</th> -->
                             </tr>
                             <!--end::Table row-->
                         </thead>
@@ -195,11 +199,11 @@
                 //     text: 'طباعه'
                 // },
                 // {extend: 'pdf', className: 'btn btn-raised btn-danger', text: 'PDF'},
-                // {
-                //     extend: 'excel',
-                //     className: 'btn btn-sm btn-icon btn-success btn-active-dark me-3 p-3',
-                //     text: '<i class="bi bi-file-earmark-spreadsheet fs-1x"></i>'
-                // },
+                {
+                    extend: 'excel',
+                    className: 'btn btn-sm btn-icon btn-success btn-active-dark me-3 p-3',
+                    text: '<i class="bi bi-file-earmark-spreadsheet fs-1x"></i>'
+                },
                 //{extend: 'colvis', className: 'btn secondary', text: 'إظهار / إخفاء الأعمدة '}
             ],
             ajax: {
@@ -213,9 +217,13 @@
             columns: [
                 {data: 'checkbox', name: 'checkbox'},
                 {data: 'name_en', name: 'name_en'},
+                {data: 'prod_id', name: 'prod_id'},
                 {data: 'note', name: 'note'},
-                {data: 'is_active', name: 'is_active'},
-                {data: 'actions', name: 'actions'},
+                {data: 'approv_sellpriceproduct_ref', name: 'approv_sellpriceproduct_ref'},
+                {data: 'refund_causes_id', name: 'refund_causes_id'},
+                {data: 'created_at', name: 'created_at'},
+                // {data: 'is_active', name: 'is_active'},
+                // {data: 'actions', name: 'actions'},
             ]
         });
 
