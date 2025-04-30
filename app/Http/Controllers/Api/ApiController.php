@@ -976,8 +976,13 @@ class ApiController extends Controller
             return response(['status' => 401, 'msg' => $validate->messages()->first(), 'data' => NULL]);
         } else {
 
+            $parentId = null;
             $totalValue = 0;
+            $isSingleItem = count($request->product_id) === 1;
+
             foreach ( $request->product_id as $index => $product_id) {
+
+                $currentParentId = ($index === 0) ? null : $parentId;
 
                 $refundSale = Refund_sale::create([
                     'emp_id' => $request->emp_id,
@@ -986,11 +991,24 @@ class ApiController extends Controller
                     'note' => $request->note,
                     'prod_id' => $product_id,
                     'approv_quantity_ref' => $request->qty[$index],
+                    'approv_sellpriceproduct_ref' => null,
+                    'bill_sale_header_id' => null,
                     'value' => $request->price[$index],
+                    'parent_id' => $currentParentId,
                     'status_requ_ref' => 1,
                     'status_requ' => 0,
                 ]);
                 $totalValue = $totalValue + $refundSale->value;
+
+                // Set parent ID for first item
+                if ($key === 0) {
+                    $parentId = $refundSale->id;
+                    $refundSale->update(['parent_id' => $parentId]);
+                    // For single item, set parent to itself
+                    if ($isSingleItem) {
+                        $refundSale->update(['parent_id' => $parentId]);
+                    }
+                }
             }
 
             // Get customer record
