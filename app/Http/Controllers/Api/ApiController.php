@@ -1001,7 +1001,7 @@ class ApiController extends Controller
                 $totalValue = $totalValue + $refundSale->value;
 
                 // Set parent ID for first item
-                if ($key === 0) {
+                if ($index === 0) {
                     $parentId = $refundSale->id;
                     $refundSale->update(['parent_id' => $parentId]);
                     // For single item, set parent to itself
