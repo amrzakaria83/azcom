@@ -862,12 +862,16 @@ class ApiController extends Controller
             foreach ( $request->product_id as $index => $product_id) {
                 $product = Product::find($product_id);
 
+                $per  = $request->percent[$index] / 100 ;
+                $sellpriceph = $product->sell_price * $per;
+
                 $azrow = Bill_sale_detail::create([
                     'emp_id' => $request->emp_id,
                     'product_id' => $product_id,
                     'bill_sale_header_id' => $row->id,
                     'quantityproduc' => $request->qty[$index],
                     'sellpriceproduct' => $product->sell_price,
+                    'sellpriceph' => $product->sell_price - $sellpriceph,
                     'percent' => $request->percent[$index],
                     'status_requ' => 0,
                 ]);
@@ -983,6 +987,7 @@ class ApiController extends Controller
             foreach ( $request->product_id as $index => $product_id) {
 
                 $currentParentId = ($index === 0) ? null : $parentId;
+                $product = Product::find($product_id);
 
                 $refundSale = Refund_sale::create([
                     'emp_id' => $request->emp_id,
@@ -991,7 +996,7 @@ class ApiController extends Controller
                     'note' => $request->note,
                     'prod_id' => $product_id,
                     'approv_quantity_ref' => $request->qty[$index],
-                    'approv_sellpriceproduct_ref' => null,
+                    'approv_sellpriceproduct_ref' => $product->sellpriceph - ($product->sellpriceph * ($request->price[$index] / 100 )),
                     'bill_sale_header_id' => null,
                     'value' => $request->price[$index],
                     'parent_id' => $currentParentId,
