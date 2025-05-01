@@ -863,7 +863,7 @@ class ApiController extends Controller
                 $product = Product::find($product_id);
 
                 $per  = $request->percent[$index] / 100 ;
-                $sellpriceph = $product->sell_price * $per;
+                $sellpriceph = $product->sell_price * (1 - $per);
 
                 $azrow = Bill_sale_detail::create([
                     'emp_id' => $request->emp_id,
@@ -871,17 +871,17 @@ class ApiController extends Controller
                     'bill_sale_header_id' => $row->id,
                     'quantityproduc' => $request->qty[$index],
                     'sellpriceproduct' => $product->sell_price,
-                    'sellpriceph' => $product->sell_price - $sellpriceph,
+                    'sellpriceph' => $sellpriceph,
                     'percent' => $request->percent[$index],
                     'status_requ' => 0,
                 ]);
-                $totalsellprice = $totalsellprice + $product->sell_price;
+                $totalsellprice += $request->qty[$index] * $sellpriceph;
             }
 
             $row->update([
                 'totalsellprice' => $totalsellprice,
             ]);
-                    
+
             return response(['status' => 200, 'msg' => trans('lang.successful'), 'data' => $row]);
 
         }

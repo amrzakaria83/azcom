@@ -901,7 +901,8 @@ class Bill_sale_headersController extends Controller
                 }
             }
             $title = trans('lang.deliverd') . ' ' . trans('lang.bill_of_sale');
-            $body = trans('lang.customer') . ': <span>' . $data->getcust->name_en . '</span><br>';
+            $body = trans('lang.customer') . ': <span>' . $data->getcust->name_en . '-</span><br>';
+            $body .= trans('lang.value') . ': <span>' . ($data->approv_sellprice ?? '' ). '</span><br>';
 
             $send_noti = new FcmNotification($token, $title, htmlspecialchars(trim(strip_tags($body))),
              "other", 0, $data->emp_id);
