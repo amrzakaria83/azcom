@@ -112,13 +112,21 @@ class Trans_custsController extends Controller
                     return $actions;
                 })
                 ->filter(function ($instance) use ($request) {
+                    if (!empty($request->get('from_time') || $request->get('to_date'))) {
+                        $instance->whereDate('created_at', '>=', $request->get('from_time'));
+                        $instance->whereDate('created_at', '<=', $request->get('to_date'));
+                    }
                     // Search logic
                     if (!empty($request->get('search'))) {
                         $search = $request->get('search'); // Define $search variable
                         $instance->where(function ($query) use ($search) {
                             $query->whereHas('getcust', function ($q) use ($search) {
-                                $q->where('name_en', 'LIKE', "%$search%");
-                            });
+                                    $q->where('name_en', 'LIKE', "%$search%");
+                                })
+                                ->orWhereHas('getemp', function ($q) use ($search) {
+                                    $q->where('name_en', 'LIKE', "%$search%"); // Assuming 'name_en' is the field in Employee
+                                    // Or use whatever name field exists in your Employee model
+                                });
                         });
                     }
                     if ($request->get('is_active') == '0' || $request->get('is_active') == '1') {
@@ -127,15 +135,32 @@ class Trans_custsController extends Controller
                     if ($request->get('type')) {
                         $instance->where('type', $request->get('type'));
                     }
-                    // if (!empty($request->get('search'))) {
-                    //         $instance->where(function($w) use($request){
-                    //         $search = $request->get('search');
-                    //         $w->orWhere('name_en', 'LIKE', "%$search%")
-                    //         ->orWhere('note', 'LIKE', "%$search%")
-                    //         ->orWhere('email', 'LIKE', "%$search%");
-                    //     });
-                    // }
                 })
+                // ->filter(function ($instance) use ($request) {
+                //     // Search logic
+                //     if (!empty($request->get('search'))) {
+                //         $search = $request->get('search'); // Define $search variable
+                //         $instance->where(function ($query) use ($search) {
+                //             $query->whereHas('getcust', function ($q) use ($search) {
+                //                 $q->where('name_en', 'LIKE', "%$search%");
+                //             });
+                //         });
+                //     }
+                //     if ($request->get('is_active') == '0' || $request->get('is_active') == '1') {
+                //         $instance->where('is_active', $request->get('is_active'));
+                //     }
+                //     if ($request->get('type')) {
+                //         $instance->where('type', $request->get('type'));
+                //     }
+                //     // if (!empty($request->get('search'))) {
+                //     //         $instance->where(function($w) use($request){
+                //     //         $search = $request->get('search');
+                //     //         $w->orWhere('name_en', 'LIKE', "%$search%")
+                //     //         ->orWhere('note', 'LIKE', "%$search%")
+                //     //         ->orWhere('email', 'LIKE', "%$search%");
+                //     //     });
+                //     // }
+                // })
                 ->rawColumns(['name_en','note','created_at','total_value','emp_id','model_name','type','is_active','checkbox','actions'])
                 ->make(true);
         }
