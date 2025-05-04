@@ -1,28 +1,68 @@
-SET FOREIGN_KEY_CHECKS = 0;  -- Disable foreign key checks
-TRUNCATE TABLE refund_sales;
-TRUNCATE TABLE cust_collections;
-TRUNCATE TABLE event_atts;
-TRUNCATE TABLE emp_bill_sales;
-TRUNCATE TABLE trans_custs;
-TRUNCATE TABLE bill_sale_details;
-TRUNCATE TABLE bill_sale_headers;
-TRUNCATE TABLE temp_sale_recs;
-TRUNCATE TABLE cut_sales;
-TRUNCATE TABLE funnel_tracks;
-TRUNCATE TABLE list_contacs;
-TRUNCATE TABLE comment_visits;
-TRUNCATE TABLE visits;
-TRUNCATE TABLE technical_supports;
-SET FOREIGN_KEY_CHECKS = 1;  -- Re-enable foreign key checks
 
-
-
-
-DELETE FROM refund_sales;DELETE FROM cust_collections;DELETE FROM event_atts;DELETE FROM emp_bill_sales;DELETE FROM trans_custs;DELETE FROM bill_sale_details;DELETE FROM bill_sale_headers;DELETE FROM temp_sale_recs;DELETE FROM cut_sales;DELETE FROM funnel_tracks;DELETE FROM list_contacs;DELETE FROM comment_visits;DELETE FROM visits;DELETE FROM technical_supports;DELETE FROM tools;DELETE FROM plan_visits;DELETE FROM event_contents;DELETE FROM events;DELETE FROM hierarchy_emps;DELETE FROM emp_sales;DELETE FROM sale_emp_aschiveds;DELETE FROM place_ws;DELETE FROM contact_rates;DELETE FROM ratings;DELETE FROM contacts;DELETE FROM products;DELETE FROM working_hours;DELETE FROM centers;DELETE FROM expense_requests;DELETE FROM vacationemps;DELETE FROM specialties;
+DELETE FROM refund_sales;
+DELETE FROM cust_collections;
+DELETE FROM event_atts;
+DELETE FROM emp_bill_sales;
+DELETE FROM trans_custs;
+DELETE FROM bill_sale_details;
+DELETE FROM bill_sale_headers;
+DELETE FROM temp_sale_recs;
+DELETE FROM cut_sales;
+DELETE FROM funnel_tracks;
+DELETE FROM list_contacs;
+DELETE FROM comment_visits;
+DELETE FROM visits;
+DELETE FROM technical_supports;
+DELETE FROM tools;
+DELETE FROM plan_visits;
+DELETE FROM event_contents;
+DELETE FROM events;
+DELETE FROM hierarchy_emps;
+DELETE FROM emp_sales;
+DELETE FROM sale_emp_aschiveds;
+DELETE FROM place_ws;
+DELETE FROM contact_rates;
+DELETE FROM ratings;
+DELETE FROM contacts;
+DELETE FROM products;
+DELETE FROM working_hours;
+DELETE FROM centers;
+DELETE FROM expense_requests;
+DELETE FROM vacationemps;
+DELETE FROM specialties;
 DELETE FROM areas;
 
 
-
 -- Reset auto-increment counters if needed
-ALTER TABLE refund_sales AUTO_INCREMENT = 1;ALTER TABLE cust_collections AUTO_INCREMENT = 1;ALTER TABLE event_atts AUTO_INCREMENT = 1;ALTER TABLE emp_bill_sales AUTO_INCREMENT = 1;ALTER TABLE trans_custs AUTO_INCREMENT = 1;ALTER TABLE bill_sale_details AUTO_INCREMENT = 1;ALTER TABLE bill_sale_headers AUTO_INCREMENT = 1;ALTER TABLE temp_sale_recs AUTO_INCREMENT = 1;ALTER TABLE cut_sales AUTO_INCREMENT = 1;ALTER TABLE funnel_tracks AUTO_INCREMENT = 1;ALTER TABLE list_contacs AUTO_INCREMENT = 1;ALTER TABLE comment_visits AUTO_INCREMENT = 1;ALTER TABLE visits AUTO_INCREMENT = 1;ALTER TABLE technical_supports AUTO_INCREMENT = 1;ALTER TABLE tools AUTO_INCREMENT = 1;ALTER TABLE plan_visits AUTO_INCREMENT = 1;ALTER TABLE event_contents AUTO_INCREMENT = 1;ALTER TABLE events AUTO_INCREMENT = 1;ALTER TABLE hierarchy_emps AUTO_INCREMENT = 1;ALTER TABLE emp_sales AUTO_INCREMENT = 1;ALTER TABLE sale_emp_aschiveds AUTO_INCREMENT = 1;ALTER TABLE place_ws AUTO_INCREMENT = 1;ALTER TABLE contact_rates AUTO_INCREMENT = 1;ALTER TABLE ratings AUTO_INCREMENT = 1;ALTER TABLE contacts AUTO_INCREMENT = 1;ALTER TABLE products AUTO_INCREMENT = 1;ALTER TABLE working_hours AUTO_INCREMENT = 1;ALTER TABLE centers AUTO_INCREMENT = 1;ALTER TABLE expense_requests AUTO_INCREMENT = 1;ALTER TABLE vacationemps AUTO_INCREMENT = 1;ALTER TABLE specialties AUTO_INCREMENT = 1;
+ALTER TABLE refund_sales AUTO_INCREMENT = 1;
+ALTER TABLE cust_collections AUTO_INCREMENT = 1;
+ALTER TABLE event_atts AUTO_INCREMENT = 1;
+ALTER TABLE emp_bill_sales AUTO_INCREMENT = 1;
+ALTER TABLE trans_custs AUTO_INCREMENT = 1;
+ALTER TABLE bill_sale_details AUTO_INCREMENT = 1;
+ALTER TABLE bill_sale_headers AUTO_INCREMENT = 1;
+ALTER TABLE temp_sale_recs AUTO_INCREMENT = 1;
+ALTER TABLE cut_sales AUTO_INCREMENT = 1;
+ALTER TABLE funnel_tracks AUTO_INCREMENT = 1;
+ALTER TABLE list_contacs AUTO_INCREMENT = 1;
+ALTER TABLE comment_visits AUTO_INCREMENT = 1;
+ALTER TABLE visits AUTO_INCREMENT = 1;
+ALTER TABLE technical_supports AUTO_INCREMENT = 1;
+ALTER TABLE tools AUTO_INCREMENT = 1;
+ALTER TABLE plan_visits AUTO_INCREMENT = 1;
+ALTER TABLE event_contents AUTO_INCREMENT = 1;
+ALTER TABLE events AUTO_INCREMENT = 1;
+ALTER TABLE hierarchy_emps AUTO_INCREMENT = 1;
+ALTER TABLE emp_sales AUTO_INCREMENT = 1;
+ALTER TABLE sale_emp_aschiveds AUTO_INCREMENT = 1;
+ALTER TABLE place_ws AUTO_INCREMENT = 1;
+ALTER TABLE contact_rates AUTO_INCREMENT = 1;
+ALTER TABLE ratings AUTO_INCREMENT = 1;
+ALTER TABLE contacts AUTO_INCREMENT = 1;
+ALTER TABLE products AUTO_INCREMENT = 1;
+ALTER TABLE working_hours AUTO_INCREMENT = 1;
+ALTER TABLE centers AUTO_INCREMENT = 1;
+ALTER TABLE expense_requests AUTO_INCREMENT = 1;
+ALTER TABLE vacationemps AUTO_INCREMENT = 1;
+ALTER TABLE specialties AUTO_INCREMENT = 1;
 ALTER TABLE areas AUTO_INCREMENT = 1;
