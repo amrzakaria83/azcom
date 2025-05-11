@@ -39,12 +39,12 @@ class DatabaseSeeder extends Seeder
             SocialStylesTableSeeder::class,
             // ModelHasRolesTableSeeder::class,
             // for trying
-            AreasTableSeeder::class,
-            CentersTableSeeder::class,
-            ProductsTableSeeder::class,
-            TypeContactsTableSeeder::class,
-            SpecialtiesTableSeeder::class,
-            ContactsTableSeeder::class,
+            // AreasTableSeeder::class,
+            // CentersTableSeeder::class,
+            // ProductsTableSeeder::class,
+            // TypeContactsTableSeeder::class,
+            // SpecialtiesTableSeeder::class,
+            // ContactsTableSeeder::class,
 
         ]);
     }
