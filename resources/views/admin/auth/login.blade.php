@@ -59,7 +59,7 @@
 									<!--begin::Heading-->
 									<div class="text-center mb-11">
 										<!--begin::Title-->
-										<h1 class="text-dark fw-bolder mb-3">{{trans('auth.login')}}</h1>
+										<h1 class="text-dark fw-bolder mb-3">ghgfgfhgfh</h1>
 										<!--end::Title-->
 									</div>
 									<!--begin::Heading-->
