@@ -706,7 +706,7 @@ class ApiController extends Controller
                 'center_id' => $request->center_id,
                 'contact_id' => $request->contact_id,
                 'status_visit' => $request->status_visit,
-                'visit_emp_ass' => $request->status_visit != 0 ? $request->employee : null,
+                'visit_emp_ass' => $request->status_visit != 0 ? json_encode($request->employee) : null,
                 'status_return' => $request->status_return,
                 'description' => $request->description ?? null,
                 'note' => $request->note ?? null,

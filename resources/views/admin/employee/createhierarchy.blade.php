@@ -128,7 +128,7 @@
                             </div>
 
                         <div class="row mb-6">
-                            <label class="col-lg-2 col-form-label fw-semibold fs-6"> {{trans('lang.status')}}</label>
+                            <label class="col-lg-2 col-form-label fw-semibold fs-6"> {{trans('lang.products')}}</label>
                             <div class="col-lg-8 d-flex align-items-center">
                                 <select data-placeholder="Select an option"  class="input-text form-control form-select mb-3 mb-lg-0 text-center product-select" id="prod" name="prod[]" data-allow-clear="true"  multiple="multiple" data-control="select2">
                                     
