@@ -95,8 +95,7 @@ class ProductsController extends Controller
                             $instance->where(function($w) use($request){
                             $search = $request->get('search');
                             $w->orWhere('name_en', 'LIKE', "%$search%")
-                            ->orWhere('description', 'LIKE', "%$search%")
-                            ->orWhere('email', 'LIKE', "%$search%");
+                            ->orWhere('description', 'LIKE', "%$search%");
                         });
                     }
                 })

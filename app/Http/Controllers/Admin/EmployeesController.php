@@ -174,7 +174,7 @@ class EmployeesController extends Controller
                     if (!empty($request->get('search'))) {
                             $instance->where(function($w) use($request){
                             $search = $request->get('search');
-                            $w->orWhere('name', 'LIKE', "%$search%")
+                            $w->orWhere('name_en', 'LIKE', "%$search%")
                             ->orWhere('phone', 'LIKE', "%$search%")
                             ->orWhere('email', 'LIKE', "%$search%");
                         });

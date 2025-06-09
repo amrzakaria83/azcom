@@ -87,9 +87,9 @@ class AreasController extends Controller
                     if (!empty($request->get('search'))) {
                             $instance->where(function($w) use($request){
                             $search = $request->get('search');
-                            $w->orWhere('name', 'LIKE', "%$search%")
+                            $w->orWhere('name_en', 'LIKE', "%$search%")
                             ->orWhere('country_id', 'LIKE', "%$search%")
-                            ->orWhere('email', 'LIKE', "%$search%");
+                            ->orWhere('note', 'LIKE', "%$search%");
                         });
                     }
                 })

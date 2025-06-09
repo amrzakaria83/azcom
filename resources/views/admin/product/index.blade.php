@@ -195,7 +195,7 @@
             searching: false,
             autoWidth: false,
             responsive: true,
-            pageLength: 10,
+            pageLength: 20,
             sort: false,
             dom: 'Bfrtip',
             buttons: [
