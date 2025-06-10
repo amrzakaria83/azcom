@@ -42,7 +42,7 @@
         {{trans('lang.center')}} :  {{$data->getcenter->name_en}}
         </h1>
         <h2 class="text-success">
-        {{trans('lang.contact')}} :  {{$data->getcontact->name_en}}
+        {{trans('lang.contact')}} :  {{ $data->getcontact->name_en ?? $data->getcenter->name_en }}
             
         </h2>
         <h3>
