@@ -12,7 +12,7 @@ class Visit extends Model
     protected $fillable = [
         'emp_id', // emp_add 
         'empvisit_id', 
-        'typevist_id',
+        'typevist_id', // 1 = am visits - 2 = pm visits
         'center_id',
         'contact_id',
         'status_visit',// 0 = single visit - 1 = double visit - 2 = triple visit

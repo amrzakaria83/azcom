@@ -36,7 +36,7 @@
 @section('content')
     <!--begin::Container-->
     <div id="kt_app_content_container" class="app-container container-fluid">
-        <h1>{{trans('lang.visit')}}-{{trans('lang.all')}}</h1>
+        <h1>{{trans('lang.visit')}}-{{trans('lang.nutrilist')}}</h1>
 
             <div class="card no-border">
                 <!--begin::Card header-->
@@ -73,46 +73,6 @@
                 <!--end::Card header-->
                 <!--begin::Card body-->
                 <div class="card-body py-4">
-
-                
-                    <div class="row mb-6">
-                        <!-- <label class="col-sm-2 col-form-label fw-semibold fs-6">{{trans('lang.name')}}-{{trans('lang.employee')}}</label> -->
-                        <div class="col-sm-4">
-                            <label class="col-sm-8 fw-semibold fs-6 mb-2">{{trans('lang.name')}}-{{trans('lang.employee')}}</label>
-                            <div class="col-sm-12 fv-row">
-                                <select  data-placeholder="Select an option" class=" input-text form-control  form-select  mb-3 mb-lg-0 text-center" id="empvisit_id" name="empvisit_id" data-control="select2" >
-                                    <option  disabled selected>Select an option</option>
-                                        @foreach (\app\Models\Employee::where('is_active' , '1')->get() as $asd)
-                                            <option value="{{$asd->id}}">{{$asd->name_en}}</option>
-                                            @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <label class="col-sm-8 fw-semibold fs-6 mb-2">{{trans('lang.name')}}-{{trans('lang.contact')}}</label>
-                            <div class="col-sm-12 fv-row">
-                                <select  data-placeholder="Select an option" class=" input-text form-control  form-select  mb-3 mb-lg-0 text-center" id="contact_id" name="contact_id" data-control="select2" >
-                                    <option  disabled selected>Select an option</option>
-                                        @foreach (\App\Models\Contact::where('status' , 0)->get() as $contac)
-                                            <option value="{{$contac->id}}">{{$contac->name_en}}</option>
-                                            @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <label class="col-sm-8 fw-semibold fs-6 mb-2">{{trans('lang.nutrilist')}} {{trans('lang.visit')}}</label>
-                            <div class="col-sm-12 fv-row">
-                                    <select   data-placeholder="Select an option" class=" input-text form-control  form-select  mb-3 mb-lg-0" id="status_visit_list" name="status_visit_list">
-                                        <option value="{{null}}" >{{trans('lang.all')}}</option>
-                                        <option value="0">{{trans('lang.nutrilist')}} {{trans('lang.contact')}}</option>
-                                        {{-- <option value="1">{{trans('lang.nutrilist')}} {{trans('lang.center')}}</option>
-                                        <option value="2">{{trans('lang.contact')}} & {{trans('lang.center')}}</option>--}}
-                                        <option value="3">out list</option>                                    
-                                        <option value="4">cancelled</option>                                    
-                                    </select>
-                            </div>
-                        </div>
-                    </div>
                     <div class="row mb-6">
 
                         <div class="col-sm-2">
@@ -142,30 +102,34 @@
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <label class="col-sm-8 fw-semibold fs-6 mb-2"> {{trans('lang.status')}} {{trans('lang.visit')}}</label>
+                            <label class="col-sm-8 fw-semibold fs-6 mb-2"></label>
+                            <div class="col-sm-8 d-flex align-items-center">
+                                <button type="button" class="btn btn-success btn-lg " id="searchbtn" >
+                                    Search
+                                </button> 
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="col-sm-8 fw-semibold fs-6 mb-2"></label>
                                 <div class="col-sm-8 d-flex align-items-center">
-                                    <select   data-placeholder="Select an option" class=" input-text form-control  form-select  mb-3 mb-lg-0" id="status_visit" name="status_visit">
-                                        <option value="{{null}}" >{{trans('lang.all')}}</option>
-                                        <option value="0">{{trans('lang.single')}} {{trans('lang.visit')}}</option>
-                                        <option value="1">{{trans('lang.double')}} {{trans('lang.visit')}}</option>                                    
-                                        <option value="2">{{trans('lang.triple')}} {{trans('lang.visit')}}</option>                                    
-                                    </select>
+                                    <a href="{{route('admin.visits.reportvistemp')}}" class="btn btn-primary btn-lg " id="searchbtn" >
+                                        refresh
+                                    </a> 
                                 </div> 
-                        </div> 
-                        <div class="col-sm-4">
-                            <label class="col-sm-8 fw-semibold fs-6 mb-2">First call {{trans('lang.products')}}</label>
-                                <div class="col-sm-8 d-flex align-items-center">
-                                    <select   data-placeholder="Select an option" class=" input-text form-control  form-select  mb-3 mb-lg-0" id="firstprodstep_id" name="firstprodstep_id">
-                                        <option value="{{null}}" >{{trans('lang.all')}}</option>
-                                        @foreach (\App\Models\Product::where('status' , 0)->get() as $item)
-                                            <option value="{{$item->id}}">{{$item->name_en}}</option>
-                                        @endforeach
-                                    </select>
-                                </div> 
-                        </div> 
+                        </div>
 
                     </div>
 
+                    @if(isset($searched))
+                    <h1 class="text-danger">
+                        @if(isset($searched))
+                        <span class="text-dark">{{trans('lang.start_from')}} </span>
+                        <span>{{$searched[0]}}</span>
+                        <span class="text-dark">{{trans('lang.end_to')}} </span>
+                        <span>{{$searched[1]}}</span>
+                        @endif
+                    </h1>
+                    @endif
                     <!--begin::Table-->
                     <table class="table align-middle table-rounded table-striped table-row-dashed fs-6" id="kt_datatable_table">
                         <!--begin::Table head-->
@@ -177,22 +141,69 @@
                                         <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_datatable_table .form-check-input" value="1" />
                                     </div>
                                 </th>
-                                <th class="min-w-125px text-start">{{trans('lang.name')}}</th>
-                                <th class="min-w-125px text-start">{{trans('lang.contact')}}</th>
-                                <th class="min-w-125px text-start">{{trans('lang.start_from')}}</th>
-                                <th class="min-w-125px text-start">{{trans('lang.duration')}}</th>
-                                <th class="min-w-125px text-start">{{trans('lang.products')}}</th>
-                                <th class="min-w-125px text-start">{{trans('lang.status')}} {{trans('lang.visit')}}</th>
-                                <th class="min-w-125px text-start">{{trans('lang.description')}}</th>
-                                <th class="min-w-125px text-start">{{trans('lang.note')}}</th>
-                                <!-- <th class="min-w-125px text-start">{{trans('lang.status')}}</th> -->
-                                <th class="min-w-125px text-start">{{trans('employee.action')}}</th>
+                                <th class="min-w-125px text-center">{{trans('lang.name')}}</th>
+                                <th class="min-w-125px text-center">{{trans('lang.counttotal')}}</th>
+                                {{-- <th class="min-w-125px text-center">{{trans('lang.tareget')}}{{trans('lang.counttotal')}}</th> --}}
+                                <th class="min-w-125px text-center">AM-{{trans('lang.visit')}}</th>
+                                <th class="min-w-125px text-center">PM-{{trans('lang.visit')}}</th>
+                                <th class="min-w-125px text-center">{{trans('lang.single')}} {{trans('lang.visit')}}</th>
+                                <th class="min-w-125px text-center">{{trans('lang.double')}} {{trans('lang.visit')}}</th>
+                                {{-- <th class="min-w-125px text-center">{{trans('lang.latest')}} {{trans('lang.visit')}}</th> --}}
+                                
                             </tr>
                             <!--end::Table row-->
                         </thead>
                         <!--end::Table head-->
                         <!--begin::Table body-->
                         <tbody class="text-gray-600 fw-bold">
+                            @if(isset($totalemp))
+                            
+                                @foreach ( $totalemp as $emp)
+                                    <tr>
+                                        <td class="text-center"></td>
+                                        <td class="text-center">{{$emp[5]}}
+                                        </td>
+                                        <td class="text-center"><span class="fs-3 text-info">{{$emp[0]}}</span></td>
+                                        <td class="text-center">{{$emp[1]}}</td>
+                                        <td class="text-center">{{$emp[2]}}</td>
+                                        <td class="text-center">{{$emp[3]}}</td>
+                                        <td class="text-center">{{$emp[4]}}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                            @if(isset($totalonlycenter))
+                            <tr><th colspan="3" class="fs-1 text-info">{{trans('lang.center')}} only</th>
+                            </tr>
+                                @foreach ( $totalonlycenter as $centeronly)
+                                    @if ($centeronly[0] > 0)
+                                        <tr>
+                                            <td class="text-center"></td>
+                                            <td class="text-center">{{$centeronly[2]->name_en}}</td>
+                                            <td class="text-center">{{$centeronly[0]}}</td>
+                                            <td class="text-center">{{$centeronly[1]->where('typevist_id' , 1)->count()}}</td>
+                                            <td class="text-center">{{$centeronly[1]->where('typevist_id' , 2)->count()}}</td>
+                                            <td class="text-center">{{$centeronly[1]->where('status_visit' , 0)->count()}}</td>
+                                            <td class="text-center">{{$centeronly[1]->where('status_visit' , 1)->count()}}</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            @endif
+                            @if(isset($totalcenter))
+                            <tr><th colspan="3" class="fs-1 text-info">{{trans('lang.center')}} & {{trans('lang.contact')}} ({{count($totalcenter)}})</th>
+                            </tr>
+                                @foreach ( $totalcenter as $center)
+                                    <tr>
+                                        <td class="text-center"></td>
+                                        <td class="text-center">{{$center[2]->name_en}}</td>
+                                        <td class="text-center">{{$center[0]}}</td>
+                                        <td class="text-center">{{$center[1]->where('typevist_id' , 1)->count()}}</td>
+                                        <td class="text-center">{{$center[1]->where('typevist_id' , 2)->count()}}</td>
+                                        <td class="text-center">{{$center[1]->where('status_visit' , 0)->count()}}</td>
+                                        <td class="text-center">{{$center[1]->where('status_visit' , 1)->count()}}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                           
                         </tbody>
                         <!--end::Table body-->
                     </table>
@@ -277,133 +288,21 @@
 <script src="{{asset('dash/assets/plugins/custom/datatables/dataTables.buttons.min.js')}}"></script>
 <script src="{{asset('dash/assets/plugins/custom/datatables/buttons.print.min.js')}}"></script>
 <script>
-    $("#kt_datepicker_1").flatpickr({defaultDate: new Date(new Date().setMonth(new Date().getMonth() - 1))});
-    $("#kt_datepicker_2").flatpickr({defaultDate: new Date(new Date().setMonth(new Date().getMonth() + 0))});
+    $("#kt_datepicker_1").flatpickr({
+        defaultDate: new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1)
 
-</script>
-<script>
-    $(function () {
-
-        var table = $('#kt_datatable_table').DataTable({
-            processing: false,
-            serverSide: true,
-            searching: false,
-            autoWidth: false,
-            responsive: true,
-            pageLength: 50,
-            sort: false,
-            dom: 'Bfrtip',
-            buttons: [
-                // {
-                //     extend: 'print',
-                //     className: 'btn btn-primary',
-                //     text: 'طباعه'
-                // },
-                // {extend: 'pdf', className: 'btn btn-raised btn-danger', text: 'PDF'},
-                {
-                    extend: 'excel',
-                    className: 'btn btn-sm btn-icon btn-success btn-active-dark me-3 p-3',
-                    text: '<i class="bi bi-file-earmark-spreadsheet fs-1x"></i>'
-                },
-                //{extend: 'colvis', className: 'btn secondary', text: 'إظهار / إخفاء الأعمدة '}
-            ],
-            ajax: {
-                url: "{{ route('admin.visits.index') }}",
-                data: function (d) {
-                    d.is_active = $('#is_active').val(),
-                    d.empvisit_id = $('#empvisit_id').val(),
-                    d.contact_id = $('#contact_id').val(),
-                    d.from_time = $('#kt_datepicker_1').val(),
-                    d.to_date = $('#kt_datepicker_2').val(),
-                    d.status_visit = $('#status_visit').val(),
-                    d.center_id = $('#center_id').val(),
-                    d.status_visit_list = $('#status_visit_list').val(),
-                    d.firstprodstep_id = $('#firstprodstep_id').val(),
-                    d.search = $('#search').val()
-                }
-            },
-            columns: [
-                {data: 'checkbox', name: 'checkbox'},
-                {data: 'name_en', name: 'name_en'},
-                {data: 'contact_id', name: 'contact_id'},
-                {data: 'from_time', name: 'from_time'},
-                {data: 'end_time', name: 'end_time'},
-                {data: 'product_id', name: 'product_id'},
-                {data: 'status_visit', name: 'status_visit'},
-                {data: 'description', name: 'description'},
-                {data: 'note', name: 'note'},
-                // {data: 'is_active', name: 'is_active'},
-                {data: 'actions', name: 'actions'},
-            ]
-        });
-
-        table.buttons().container().appendTo($('.dbuttons'));
-        
-        const filterSearch = document.querySelector('[data-kt-db-table-filter="search"]');
-        filterSearch.addEventListener('keyup', function (e) {
-            table.draw();
-        });
-        $('#empvisit_id,#contact_id,#kt_datepicker_1,#kt_datepicker_2,#status_visit,#status_visit_list,#firstprodstep_id').change(function() {
-            table.draw();
-        });
-    
-        $('#submit').click(function(){
-            $("#kt_modal_filter").modal('hide');
-            table.draw();
-        });
-
-        $("#btn_delete").click(function(event){
-            event.preventDefault();
-            var checkIDs = $("#kt_datatable_table input:checkbox:checked").map(function(){
-            return $(this).val();
-            }).get(); // <----
-
-            if (checkIDs.length > 0) {
-                var token = $(this).data("token");
-                
-                Swal.fire({
-                    title: 'هل انت متأكد ؟',
-                    text: "لا يمكن استرجاع البيانات المحذوفه",
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonClass: 'btn btn-success',
-                    cancelButtonClass: 'btn btn-danger m-l-10',
-                    confirmButtonText: 'موافق',
-                    cancelButtonText: 'لا'
-                }).then(function (isConfirm) {
-                    if (isConfirm.value) {
-                        $.ajax(
-                        {
-                            url: "{{route('admin.employees.delete')}}",
-                            type: 'post',
-                            dataType: "JSON",
-                            data: {
-                                "id": checkIDs,
-                                "_method": 'post',
-                                "_token": token,
-                            },
-                            success: function (data) {
-                                if(data.message == "success") {
-                                    table.draw();
-                                    toastr.success("", "تم الحذف بنجاح");
-                                } else {
-                                    toastr.success("", "عفوا لم يتم الحذف");
-                                }
-                            },
-                            fail: function(xhrerrorThrown){
-                                toastr.success("", "عفوا لم يتم الحذف");
-                            }
-                        });
-                    } else {
-                        console.log(isConfirm);
-                    }
-                });
-            } else {
-                toastr.error("", "حدد العناصر اولا");
-            }        
-
-        });
     });
+    $("#kt_datepicker_2").flatpickr({defaultDate: new Date(new Date().setMonth(new Date().getMonth() + 0))});
+    $('#searchbtn').click(function(){
+            const from_time = $('#kt_datepicker_1').val();
+            const to_date = $('#kt_datepicker_2').val();
+            const status_visit = $('#status_visit').val() || 'all';
+
+            window.location = '{{route("admin.visits.indexvistemp")}}' + '/' + from_time+ '/' + to_date + '/' + status_visit;
+            $('#searchbtn').prop('disabled', true);
+        });
+
 </script>
+
 
 @endsection

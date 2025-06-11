@@ -602,8 +602,8 @@ class VisitsController extends Controller
                         } else{
                             $salfunnel ='';
                         }
-                        $amdatacontact = $datacontact->where('typevist_id' , 3)->count();
-                        $pmdatacontact = $datacontact->where('typevist_id' , 4)->count();
+                        $amdatacontact = $datacontact->where('typevist_id' , 1)->count();
+                        $pmdatacontact = $datacontact->where('typevist_id' , 2)->count();
                         $single = $datacontact->where('status_visit' , 0)->count(); //  0 = single visit - 1 = double visit - 2 = triple visit
                         $double = $datacontact->where('status_visit' , 1)->count(); //  0 = single visit - 1 = double visit - 2 = triple visit
                         $target = $data->taregetvisit ?? 0;
@@ -687,4 +687,44 @@ class VisitsController extends Controller
         $centellocation = Center::where('id', $data->center_id)->get(['lat','lng']);
         return view('admin.visit.showlocation', compact('data','centellocation'));
     }
+    public function reportvistemp()
+    {
+        return view('admin.visit.reportvistemp');
+    }
+    public function indexvistemp($from_time,$to_date,$status_visit)
+    {
+        $data = Employee::where('is_active' , '1')->get();
+
+            $helper = new Helper;
+            $ids = $helper->emp_ids();
+            if (auth()->user()->role_id != 1) {
+                $data = $data->whereIn('id', $ids);
+            }
+        foreach ($data as $dataemp) {
+            $nameemp = $dataemp->name_en;
+            $dataemp = Visit::where('status', 0)
+            ->where('empvisit_id', $dataemp->id)
+            ->whereBetween('from_time', [$from_time, $to_date])
+            ->get();
+            if ($dataemp->count() > 0) {
+                $totalvisit = 0;
+                $totalamvisit = 0;
+                $totalpmvisit = 0;
+                $totalsingle = 0;
+                $totaldouble = 0;
+                $totalvisit = $dataemp->count();
+                $totalamvisit = $dataemp->where('typevist_id' , 1 )->count();// 1 = am visits - 2 = pm visits
+                $totalpmvisit = $dataemp->where('typevist_id' , 2 )->count();// 1 = am visits - 2 = pm visits
+                $totalsingle = $dataemp->where('status_visit' , 0 )->count();//  0 = single visit - 1 = double visit - 2 = triple visit
+                $totaldouble = $dataemp->where('status_visit' , 1 )->count();//  0 = single visit - 1 = double visit - 2 = triple visit
+                $totalemp[] = [$totalvisit,$totalamvisit,$totalpmvisit,$totalsingle,$totaldouble,$nameemp];
+
+            }
+            
+        }
+      
+        $searched = [$from_time, $to_date];
+        return view('admin.visit.reportvistemp',compact('totalemp','searched'));
+    }
+
 }

@@ -33,4 +33,8 @@ class Center extends Model
     {
         return $this->belongsTo(Type_center::class, 'type_id');
     }
+    public function getarea()
+    {
+        return $this->belongsTo(Area::class, 'area_id');
+    }
 }
