@@ -634,7 +634,7 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
             Route::get('/reportprod','VisitsController@reportprod')->name('reportprod');
             Route::get('/reportprodlist/{from_t?}/{to_d?}/{empvisit_id?}','VisitsController@reportprodlist')->name('reportprodlist');
             Route::get('/showlocation/{id}', 'VisitsController@showlocation')->name('showlocation');
-            Route::get('/reportvistemp','VisitsController@reportvistemp')->name('reportvistemp');
+            Route::get('/reportvistemp','VisitsController@reportvistemp')->name('reportvistemp')->can('report empvisits'); // add can
             Route::get('/indexvistemp/{from_t?}/{to_d?}/{st?}','VisitsController@indexvistemp')->name('indexvistemp');
 
             

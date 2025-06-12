@@ -293,6 +293,10 @@ if (isset($data)) {
                                 <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('report product')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('report product')) ? 'checked' : '':'' }} name="permissions[]" />
                                 <span class="form-check-label">report Visit product</span>
                             </label>
+                            <label class="form-check form-check-custom form-check-solid me-3 me-lg-10">
+                                <input class="form-check-input" type="checkbox" value="{{$permissions->findByName('report empvisits')->id}}" {{ isset($data) ? $role->hasPermissionTo($permissions->findByName('report empvisits')) ? 'checked' : '':'' }} name="permissions[]" />
+                                <span class="form-check-label">report Visit employees</span>
+                            </label>
                             <!--end::Checkbox-->
                         </div>
                         <!--end::Wrapper-->

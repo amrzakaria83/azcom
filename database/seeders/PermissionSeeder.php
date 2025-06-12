@@ -23,6 +23,7 @@ class PermissionSeeder extends Seeder
             'visit new',
             'report list',
             'report product',
+            'report empvisits', //reportvistemp
             'all list',
             'list details',
             'list new',
