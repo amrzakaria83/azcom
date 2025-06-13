@@ -157,7 +157,31 @@
                         <!--begin::Table body-->
                         <tbody class="text-gray-600 fw-bold">
                             @if(isset($totalemp))
-                            
+                            <tr>
+                                <td class="text-center"></td>
+                                <td class="text-center text-info">{{trans('lang.total')}}</td>
+                                <td class="text-center"><span class="fs-3 text-info">
+                                    @php
+                                        $sum0 = 0;
+                                        $sum1 = 0;
+                                        $sum2 = 0;
+                                        $sum3 = 0;
+                                        $sum4 = 0;
+                                        foreach ($totalemp as $emp) {
+                                            $sum0 += $emp[0];
+                                            $sum1 += $emp[1];
+                                            $sum2 += $emp[2];
+                                            $sum3 += $emp[3];
+                                            $sum4 += $emp[4];
+                                        }
+                                    @endphp
+                                    {{ $sum0 }}
+                                </span></td>
+                                <td class="text-center text-info">{{ $sum1 }}</td>
+                                <td class="text-center text-info">{{ $sum2 }}</td>
+                                <td class="text-center text-info">{{ $sum3 }}</td>
+                                <td class="text-center text-info">{{ $sum4 }}</td>
+                            </tr>
                                 @foreach ( $totalemp as $emp)
                                     <tr>
                                         <td class="text-center"></td>
