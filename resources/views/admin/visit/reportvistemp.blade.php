@@ -36,7 +36,9 @@
 @section('content')
     <!--begin::Container-->
     <div id="kt_app_content_container" class="app-container container-fluid">
-        <h1>{{trans('lang.visit')}}-{{trans('lang.nutrilist')}}</h1>
+        <h1>
+            {{trans('lang.report')}} {{trans('lang.visit')}} {{trans('employee.employees')}}
+            </h1>
 
             <div class="card no-border">
                 <!--begin::Card header-->
@@ -313,10 +315,16 @@
 <script src="{{asset('dash/assets/plugins/custom/datatables/buttons.print.min.js')}}"></script>
 <script>
     $("#kt_datepicker_1").flatpickr({
-        defaultDate: new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1)
+        defaultDate: new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1),
+        allowInput: true,           // Allow manual input
+        enableTime: false,
+    });
+    $("#kt_datepicker_2").flatpickr({
+        defaultDate: new Date().setDate(new Date().getDate() + 1),
+        allowInput: true,           // Allow manual input
+        enableTime: false,
 
     });
-    $("#kt_datepicker_2").flatpickr({defaultDate: new Date(new Date().setMonth(new Date().getMonth() + 0))});
     $('#searchbtn').click(function(){
             const from_time = $('#kt_datepicker_1').val();
             const to_date = $('#kt_datepicker_2').val();

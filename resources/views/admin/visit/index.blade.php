@@ -277,7 +277,9 @@
 <script src="{{asset('dash/assets/plugins/custom/datatables/dataTables.buttons.min.js')}}"></script>
 <script src="{{asset('dash/assets/plugins/custom/datatables/buttons.print.min.js')}}"></script>
 <script>
-    $("#kt_datepicker_1").flatpickr({defaultDate: new Date(new Date().setMonth(new Date().getMonth() - 1))});
+    $("#kt_datepicker_1").flatpickr({
+        defaultDate: new Date(new Date().setMonth(new Date().getMonth() - 1))
+    });
     $("#kt_datepicker_2").flatpickr({defaultDate: new Date(new Date().setMonth(new Date().getMonth() + 0))});
 
 </script>

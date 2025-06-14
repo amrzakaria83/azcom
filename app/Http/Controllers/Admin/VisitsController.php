@@ -700,6 +700,8 @@ class VisitsController extends Controller
             if (auth()->user()->role_id != 1) {
                 $data = $data->whereIn('id', $ids);
             }
+            $totalemp = []; // Initialize the array
+
         foreach ($data as $dataemp) {
             $nameemp = $dataemp->name_en;
             $dataemp = Visit::where('status', 0)
