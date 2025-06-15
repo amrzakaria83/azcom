@@ -315,7 +315,7 @@
 <script src="{{asset('dash/assets/plugins/custom/datatables/buttons.print.min.js')}}"></script>
 <script>
     $("#kt_datepicker_1").flatpickr({
-        defaultDate: new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1),
+        defaultDate: new Date().setDate(new Date().getDate() - 30),
         allowInput: true,           // Allow manual input
         enableTime: false,
     });
