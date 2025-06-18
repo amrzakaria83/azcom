@@ -48,10 +48,15 @@
 
                         <div class="row mb-8">
                             <div class="col-xl-2">
-                                <div class="fs-6 fw-semibold">{{trans('lang.name')}} </div>
+                                <div class="fs-6 fw-semibold">
+                                    {{trans('lang.name')}} 
+
+                                </div>
                             </div>
                             <div class="col-lg-9">
-                                <div class="fw-bold fs-5">{{$data->name_en}}</div>
+                                <div class="fw-bold fs-5">
+                                <input type="text" name="name_en" placeholder="{{trans('lang.name')}}" value="{{$data->name_en}}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
+                                </div>
                             </div>
                         </div>
 

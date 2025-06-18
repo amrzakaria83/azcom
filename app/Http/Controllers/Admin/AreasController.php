@@ -171,6 +171,7 @@ class AreasController extends Controller
         $center = Area::find($request->id);
         $data = Area::where('id', $request->id)->update([
             'emp_id' => Auth::guard('admin')->user()->id,
+            'name_en' => $request->name_en,
             'note' => $request->note,
             'status' => $request->status ?? 0,
         ]);
