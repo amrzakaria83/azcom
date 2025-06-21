@@ -255,6 +255,8 @@ return [
     "location_on_map" => "Location on map",
     "logo" => "Logo",
     "logo_dark" => "Logo dark",
+    "uncompleted" => "Uncompleted",
+    "completed" => "Completed",
     
     ###########   API Lang   ###########
     

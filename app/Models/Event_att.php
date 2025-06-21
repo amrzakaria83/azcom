@@ -19,6 +19,10 @@ class Event_att extends Model
         'end_time',
         'note',
         'status',
+        'lat_checkin',
+        'lng_checkin',
+        'lat_checkout',
+        'lng_checkout',
     ];
 
     public function getevent()

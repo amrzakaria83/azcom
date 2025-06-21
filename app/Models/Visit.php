@@ -33,6 +33,8 @@ class Visit extends Model
         'checkout_location',
         'end_time',
         'status',
+        'status_completed', // 0 = completed - 1 = not completed
+
     ];
     public function getemp()
     {

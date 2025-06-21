@@ -724,12 +724,14 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
         });
         Route::name('event_atts.')->prefix('event_atts')->group(function(){
             Route::get('/','Event_attsController@index')->name('index');
-            Route::get('/show/{id}','Event_attsController@show')->name('show')->can('brand gift details');
+            Route::get('/show/{id}','Event_attsController@show')->name('show');
             Route::post('/delete', 'Event_attsController@destroy')->name('delete');
             Route::get('/create','Event_attsController@create')->name('create');
             Route::post('/store','Event_attsController@store')->name('store');
-            Route::get('/edit/{id}', 'Event_attsController@edit')->name('edit')->can('brand gift edit');
+            Route::get('/edit/{id}', 'Event_attsController@edit')->name('edit');
             Route::post('/update', 'Event_attsController@update')->name('update');
+            Route::post('/store_in','Event_attsController@store_in')->name('store_in');
+            Route::post('/store_out','Event_attsController@store_out')->name('store_out');
 
         });
 

@@ -10,6 +10,7 @@ use App\Models\Event_att;
 use DataTables;
 use Validator;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class Event_attsController extends Controller
 {
@@ -104,6 +105,7 @@ class Event_attsController extends Controller
     public function store(Request $request)
     {
         $rule = [
+            'event_id' => 'required'
         ];
 
         $validate = Validator::make($request->all(), $rule);
@@ -113,14 +115,14 @@ class Event_attsController extends Controller
 
         $row = Event_att::create([
             'emp_id' => Auth::guard('admin')->user()->id,
-            'empatt_id' => $request->empatt_id,
+            'empatt_id' => Auth::guard('admin')->user()->id,
             'event_id' => $request->event_id,
-            'checkin_location' => $request->checkin_location ?? null,
-            'from_time' => $request->from_time,
-            'checkout_location' => $request->checkout_location ?? null,
-            'end_time' => $request->end_time,
             'note' => $request->note,
             'status' => 0 ,
+            'lat_checkin' => $request->lat_checkin ?? null,
+            'lng_checkin' => $request->lng_checkin ?? null,
+            'lat_checkout' => $request->lat_checkout ?? null,
+            'lng_checkout' => $request->lng_checkout ?? null,
         ]);
 
         if($request->hasFile('photo') && $request->file('photo')->isValid()){
@@ -156,12 +158,12 @@ class Event_attsController extends Controller
             'emp_id' => Auth::guard('admin')->user()->id,
             'empatt_id' => Auth::guard('admin')->user()->id,
             'event_id' => $request->event_id,
-            'checkin_location' => $request->checkin_location ?? null,
-            'from_time' => $request->from_time,
-            'checkout_location' => $request->checkout_location ?? null,
-            'end_time' => $request->end_time,
             'note' => $request->note,
             'status' => 0 ,
+            'lat_checkin' => $request->lat_checkin ?? null,
+            'lng_checkin' => $request->lng_checkin ?? null,
+            'lat_checkout' => $request->lat_checkout ?? null,
+            'lng_checkout' => $request->lng_checkout ?? null,
         ]);
 
         if($request->hasFile('photo') && $request->file('photo')->isValid()){
@@ -185,5 +187,67 @@ class Event_attsController extends Controller
         }
         return response()->json(['message' => 'success']);
 
+    }
+    public function store_in(Request $request)
+    {
+        $rule = [
+            'event_id' => 'required'
+        ];
+
+        $validate = Validator::make($request->all(), $rule);
+        if ($validate->fails()) { 
+            return redirect()->back()->with('message', $validate->messages()->first())->with('status', 'error');
+        } 
+
+        $row = Event_att::create([
+            'emp_id' => Auth::guard('admin')->user()->id,
+            'empatt_id' => Auth::guard('admin')->user()->id,
+            'event_id' => $request->event_id,
+            'from_time' => Carbon::now(),
+            'note' => $request->note,
+            'status' => 0 ,
+            'lat_checkin' => $request->lat_checkin ?? null,
+            'lng_checkin' => $request->lng_checkin ?? null,
+            
+        ]);
+
+        if($request->hasFile('photo') && $request->file('photo')->isValid()){
+            $row->addMediaFromRequest('photo')->toMediaCollection('attach');
+        }
+
+        // $role = Role::find($request->role_id);
+        // $row->syncRoles([]);
+        // $row->assignRole($role->name);
+
+        return redirect('admin/event_atts')->with('message', 'Added successfully')->with('status', 'success');
+    }
+    public function store_out(Request $request)
+    {
+        $rule = [
+            'event_id' => 'required'
+        ];
+
+        $validate = Validator::make($request->all(), $rule);
+        if ($validate->fails()) { 
+            return redirect()->back()->with('message', $validate->messages()->first())->with('status', 'error');
+        } 
+        $event_att = Event_att::where('event_id',$request->id);// still need update
+        $event_att->update([
+            'end_time' => Carbon::now(),
+            'note' => $request->note,
+            'lat_checkout' => $request->lat_checkout ?? null,
+            'lng_checkout' => $request->lng_checkout ?? null,
+            
+        ]);
+
+        if($request->hasFile('photo') && $request->file('photo')->isValid()){
+            $row->addMediaFromRequest('photo')->toMediaCollection('attach');
+        }
+
+        // $role = Role::find($request->role_id);
+        // $row->syncRoles([]);
+        // $row->assignRole($role->name);
+
+        return redirect('admin/event_atts')->with('message', 'Added successfully')->with('status', 'success');
     }
 }

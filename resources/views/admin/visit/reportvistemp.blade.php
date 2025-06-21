@@ -145,12 +145,11 @@
                                 </th>
                                 <th class="min-w-125px text-center">{{trans('lang.name')}}</th>
                                 <th class="min-w-125px text-center">{{trans('lang.counttotal')}}</th>
-                                {{-- <th class="min-w-125px text-center">{{trans('lang.tareget')}}{{trans('lang.counttotal')}}</th> --}}
                                 <th class="min-w-125px text-center">AM-{{trans('lang.visit')}}</th>
                                 <th class="min-w-125px text-center">PM-{{trans('lang.visit')}}</th>
                                 <th class="min-w-125px text-center">{{trans('lang.single')}} {{trans('lang.visit')}}</th>
                                 <th class="min-w-125px text-center">{{trans('lang.double')}} {{trans('lang.visit')}}</th>
-                                {{-- <th class="min-w-125px text-center">{{trans('lang.latest')}} {{trans('lang.visit')}}</th> --}}
+                                <th class="min-w-125px text-center">{{trans('lang.visit')}} {{trans('lang.uncompleted')}}</th>
                                 
                             </tr>
                             <!--end::Table row-->
@@ -169,12 +168,15 @@
                                         $sum2 = 0;
                                         $sum3 = 0;
                                         $sum4 = 0;
+                                        $sum7 = 0;
+
                                         foreach ($totalemp as $emp) {
                                             $sum0 += $emp[0];
                                             $sum1 += $emp[1];
                                             $sum2 += $emp[2];
                                             $sum3 += $emp[3];
                                             $sum4 += $emp[4];
+                                            $sum7 += $emp[7];
                                         }
                                     @endphp
                                     {{ $sum0 }}
@@ -183,6 +185,8 @@
                                 <td class="text-center text-info">{{ $sum2 }}</td>
                                 <td class="text-center text-info">{{ $sum3 }}</td>
                                 <td class="text-center text-info">{{ $sum4 }}</td>
+                                <td class="text-center text-danger">{{ $sum7 }}</td>
+
                             </tr>
                                 @foreach ( $totalemp as $emp)
                                     <tr>
@@ -194,6 +198,8 @@
                                         <td class="text-center">{{$emp[2]}}</td>
                                         <td class="text-center">{{$emp[3]}}</td>
                                         <td class="text-center">{{$emp[4]}}</td>
+                                        <td class="text-center text-danger">{{$emp[7]}}</td>
+
                                     </tr>
                                 @endforeach
                             @endif

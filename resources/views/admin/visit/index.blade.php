@@ -141,7 +141,7 @@
                                 <input class="form-control form-control-solid ps-12" name="to_date" placeholder="{{trans('lang.end_to')}}" id="kt_datepicker_2" />
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-2">
                             <label class="col-sm-8 fw-semibold fs-6 mb-2"> {{trans('lang.status')}} {{trans('lang.visit')}}</label>
                                 <div class="col-sm-8 d-flex align-items-center">
                                     <select   data-placeholder="Select an option" class=" input-text form-control  form-select  mb-3 mb-lg-0" id="status_visit" name="status_visit">
@@ -152,6 +152,16 @@
                                     </select>
                                 </div> 
                         </div> 
+                        <div class="col-sm-2">
+                            <label class="col-sm-12 fw-semibold fs-6 mb-2"> {{trans('lang.status')}} {{trans('lang.completed')}}</label>
+                                <div class="col-sm-12 d-flex align-items-center">
+                                    <select   data-placeholder="Select an option" class=" input-text form-control  form-select  mb-3 mb-lg-0" id="status_completed" name="status_completed">
+                                        <option value="{{null}}" >{{trans('lang.all')}}</option>
+                                        <option value="0">{{trans('lang.completed')}}</option>
+                                        <option value="1">{{trans('lang.uncompleted')}}</option>                                    
+                                    </select>
+                                </div> 
+                        </div>
                         <div class="col-sm-4">
                             <label class="col-sm-8 fw-semibold fs-6 mb-2">First call {{trans('lang.products')}}</label>
                                 <div class="col-sm-8 d-flex align-items-center">
@@ -321,6 +331,8 @@
                     d.center_id = $('#center_id').val(),
                     d.status_visit_list = $('#status_visit_list').val(),
                     d.firstprodstep_id = $('#firstprodstep_id').val(),
+                    d.status_completed = $('#status_completed').val(),
+
                     d.search = $('#search').val()
                 }
             },
@@ -345,7 +357,7 @@
         filterSearch.addEventListener('keyup', function (e) {
             table.draw();
         });
-        $('#empvisit_id,#contact_id,#kt_datepicker_1,#kt_datepicker_2,#status_visit,#status_visit_list,#firstprodstep_id').change(function() {
+        $('#empvisit_id,#contact_id,#kt_datepicker_1,#kt_datepicker_2,#status_visit,#status_visit_list,#firstprodstep_id,#status_completed').change(function() {
             table.draw();
         });
     

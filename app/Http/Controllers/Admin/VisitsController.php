@@ -63,6 +63,10 @@ class VisitsController extends Controller
                         $name_en .= '<div class="d-flex flex-column"><a href="javascript:;" class="text-danger text-hover-primary mb-1"> cancelled </a></div>';
 
                     }
+                    $status_completed = $row->status_completed ?? 0; // 0 = completed - 1 = not completed
+                    if ($status_completed === 1){
+                        $name_en .= '<div class="d-flex flex-column"><a href="javascript:;" class="text-danger text-hover-primary mb-1">'.trans('lang.uncompleted').'</a></div>';
+                    }
                     return $name_en;
                 })
                 ->addColumn('contact_id', function($row){
@@ -267,6 +271,12 @@ class VisitsController extends Controller
                         $query->where('status_visit', $request->get('status_visit'));
                     });
                     }
+                    if ($request->get('status_completed') != Null)
+                    {
+                    $instance->where(function ($query) use ($request) {
+                        $query->where('status_completed', $request->get('status_completed'));
+                    });
+                    }
                     if ($request->get('firstprodstep_id') != Null)
                     {
                     $instance->where(function ($query) use ($request) {
@@ -357,6 +367,8 @@ class VisitsController extends Controller
             'checkout_location' => $request->checkout_location,
             'end_time' => $request->end_time,
             'status' => 0 ,
+            'status_completed' => $request->status_completed ?? 0, //0 = completed - 1 = not completed
+
         ]);
                     $Visit = Visit::find($row->id);
 
@@ -719,7 +731,9 @@ class VisitsController extends Controller
                 $totalpmvisit = $dataemp->where('typevist_id' , 2 )->count();// 1 = am visits - 2 = pm visits
                 $totalsingle = $dataemp->where('status_visit' , 0 )->count();//  0 = single visit - 1 = double visit - 2 = triple visit
                 $totaldouble = $dataemp->where('status_visit' , 1 )->count();//  0 = single visit - 1 = double visit - 2 = triple visit
-                $totalemp[] = [$totalvisit,$totalamvisit,$totalpmvisit,$totalsingle,$totaldouble,$nameemp];
+                $totalcompleted = $dataemp->where('status_completed' , 0 )->count();// 0 = completed - 1 = not completed
+                $totaluncompleted = $dataemp->where('status_completed' , 1 )->count();// 0 = completed - 1 = not completed
+                $totalemp[] = [$totalvisit,$totalamvisit,$totalpmvisit,$totalsingle,$totaldouble,$nameemp,$totalcompleted,$totaluncompleted];
 
             }
             

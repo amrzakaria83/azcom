@@ -253,6 +253,8 @@ return [
     "logo" => "اللوجو",
     "logo_dark" => "اللوجو غامق",
     "delivered" => "تم التسليم",
+    "uncompleted" => "غير مكتملة",
+    "completed" => "مكتملة",
 
     ###########   API Lang   ###########
     
