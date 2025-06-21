@@ -38,7 +38,7 @@ class VisitResource extends JsonResource
             'type'=>$this->gettype->name_en,
             'center_id'=>$this->getcenter->id ?? '',
             'center'=>$this->getcenter->name_en ?? '',
-            'contact_id'=>$this->getcenter->id ?? '',
+            'contact_id'=>$this->getcontact->id ?? '',
             'contact'=>$this->getcontact->name_en ?? '',
             'status_id'=>$this->status_visit,
             'status'=>$status,

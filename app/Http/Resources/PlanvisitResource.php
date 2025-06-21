@@ -36,7 +36,7 @@ class PlanvisitResource extends JsonResource
             'id'=>$this->id,
             'center_id'=>$this->getcenter->id ?? '',
             'center'=>$this->getcenter->name_en ?? '',
-            'contact_id'=>$this->getcenter->id ?? '',
+            'contact_id'=>$this->getcontact->id ?? '',
             'contact'=>$this->getcontact->name_en ?? '',
             'type_id'=>$this->gettype->id,
             'type'=>$this->gettype->name_en,
