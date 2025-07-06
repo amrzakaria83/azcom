@@ -14,6 +14,7 @@ use App\Models\Message;
 use App\Http\Resources\NotificationResource;
 use App\Models\Notification;
 use App\Models\Event;
+use App\Models\Event_att;
 use App\Http\Resources\EventResource;
 use App\Models\Type_expense;
 use App\Models\Expense_request;
@@ -87,7 +88,7 @@ class ApiController extends Controller
         
     }
 
-    public function getEvents()
+    public function getEvents($user_id)
     {
         $token = request()->header('token');
         $user = $this->check_api_token($token);
@@ -95,7 +96,9 @@ class ApiController extends Controller
             return response(['status' => 403, 'msg' => trans('auth.not_login'), 'data' => NULL]);
         }
 
-        $data = Event::orderBy('id', 'DESC')->paginate(10);
+        $data = Event::orderBy('id', 'DESC')->with('getAttends', function($query) use ($user_id) {
+                            $query->where('empatt_id', $user_id);
+                    })->paginate(10);
 
         $results = EventResource::collection($data)->response()->getData();
 
@@ -1058,5 +1061,93 @@ class ApiController extends Controller
             return response(['status' => 200, 'msg' => trans('lang.successful'), 'data' => $data]);
         }
         
+    }
+
+    public function addVisitPlan(Request $request)
+    {
+
+        $token = request()->header('token');
+        $user = $this->check_api_token($token);
+        if (!$user) {
+            return response(['status' => 403, 'msg' => trans('auth.not_login'), 'data' => NULL]);
+        }
+
+        $rule = [
+            'emp_id' => 'required',
+            'type_id' => 'required',
+            'center_id' => 'required',
+            'contact_id' => 'required',
+            'status_visit' => 'required',
+        ];
+        $validate = Validator::make($request->all(), $rule);
+
+        if ($validate->fails()) {
+
+            return response(['status' => 401, 'msg' => $validate->messages()->first(), 'data' => NULL]);
+        } else {
+
+            $row = Plan_visit::create([
+                'emp_id' => $request->emp_id,
+                'emphplan_id' => $request->emp_id,
+                'center_id' => $request->center_id,
+                'contact_id' => $request->contact_id,
+                'typevist_id' => $request->type_id,
+                'from_time' => $request->from_time,
+                'status_visit' => $request->status_visit,//0 = single visit - 1 = double visit - 2 = triple visit
+                'visit_emp_ass' => $request->status_visit != 0 ? json_encode($request->employee) : null,
+                'note' => $request->note,
+                'status_return' => $request->status_return ?? 4,// 0 = done - 1 = canceld - 3 = delayed - 4 = planned
+                'status' => $request->status ?? 0 ,
+            ]);
+
+            // $results = new VacationempResource($row);
+                    
+            return response(['status' => 200, 'msg' => trans('lang.successful'), 'data' => $row]);
+
+        }
+
+    }
+
+    public function addCheckEvent(Request $request)
+    {
+
+        $token = request()->header('token');
+        $user = $this->check_api_token($token);
+        if (!$user) {
+            return response(['status' => 403, 'msg' => trans('auth.not_login'), 'data' => NULL]);
+        }
+
+        $rule = [
+            'emp_id' => 'required',
+            'event_id' => 'required',
+        ];
+        $validate = Validator::make($request->all(), $rule);
+
+        if ($validate->fails()) {
+
+            return response(['status' => 401, 'msg' => $validate->messages()->first(), 'data' => NULL]);
+        } else {
+            $attend = Event_att::where('empatt_id', $request->emp_id)->where('event_id', $request->event_id)->first();
+            if ($attend) {
+                $att = $attend->update([
+                    'end_time' => $request->end_time,
+                    'lat_checkout' => $request->lat_checkout,
+                    'lng_checkout' => $request->lng_checkout,
+                ]);
+            } else {
+                $attend = Event_att::create([
+                'emp_id' => $request->emp_id,
+                'empatt_id' => $request->emp_id,
+                'event_id' => $request->event_id,
+                'from_time' => $request->from_time,
+                'lat_checkin' => $request->lat_checkin,
+                'lng_checkin' => $request->lng_checkin,
+            ]);
+            }
+                    
+            return response(['status' => 200, 'msg' => trans('lang.successful'), 'data' => $attend]);
+
+        }
+
     }
 }

@@ -32,6 +32,11 @@ class Event extends Model implements HasMedia
         return $this->HasMany(Event_content::class, 'event_id');
     }
 
+    public function getAttends()
+    {
+        return $this->HasOne(Event_att::class, 'event_id');
+    }
+
     public function registerMediaCollections(Media $media = null): void
     {
         $this->addMediaCollection('photo')

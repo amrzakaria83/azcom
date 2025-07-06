@@ -26,8 +26,9 @@ Route::get('/settings',[ApiController::class ,'settings']);
 
 Route::get('/get-home-notification/{employee_id}',[ApiController::class ,'getHomeNotification']);
 Route::get('/get-all-notification/{employee_id}',[ApiController::class ,'getAllNotification']);
-Route::get('/get-events',[ApiController::class ,'getEvents']);
+Route::get('/get-events/{userid}',[ApiController::class ,'getEvents']);
 Route::get('/get-event-details/{id}',[ApiController::class ,'getEventDetails']);
+Route::post('/add-check-event',[ApiController::class ,'addCheckEvent']);
 Route::get('/get-expenses/{id}',[ApiController::class ,'getExpenses']);
 Route::get('/get-expense-details/{id}',[ApiController::class ,'getExpenseDetails']);
 Route::post('/request-expense',[ApiController::class ,'requestExpense']);
@@ -58,3 +59,4 @@ Route::post('/request-customer-collection',[ApiController::class ,'requestCutome
 Route::get('/get-transactions/{employee_id}',[ApiController::class ,'getTransaction']);
 Route::post('/request-refund',[ApiController::class ,'requestRefund']);
 Route::get('/get-refund-reasons',[ApiController::class ,'getReasons']);
+Route::post('/add-visit-plan',[ApiController::class ,'addVisitPlan']);
