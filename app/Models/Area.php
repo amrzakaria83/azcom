@@ -27,7 +27,11 @@ class Area extends Model
     }
     }
     public function country()
-{
-    return $this->belongsTo(Country::class, 'country_id');
-}
+    {
+        return $this->belongsTo(Country::class, 'country_id');
+    }
+    public function getNameEnAttribute()
+    {
+        return $this->attributes['name_en'].' - '.$this->getcity->getgovernorate->governorate_name_en;
+    }
 }
