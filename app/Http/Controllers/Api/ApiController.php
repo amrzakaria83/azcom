@@ -646,7 +646,7 @@ class ApiController extends Controller
         
     }
 
-    public function getEmployee()
+    public function getEmployee(Request $request)
     {
         $token = request()->header('token');
         $user = $this->check_api_token($token);
@@ -654,7 +654,14 @@ class ApiController extends Controller
             return response(['status' => 403, 'msg' => trans('auth.not_login'), 'data' => NULL]);
         }
 
-        $data = Employee::orderBy('id', 'DESC')->paginate(10);
+        $data = Employee::orderBy('id', 'DESC');
+
+        if ($request->search) {
+            $data = $data->where('name_en', 'LIKE', "%{$request->search}%");
+        }
+        
+        $data = $data->paginate(10);
+        
         $results = EmployeeResource::collection($data)->response()->getData();
 
         if(count($data) == 0) {
