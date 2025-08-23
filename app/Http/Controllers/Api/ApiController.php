@@ -1092,20 +1092,29 @@ class ApiController extends Controller
 
             return response(['status' => 401, 'msg' => $validate->messages()->first(), 'data' => NULL]);
         } else {
+            $check = Plan_visit::where('emphplan_id', $request->emp_id)
+                    ->where('center_id', $request->center_id)
+                    ->where('contact_id', $request->contact_id)
+                    ->where('from_time', $request->from_time)->get();
 
-            $row = Plan_visit::create([
-                'emp_id' => $request->emp_id,
-                'emphplan_id' => $request->emp_id,
-                'center_id' => $request->center_id,
-                'contact_id' => $request->contact_id,
-                'typevist_id' => $request->type_id,
-                'from_time' => $request->from_time,
-                'status_visit' => $request->status_visit,//0 = single visit - 1 = double visit - 2 = triple visit
-                'visit_emp_ass' => $request->status_visit != 0 ? json_encode($request->employee) : null,
-                'note' => $request->note,
-                'status_return' => $request->status_return ?? 4,// 0 = done - 1 = canceld - 3 = delayed - 4 = planned
-                'status' => $request->status ?? 0 ,
-            ]);
+            if (count($check) > 0) {
+                return response(['status' => 200, 'msg' => "تم تسجيلها من قبل", 'data' => NULL]);
+            } else {
+                $row = Plan_visit::create([
+                    'emp_id' => $request->emp_id,
+                    'emphplan_id' => $request->emp_id,
+                    'center_id' => $request->center_id,
+                    'contact_id' => $request->contact_id,
+                    'typevist_id' => $request->type_id,
+                    'from_time' => $request->from_time,
+                    'status_visit' => $request->status_visit,//0 = single visit - 1 = double visit - 2 = triple visit
+                    'visit_emp_ass' => $request->status_visit != 0 ? json_encode($request->employee) : null,
+                    'note' => $request->note,
+                    'status_return' => $request->status_return ?? 4,// 0 = done - 1 = canceld - 3 = delayed - 4 = planned
+                    'status' => $request->status ?? 0 ,
+                ]);
+            }
+            
 
             // $results = new VacationempResource($row);
                     
