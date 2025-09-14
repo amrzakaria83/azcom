@@ -61,7 +61,7 @@
                                     <option  disabled selected>Select an option</option>
                                     @if(isset($dataemp))
                                         @foreach ($dataemp as $item)
-                                                <option value="{{$item->id}}" @if($data->emplist_id === $item->id) selected disabled @endif>{{$item->name_en}}</option>
+                                                <option value="{{$item->id}}" @if($data->emplist_id === $item->id) selected @endif>{{$item->name_en}}</option>
                                             @endforeach
                                         @endif
                                 </select>
