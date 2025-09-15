@@ -116,6 +116,7 @@ return [
     "products" => "Products",
     "product_photo" => "Product photo",
     "have" => "Have",
+    "no_area" => "No Area",
     "area" => "Area",
     "areas" => "Areas",
     "country" => "Country",

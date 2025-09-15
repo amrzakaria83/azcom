@@ -14,7 +14,7 @@ class Hierarchy_emp extends Model
         'emphier_id',
         'type_hierarchy', // 0 = main - 1 = middle - 2 = end hierarchy
         'parent_id',
-        'above_hierarchy', //json emp_id
+        'above_hierarchy', 
         'bellow_hierarchy', //json emp_id 
         'status_area', //0 = area active - 1 = area notactive
         'area', //json area_id
@@ -38,5 +38,33 @@ class Hierarchy_emp extends Model
 
             }
 
+    }
+    public function getaboveemp()
+    {
+        return $this->belongsTo(Employee::class, 'above_hierarchy');
+    }
+    public function getareaname()
+    {
+        $areaIds = json_decode($this->area, true);
+        if (empty($areaIds)) {
+            return null;
+        }
+        
+        $areas = Area::whereIn('id', $areaIds)->get();
+        $names = $areas->pluck('name_en')->toArray();
+        
+        return implode(', ', $names);
+    }
+    public function getprodname()
+    {
+        $prodIds = json_decode($this->prod, true);
+        if (empty($prodIds)) {
+            return null;
+        }
+
+        $products = Product::whereIn('id', $prodIds)->get();
+        $names = $products->pluck('name_en')->toArray();
+
+        return implode(', ', $names);
     }
 }

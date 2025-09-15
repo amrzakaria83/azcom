@@ -11,6 +11,7 @@ use App\Models\Area;
 use App\Models\Center;
 use App\Models\Governorate;
 use App\Models\Emirate;
+use App\Models\Employee;
 use DataTables;
 use Validator;
 use Carbon\Carbon;
@@ -27,7 +28,7 @@ class Hierarchy_empsController extends Controller
 
         if ($request->ajax()) {
             $data = Hierarchy_emp::query();
-            $data = $data->orderBy('country_id', 'ASC');
+            // $data = $data->where('status', 0);
             // $data = $data->orderBy('id', 'DESC');
 
             return Datatables::of($data)
@@ -37,24 +38,66 @@ class Hierarchy_empsController extends Controller
                                 </div>';
                     return $checkbox;
                 })
-                ->addColumn('name', function($row){
-                    $name = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->name_en.'</a></div>';
-                    return $name;
+                ->addColumn('name_en', function($row){
+                    $name_en = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->getemp->name_en.'</a></div>';
+                    return $name_en;
                 })
-                ->addColumn('country_id', function($row){
-                    if ($row->country_id === "EGY"){
-                        $country_id = '<span class="fs-2 text-info">'.$row->getcity->city_name_en.'</span><br>';
-                        $gov = $row->getcity->governorate_id;
-                        $namgov = Governorate::find($gov);
-                        $country_id .= '<span>'.trans('lang.governorate').':'.$namgov->governorate_name_en.'</span><br>';
-                        $country_id .= '<span>'.trans('lang.egypt').'</span>';
-                    } elseif ($row->country_id === "UAE"){
-                        $country_id = '<span class="fs-2 text-info">'.$row->getcity->name_en.'</span><br>';
-                        $country_id .= '<span>'.trans('lang.uae').'</span>';
-                    }
+                ->addColumn('type_hierarchy', function($row){
+                    if($row->type_hierarchy == 0) {
 
-                    return $country_id;
+                        $type_hierarchy = '<div class="badge badge-light-danger fw-bold">'.trans('lang.main').'</div>';
+                    } else {
+                        $type_hierarchy = '<div class="badge badge-light-info fw-bold">'.trans('lang.sub').'</div>';
+                        
+                        $type_hierarchy .= '<div class="badge badge-light-success fw-bold">'.$row->getaboveemp->name_en.'</div>';
+
+                    }
+                    return $type_hierarchy;
                 })
+                // ->addColumn('status_area', function($row){
+                //     if($row->status_area == 1) {
+
+                //         $status_area = '<div class="badge badge-light-danger fw-bold">'.trans('lang.no_area').'</div>';
+                //     } else if($row->status_area == 0 && $row->area != null) {
+                //         $areas = json_decode($row->area);
+                //         $area_names = Area::whereIn('id', $areas)->pluck('name_en')->toArray();
+                //         $rows_area = .implode(', ', $area_names) ;
+                //         foreach($area_names as $areaname){
+                //             $status_area = '<div class="badge badge-light-success fw-bold">'.$areaname.'</div>';
+                //         }
+                //     } else {    
+                //         $status_area = '<div class="badge badge-light-info fw-bold">'.trans('lang.sub').'</div>';
+
+                //     }
+                //     return $status_area;
+                // })
+                ->addColumn('status_area', function($row) {
+                    if ($row->status_area == 1) {
+                        $status_area = '<div class="badge badge-light-danger fw-bold">'.trans('lang.no_area').'</div>';
+                        return $status_area;
+                    } 
+                    else if ($row->status_area == 0 && $row->area != null) {
+                        $areaIds = json_decode($row->area, true);
+                        
+                        if (empty($areaIds)) {
+                            $status_area = '<div class="badge badge-light-info fw-bold">'.trans('lang.sub').'</div>';
+                            return $status_area;
+                        }
+                        
+                        $areas = Area::whereIn('id', $areaIds)->get();
+                        $badges = '';
+                        
+                        foreach ($areas as $area) {
+                            $badges .= '<div class="badge badge-light-info fw-bold me-1">'.$area->name_en.'</div>';
+                        }
+                        
+                        return $badges;
+                    } 
+                    else {
+                        return '<div class="badge badge-light-info fw-bold">'.trans('lang.sub').'</div>';
+                    }
+                })
+
                 ->addColumn('note', function($row){
 
                     $note = $row->note;
@@ -74,7 +117,7 @@ class Hierarchy_empsController extends Controller
                 })
                 ->addColumn('actions', function($row){
                     $actions = '<div class="ms-2">
-                                <a href="'.route('admin.areas.edit', $row->id).'" class="btn btn-sm btn-icon btn-info btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                <a href="'.route('admin.hierarchy_emps.edit', $row->id).'" class="btn btn-sm btn-icon btn-info btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
                                     <i class="bi bi-pencil-square fs-1x"></i>
                                 </a>
                             </div>';
@@ -94,21 +137,21 @@ class Hierarchy_empsController extends Controller
                         });
                     }
                 })
-                ->rawColumns(['name','country_id','note','is_active','checkbox','actions'])
+                ->rawColumns(['name_en','type_hierarchy','status_area','note','is_active','checkbox','actions'])
                 ->make(true);
         }
-        return view('admin.area.index');
+        return view('admin.hierarchy_emp.index');
     }
 
     public function show($id)
     {
         $data = Area::find($id);
-        return view('admin.area.show', compact('data'));
+        return view('admin.hierarchy_emp.show', compact('data'));
     }
 
     public function create()
     {
-        return view('admin.area.create' );
+        return view('admin.hierarchy_emp.create' );
     }
 
     public function store(Request $request)
@@ -147,14 +190,14 @@ class Hierarchy_empsController extends Controller
         // $row->syncRoles([]);
         // $row->assignRole($role->name);
 
-        return redirect('admin/areas')->with('message', 'Added successfully')->with('status', 'success');
+        return redirect('admin/hierarchy_emps')->with('message', 'Added successfully')->with('status', 'success');
     }
 
     public function edit($id)
     {
         $data = Area::find($id);
 
-        return view('admin.area.edit', compact('data'));
+        return view('admin.hierarchy_emp.edit', compact('data'));
     }
 
     public function update(Request $request)
@@ -184,7 +227,7 @@ class Hierarchy_empsController extends Controller
         // $employee->syncRoles([]);
         // $employee->assignRole($role->name);
 
-        return redirect('admin/areas')->with('message', 'Modified successfully')->with('status', 'success');
+        return redirect('admin/hierarchy_emps')->with('message', 'Modified successfully')->with('status', 'success');
     }
 
     public function destroy(Request $request)
@@ -220,6 +263,16 @@ class Hierarchy_empsController extends Controller
         $governorate = Emirate::where('countrycodealpha3', $countryId)->get();
         
         return response()->json($governorate);
+    }
+    public function indextreehie()
+    {
+   
+        $data = Hierarchy_emp::where('status', 0)->orderBy('id', 'desc')->with('getemp','getaboveemp')->get();
+
+        // Build a collection for efficient lookup
+        $accountCollection = $data->keyBy('id');
+
+        return view('admin.hierarchy_emp.indextreehie', compact('data'));
     }
 
 }

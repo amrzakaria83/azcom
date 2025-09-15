@@ -30,7 +30,7 @@
   --bs-gray-800: #3F4254;
   --bs-gray-900: #181C32;
   --bs-light: #F9F9F9;
-  --bs-primary: #6A3C96;
+  --bs-primary: #000dc0;
   --bs-secondary: #E1E3EA;
   --bs-success: #50cd89;
   --bs-info: #7239ea;
@@ -27955,7 +27955,7 @@ textarea.form-control-lg {
   --bs-gray-900: #181C32;
   --bs-gray-900-rgb: 24, 28, 50;
   --bs-light: #F9F9F9;
-  --bs-primary: #6A3C96;
+  --bs-primary: #000dc0;
   --bs-secondary: #E1E3EA;
   --bs-success: #50cd89;
   --bs-info: #7239ea;
@@ -28064,8 +28064,8 @@ textarea.form-control-lg {
   --bs-menu-link-bg-color-show: #F4F6FA;
   --bs-menu-link-bg-color-here: #F4F6FA;
   --bs-menu-link-bg-color-active: #F4F6FA;
-  --bs-scrollbar-color: #58416f;
-  --bs-scrollbar-hover-color: #58416f;
+  --bs-scrollbar-color: #0424bf;
+  --bs-scrollbar-hover-color: #0424bf;
   --bs-scrollbar-size: 5px;
   --bs-scrollbar-overlay-size: 19px;
   --bs-scrollbar-overlay-space: 7px;
@@ -28107,7 +28107,7 @@ textarea.form-control-lg {
   --bs-gray-900-rgb: 255, 255, 255;
   --bs-white: #ffffff;
   --bs-light: #2B2B40;
-  --bs-primary: #6A3C96;
+  --bs-primary: #000dc0;
   --bs-success: #50cd89;
   --bs-info: #7239ea;
   --bs-warning: #ff8400;

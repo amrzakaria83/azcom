@@ -83,10 +83,11 @@
                                     </div>
                                 </th>
                                 <th class="min-w-125px text-start">{{trans('lang.name')}}</th>
-                                <th class="min-w-125px text-start">{{trans('lang.description')}}</th>
+                                <th class="min-w-125px text-start">{{trans('lang.type_type')}}</th>
+                                <th class="min-w-125px text-start">{{trans('lang.area')}}</th>
                                 <th class="min-w-125px text-start">{{trans('lang.note')}}</th>
-                                <th class="min-w-125px text-start">{{trans('employee.is_active')}}</th>
-                                <th class="min-w-125px text-start">{{trans('employee.action')}}</th>
+                                <th class="min-w-125px text-start">{{trans('lang.status')}}</th>
+                                <th class="min-w-125px text-start">{{trans('lang.action')}}</th>
                             </tr>
                             <!--end::Table row-->
                         </thead>
@@ -207,17 +208,18 @@
                 //{extend: 'colvis', className: 'btn secondary', text: 'إظهار / إخفاء الأعمدة '}
             ],
             ajax: {
-                url: "{{ route('admin.areas.index') }}",
+                url: "{{ route('admin.hierarchy_emps.index') }}",
                 data: function (d) {
                     d.is_active = $('#is_active').val(),
-                    d.center_id = $('#center_id').val(),
+                    
                     d.search = $('#search').val()
                 }
             },
             columns: [
                 {data: 'checkbox', name: 'checkbox'},
-                {data: 'name', name: 'name'},
-                {data: 'country_id', name: 'country_id'},
+                {data: 'name_en', name: 'name_en'},
+                {data: 'type_hierarchy', name: 'type_hierarchy'},
+                {data: 'status_area', name: 'status_area'},
                 {data: 'note', name: 'note'},
                 {data: 'is_active', name: 'is_active'},
                 {data: 'actions', name: 'actions'},

@@ -522,6 +522,7 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
             Route::get('/getGovernorate','Hierarchy_empsController@getGovernorate')->name('getGovernorate');
             Route::get('/getCitiesByGovernorate','Hierarchy_empsController@getCitiesByGovernorate')->name('getCitiesByGovernorate');
             Route::get('/getemrate','Hierarchy_empsController@getemrate')->name('getemrate');
+            Route::get('/indextreehie','Hierarchy_empsController@indextreehie')->name('indextreehie');
 
         });
 
