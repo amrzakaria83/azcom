@@ -74,12 +74,12 @@
                             </div>
                         </div>
 
-                        <div class="row mb-6">
+                        <!-- <div class="row mb-6">
                             <label class="col-lg-2 col-form-label required fw-semibold fs-3 text-info">{{trans('employee.job_title')}}</label>
                             <div class="col-lg-8 fv-row">
                                 <input type="text" name="job_title" placeholder="{{trans('employee.job_title')}}" value="" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row mb-6">
                             <label class="col-lg-2 col-form-label fw-semibold fs-6">{{trans('employee.national_id')}}</label>
                             <div class="col-lg-8 fv-row">

@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('salary')->nullable();
             $table->string('bank_name')->nullable();
             $table->string('department')->nullable();
+            $table->unsignedBigInteger('level_id')->nullable();
+            $table->foreign('level_id')
+                    ->references('id')->on('level_sequences')->onDelete('cascade')->comment('level_id');
         });
     }
 

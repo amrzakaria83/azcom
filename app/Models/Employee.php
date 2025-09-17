@@ -22,6 +22,7 @@ class Employee extends Authenticatable implements HasMedia
     protected $fillable = [
         'name_en',
         'job_title',
+        'level_id',
         'national_id',
         'birth_date',
         'work_date',

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Hierarchy_emp;
 use App\Models\Area;
+use App\Models\Level_sequence;
 use DataTables;
 use Validator;
 use Carbon\Carbon;
@@ -195,7 +196,8 @@ class EmployeesController extends Controller
 
     public function create()
     {
-        return view('admin.employee.create');
+        $datalevel = Level_sequence::where('status' ,0)->get();
+        return view('admin.employee.create', compact('datalevel'));
     }
 
     public function store(Request $request)
