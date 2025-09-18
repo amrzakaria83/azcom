@@ -74,6 +74,17 @@
                             </div>
                         </div>
 
+                        <div class="row mb-6">
+                            <label class="col-lg-2 col-form-label required fw-semibold fs-3 text-info">{{trans('employee.organizational_level')}}</label>
+                            <div class="col-lg-8 fv-row">
+                                <select  data-placeholder="Select an option" class="input-text form-control form-select mb-3 mb-lg-0 text-center" id="level_id" name="level_id" data-control="select2" >
+                                    <option  disabled selected>Select an option</option>
+                                    @foreach (\App\Models\Level_sequence::where('status' , 0)->get() as $asd)
+                                        <option value="{{$asd->id}}" >{{$asd->name_ar}}</option>
+                                        @endforeach
+                                </select>
+                        </div>
+
                         <!-- <div class="row mb-6">
                             <label class="col-lg-2 col-form-label required fw-semibold fs-3 text-info">{{trans('employee.job_title')}}</label>
                             <div class="col-lg-8 fv-row">

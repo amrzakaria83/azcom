@@ -219,6 +219,7 @@ class EmployeesController extends Controller
 
         $row = Employee::create([
             'name_en' => $request->name_en,
+            'level_id' => $request->level_id,
             'job_title' => $request->job_title,
             'email' => $request->email,
             'phone' => $request->phone,
@@ -281,6 +282,7 @@ class EmployeesController extends Controller
         $employee = Employee::find($request->id);
         $data = Employee::where('id', $request->id)->update([
             'name_en' => $request->name_en,
+            'level_id' => $request->level_id,
             'job_title' => $request->job_title,
             'email' => $request->email,
             'phone' => $request->phone,

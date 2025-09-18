@@ -80,11 +80,21 @@
                         </div>
 
                         <div class="row mb-6">
+                            <label class="col-lg-2 col-form-label required fw-semibold fs-3 text-info">{{trans('employee.organizational_level')}}</label>
+                            <div class="col-lg-8 fv-row">
+                                <select  data-placeholder="Select an option" class="input-text form-control form-select mb-3 mb-lg-0 text-center" id="level_id" name="level_id" data-control="select2" >
+                                    <option  disabled selected>Select an option</option>
+                                    @foreach (\App\Models\Level_sequence::where('status' , 0)->get() as $asd)
+                                        <option value="{{$asd->id}}" @if(($asd->id, $data->level_id)) selected @endif>{{$asd->name_ar}}</option>
+                                        @endforeach
+                                </select>
+                        </div>
+                        <!--<div class="row mb-6">  
                             <label class="col-lg-2 col-form-label required fw-semibold fs-6">{{trans('employee.job_title')}}</label>
                             <div class="col-lg-8 fv-row">
                                 <input type="text" name="job_title" placeholder="{{trans('employee.job_title')}}" value="{{$data->job_title}}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row mb-6">
                             <label class="col-lg-2 col-form-label required fw-semibold fs-6">{{trans('employee.national_id')}}</label>
                             <div class="col-lg-8 fv-row">
