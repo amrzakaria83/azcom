@@ -47,5 +47,6 @@ return [
     "action" => "الاجراء",
     "filter" => "فلتر البحث",
     "hierarchy" => "تسلسل",
+    "organizational_level" => "المستوى التنظيمى",
 
 ];

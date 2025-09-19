@@ -523,6 +523,20 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
             Route::get('/indextreehie','Hierarchy_empsController@indextreehie')->name('indextreehie');
 
         });
+        Route::name('level_sequences.')->prefix('level_sequences')->group(function(){
+            Route::get('/','Level_sequencesController@index')->name('index');
+            Route::get('/show/{id}','Level_sequencesController@show')->name('show');
+            Route::post('/delete', 'Level_sequencesController@destroy')->name('delete');
+            Route::get('/create','Level_sequencesController@create')->name('create');
+            Route::post('/store','Level_sequencesController@store')->name('store');
+            Route::get('/edit/{id}', 'Level_sequencesController@edit')->name('edit');
+            Route::post('/update', 'Level_sequencesController@update')->name('update');
+            Route::get('/getGovernorate','Level_sequencesController@getGovernorate')->name('getGovernorate');
+            Route::get('/getCitiesByGovernorate','Level_sequencesController@getCitiesByGovernorate')->name('getCitiesByGovernorate');
+            Route::get('/getemrate','Level_sequencesController@getemrate')->name('getemrate');
+            Route::get('/indextreehie','Level_sequencesController@indextreehie')->name('indextreehie');
+
+        });
 
         Route::name('events.')->prefix('events')->group(function(){
             Route::get('/','EventsController@index')->name('index');
