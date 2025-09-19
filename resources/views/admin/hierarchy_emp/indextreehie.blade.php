@@ -7,7 +7,210 @@
 @endsection
 
 @section('style')
-
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .description {
+            color: #7f8c8d;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .content {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .tree-container {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .employee-details {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .tree {
+            padding-left: 20px;
+        }
+        
+        .employee {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+        }
+        
+        .employee-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .employee-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .employee-id {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        .children {
+            padding-left: 30px;
+            margin-top: 10px;
+            border-left: 2px dashed #ddd;
+        }
+        
+        .details-content {
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .detail-item {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .detail-icon {
+            width: 30px;
+            color: #3498db;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            width: 150px;
+            color: #2c3e50;
+        }
+        
+        .detail-value {
+            flex: 1;
+            color: #34495e;
+        }
+        
+        .search-box {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        .search-box input:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        .search-box i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .stat {
+            padding: 15px;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: 700;
+            color: #3498db;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            .stats {
+                flex-direction: column;
+            }
+        }
+    </style>
 @endsection
 
 @section('breadcrumb')
@@ -74,8 +277,51 @@
                 <div class="card-body py-4">
                     <div class="card">
                         <h3 class="card-title">Employee Hierarchy</h3>
-                      <!--begin::Table-->
-                    <div id="kt_docs_jstree_contextual"></div>
+                        @if(isset($data) && count($data) > 0)
+                            <input type="hidden" id="data" value="{{$data}}"/>
+                            @endif
+                            @if(isset($dataemp) && count($dataemp) > 0)
+                            <input type="hidden" id="dataemp" value="{{$dataemp}}"/>
+                            @endif
+
+                        <!--begin::Table-->
+                    <!-- <div id="kt_docs_jstree_contextual"></div> -->
+                     <div class="stats">
+                        <div class="stat">
+                            <div class="stat-number" id="totalEmployees">0</div>
+                            <div class="stat-label">Total Employees</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number" id="hierarchyLevels">0</div>
+                            <div class="stat-label">Hierarchy Levels</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number" id="rootEmployees">0</div>
+                            <div class="stat-label">Root Employees</div>
+                        </div>
+                    </div>
+                     <div class="content">
+                        <div class="tree-container">
+                            <h2><i class="fas fa-sitemap"></i> Organization Tree</h2>
+                            <div class="search-box">
+                                <input type="text" placeholder="Search employees...">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="tree" id="employeeTree">
+                                <!-- Tree will be generated by JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <div class="employee-details">
+                            <h2><i class="fas fa-user-circle"></i> Employee Details</h2>
+                            <div class="details-content" id="employeeDetails">
+                                <div class="card">
+                                    <p>Select an employee from the tree to view details</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                     <!--end::Table-->
                 </div>
                 <!--end::Card body-->
@@ -154,90 +400,224 @@
 
 <script>
 $(document).ready(function() {
-    var data = <?php echo json_encode($data); ?>;
-    console.log('Original data:', data);
-    
-    // Debug: Check the actual above_hierarchy values
-    data.forEach(function(node) {
-        console.log('Node ID:', node.id, 'Above Hierarchy:', node.above_hierarchy, 'Emp Name:', node.getemp ? node.getemp.name_en : 'Unknown');
-    });
-
-    // Build proper hierarchy - use above_hierarchy to find parent
-    function buildTree(nodes) {
-        // Create a map for easy lookup
-        var nodeMap = {};
-        nodes.forEach(function(node) {
-            nodeMap[node.id] = {
-                ...node,
-                children: []
-            };
-        });
-        
-        // Build the tree structure
-        var rootNodes = [];
-        
-        nodes.forEach(function(node) {
-            var aboveId = node.above_hierarchy;
+    const data = $('#data').val();
+    const dataemp = $('#dataemp').val();
+    console.log(data);
+    console.log(dataemp);
+});
+        // Build the hierarchy tree
+        function buildTree(nodes) {
+            const nodeMap = {};
+            const roots = [];
             
-            // If above_hierarchy exists and points to a valid node (and not itself)
-            if (aboveId && aboveId != node.id && nodeMap[aboveId]) {
-                // This is a child node, add to parent's children
-                nodeMap[aboveId].children.push(nodeMap[node.id]);
-            } else if (!aboveId || aboveId == 0 || aboveId == '') {
-                // This is a root node (no above_hierarchy)
-                rootNodes.push(nodeMap[node.id]);
-            } else if (aboveId == node.id) {
-                // Self-reference - treat as root node with warning
-                console.warn('Self-referencing node:', node.id);
-                rootNodes.push(nodeMap[node.id]);
-            } else {
-                // Invalid above_hierarchy - treat as root node
-                console.warn('Invalid above_hierarchy for node:', node.id, 'above:', aboveId);
-                rootNodes.push(nodeMap[node.id]);
-            }
-        });
-        
-        return rootNodes;
-    }
-
-    // Convert to jstree format
-    function convertToJsTreeFormat(nodes) {
-        return nodes.map(function(node) {
-            var nodeText = '<span class="text-dark">' + (node.getemp ? node.getemp.name_en : 'Unknown') + '</span>';
-            nodeText += ' <small class="text-muted">(ID: ' + node.id + ')</small>';
+            // First pass: create all nodes
+            nodes.forEach(node => {
+                nodeMap[node.id] = {
+                    ...node,
+                    children: []
+                };
+            });
             
-            if (node.above_hierarchy && node.above_hierarchy != node.id) {
-                nodeText += ' <small class="text-info">↑ Parent: ' + node.above_hierarchy + '</small>';
-            } else if (node.above_hierarchy == node.id) {
-                nodeText += ' <small class="text-warning">↺ Self-reference</small>';
-            } else {
-                nodeText += ' <small class="text-success">🌱 Root</small>';
+            // Second pass: link children to parents
+            nodes.forEach(node => {
+                const parentId = node.above_hierarchy;
+                if (parentId && nodeMap[parentId] && parentId != node.id) {
+                    nodeMap[parentId].children.push(nodeMap[node.id]);
+                } else if (!parentId || parentId === "null" || parentId === 0) {
+                    roots.push(nodeMap[node.id]);
+                }
+            });
+            
+            return roots;
+        }
+
+        // Calculate tree statistics
+        function calculateTreeStats(tree) {
+            let totalEmployees = 0;
+            let maxDepth = 0;
+            
+            function countNodes(node, depth) {
+                if (!node) return;
+                
+                totalEmployees++;
+                maxDepth = Math.max(maxDepth, depth);
+                
+                if (node.children && node.children.length) {
+                    node.children.forEach(child => {
+                        countNodes(child, depth + 1);
+                    });
+                }
             }
+            
+            tree.forEach(root => {
+                countNodes(root, 1);
+            });
             
             return {
-                "id": node.id.toString(),
-                "text": nodeText,
-                "icon": "ki-solid ki-user text-primary",
-                "data": node,
-                "children": convertToJsTreeFormat(node.children)
+                total: totalEmployees,
+                depth: maxDepth,
+                roots: tree.length
             };
-        });
-    }
+        }
 
-    var treeStructure = buildTree(data);
-    var treeData = convertToJsTreeFormat(treeStructure);
-    
-    console.log('Tree data:', treeData);
-    
-    $("#kt_docs_jstree_contextual").jstree({
-        "core": {
-            "themes": { "responsive": false },
-            "check_callback": true,
-            'data': treeData
-        },
-        "plugins": ["types"]
-    });
-});
+        // Render the tree
+        function renderTree(node, container) {
+            const employeeElement = document.createElement('div');
+            employeeElement.className = 'employee';
+            employeeElement.setAttribute('data-id', node.id);
+            employeeElement.setAttribute('data-name', node.getemp ? node.getemp.name_en : 'Unknown');
+            employeeElement.setAttribute('data-email', node.getemp ? node.getemp.email : '');
+            
+            const employeeHeader = document.createElement('div');
+            employeeHeader.className = 'employee-header';
+            employeeHeader.innerHTML = `
+                <div>
+                    <div class="employee-name">${node.getemp ? node.getemp.name_en : 'Unknown'}</div>
+                    <div class="employee-id">ID: ${node.id} | ${node.getemp ? node.getemp.email : ''}</div>
+                </div>
+                <div>${node.children && node.children.length ? '<i class="fas fa-chevron-down"></i>' : ''}</div>
+            `;
+            
+            employeeElement.appendChild(employeeHeader);
+            
+            const childrenContainer = document.createElement('div');
+            childrenContainer.className = 'children';
+            
+            if (node.children && node.children.length) {
+                node.children.forEach(child => {
+                    renderTree(child, childrenContainer);
+                });
+            }
+            
+            employeeElement.appendChild(childrenContainer);
+            container.appendChild(employeeElement);
+            
+            // Add click event to show details and toggle children
+            employeeHeader.addEventListener('click', () => {
+                showEmployeeDetails(node);
+                
+                // Toggle children visibility
+                if (childrenContainer.classList.contains('show')) {
+                    childrenContainer.classList.remove('show');
+                    if (employeeHeader.querySelector('i')) {
+                        employeeHeader.querySelector('i').className = 'fas fa-chevron-down';
+                    }
+                } else {
+                    childrenContainer.classList.add('show');
+                    if (employeeHeader.querySelector('i')) {
+                        employeeHeader.querySelector('i').className = 'fas fa-chevron-up';
+                    }
+                }
+            });
+        }
+
+        // Show employee details
+        function showEmployeeDetails(employee) {
+            const detailsContainer = document.getElementById('employeeDetails');
+            const emp = dataemp.find(e => e.id === employee.emphier_id) || employee.getemp || {};
+            
+            detailsContainer.innerHTML = `
+                <div class="card">
+                    <h3>${emp.name_en || 'Unknown'}</h3>
+                    <p>${emp.job_title || 'No title'}</p>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-icon"><i class="fas fa-id-card"></i></div>
+                    <div class="detail-label">Employee ID:</div>
+                    <div class="detail-value">${employee.id}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="detail-label">Email:</div>
+                    <div class="detail-value">${emp.email || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-icon"><i class="fas fa-phone"></i></div>
+                    <div class="detail-label">Phone:</div>
+                    <div class="detail-value">${emp.phone || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="detail-label">Address:</div>
+                    <div class="detail-value">${emp.address1 || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-icon"><i class="fas fa-birthday-cake"></i></div>
+                    <div class="detail-label">Birth Date:</div>
+                    <div class="detail-value">${emp.birth_date || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-icon"><i class="fas fa-venus-mars"></i></div>
+                    <div class="detail-label">Gender:</div>
+                    <div class="detail-value">${emp.gender === 0 ? 'Male' : 'Female'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-icon"><i class="fas fa-calendar-day"></i></div>
+                    <div class="detail-label">Work Date:</div>
+                    <div class="detail-value">${emp.work_date || 'N/A'}</div>
+                </div>
+            `;
+        }
+
+        // Initialize the application
+        function initApp() {
+            const treeContainer = document.getElementById('employeeTree');
+            const searchInput = document.getElementById('searchInput');
+            
+            // Check if required elements exist
+            if (!treeContainer || !searchInput) {
+                console.error("Required DOM elements not found");
+                return;
+            }
+            
+            const tree = buildTree(data);
+            
+            // Calculate and display statistics
+            const stats = calculateTreeStats(tree);
+            document.getElementById('totalEmployees').textContent = stats.total;
+            document.getElementById('hierarchyLevels').textContent = stats.depth;
+            document.getElementById('rootEmployees').textContent = stats.roots;
+            
+            // Clear loading message
+            treeContainer.innerHTML = '';
+            
+            // Render the tree
+            tree.forEach(root => {
+                renderTree(root, treeContainer);
+            });
+            
+            // Add search functionality
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase().trim();
+                const employees = document.querySelectorAll('.employee');
+                let visibleCount = 0;
+                
+                employees.forEach(emp => {
+                    const name = emp.getAttribute('data-name').toLowerCase();
+                    const email = emp.getAttribute('data-email').toLowerCase();
+                    
+                    if (searchTerm === '' || name.includes(searchTerm) || email.includes(searchTerm)) {
+                        emp.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        emp.style.display = 'none';
+                    }
+                });
+                
+                // Show no results message if needed
+                if (visibleCount === 0 && searchTerm !== '') {
+                    treeContainer.innerHTML = '<div class="no-results">No employees match your search</div>';
+                } else if (treeContainer.innerHTML.includes('no-results') && searchTerm === '') {
+                    treeContainer.innerHTML = '';
+                    tree.forEach(root => {
+                        renderTree(root, treeContainer);
+                    });
+                }
+            });
+        }
+
+        // Initialize the app when the page is fully loaded
+        window.addEventListener('load', initApp);
 </script>
 <!-- <script>
 $(document).ready(function() {

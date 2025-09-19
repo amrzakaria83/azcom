@@ -267,12 +267,13 @@ class Hierarchy_empsController extends Controller
     public function indextreehie()
     {
    
+        $dataemp = Employee::where('is_active', '1')->orderBy('id', 'desc')->get();
         $data = Hierarchy_emp::where('status', 0)->orderBy('id', 'desc')->with('getemp','getaboveemp')->get();
 
         // Build a collection for efficient lookup
         $accountCollection = $data->keyBy('id');
 
-        return view('admin.hierarchy_emp.indextreehie', compact('data'));
+        return view('admin.hierarchy_emp.indextreehie', compact('data','dataemp','accountCollection'));
     }
 
 }

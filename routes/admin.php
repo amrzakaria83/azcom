@@ -428,7 +428,6 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
             Route::post('/storecontact_rate','ContactsController@storecontact_rate')->name('storecontact_rate');
             Route::get('/indextotalserch/{list?}','ContactsController@indextotalserch')->name('indextotalserch');
 
-
         });
 
         Route::name('ratings.')->prefix('ratings')->group(function(){
@@ -462,7 +461,6 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
             Route::get('/edit/{id}', 'Relative_contactsController@edit')->name('edit');
             Route::post('/update', 'Relative_contactsController@update')->name('update');
             
-
         });
 
         Route::name('place_ws.')->prefix('place_ws')->group(function(){
