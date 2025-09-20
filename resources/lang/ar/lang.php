@@ -54,6 +54,8 @@ return [
     "note" => "ملاحظات",
     "description" => "الوصف",
     "name" => "الاسم",
+    "name_en" => "EN الاسم",
+    "name_ar" => "الاسم",
     "active" => "مفعل",
     "inactive" => "غير مفعل",
     "addnew" => "أضف",
@@ -256,6 +258,8 @@ return [
     "delivered" => "تم التسليم",
     "uncompleted" => "غير مكتملة",
     "completed" => "مكتملة",
+    "level" => "مستوى",
+    "levels" => "مستويات",
 
     ###########   API Lang   ###########
     

@@ -1,5 +1,10 @@
 @extends('admin.layout.master')
 
+@php
+    $route = 'admin.level_sequences';
+    $viewPath = 'admin.level_sequence';
+@endphp
+
 @section('css')
 @endsection
 
@@ -19,13 +24,13 @@
         <span class="h-20px border-gray-300 border-start mx-4"></span>
         <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
             <li class="breadcrumb-item text-muted px-2">
-                <a  href="{{route('admin.areas.index')}}" class="text-muted text-hover-primary">{{trans('lang.area')}}</a>
+                <a  href="{{route($route. '.index')}}" class="text-muted text-hover-primary">{{trans('lang.levels')}}</a>
             </li>
             <li class="breadcrumb-item">
                 <span class="bullet bg-gray-300 w-5px h-2px"></span>
             </li>
             <li class="breadcrumb-item text-muted px-2">
-                {{trans('employee.edit')}}   
+                
             </li>
         </ul>
     </div>
@@ -40,65 +45,18 @@
             <!--begin::Content-->
             <div id="kt_account_settings_profile_details" class="collapse show">
                 <!--begin::Form-->
-                <form action="{{route('admin.areas.update')}}" method="POST" enctype="multipart/form-data" id="kt_account_profile_details_form" class="form">
+                <form action="{{route($route. '.update')}}" method="POST" enctype="multipart/form-data" id="kt_account_profile_details_form" class="form">
                     @csrf
                     <input type="hidden" name="id" value="{{$data->id}}" />
                     <!--begin::Card body-->
                     <div class="card-body border-top p-9">
 
-                        <div class="row mb-8">
-                            <div class="col-xl-2">
-                                <div class="fs-6 fw-semibold">{{trans('lang.name')}} </div>
-                            </div>
-                            <div class="col-lg-9">
-                                <div class="fw-bold fs-5">{{$data->name_en}}</div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-8">
-                            <div class="col-xl-2">
-                                <div class="fs-6 fw-semibold">{{trans('lang.country')}} </div>
-                            </div>
-                        @if(isset($data->country_id))
-                            @if($data->country_id === "EGY")
-                            <div class="col-lg-9">
-                                <div class="fw-bold fs-5">{{trans('lang.egypt')}}</div>
-                                <div class="fw-bold fs-5">{{trans('lang.governorate')}}:{{$data->getcity->getgovernorate->governorate_name_en}}</div>
-                                <div class="fw-bold fs-5">{{trans('lang.city')}}:{{$data->getcity->city_name_en}}</div>
-                            </div>
-                            @else 
-                            <div class="col-lg-9">
-                                <div class="fw-bold fs-5">{{trans('lang.uae')}}</div>
-                                <div class="fw-bold fs-5">{{trans('lang.emirate')}}:{{$data->getcity->name_en}}</div>
-                            </div>
-                            @endif
-
-                        @endif
-                        </div>
-
-                        <div class="row mb-6">
-                            <label class="col-lg-2 col-form-label fw-semibold fs-6">{{trans('lang.note')}}</label>
-                            <div class="col-lg-8 fv-row">
-                                <input type="text" name="note" placeholder="{{trans('lang.note')}}" value="{{$data->note}}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <label class="col-lg-2 col-form-label fw-semibold fs-6"> {{trans('lang.status')}}</label>
-                            <div class="col-lg-8 d-flex align-items-center">
-                            <select   data-placeholder="Select an option" class=" input-text form-control  form-select  mb-3 mb-lg-0"  name="status">
-                            <option value="0" @if($data->status == '0') selected @endif >{{trans('employee.active')}}</option>
-                            <option value="1" @if($data->status == '1') selected @endif >{{trans('employee.notactive')}}</option>                                   
-                                </select>
-                            </div>
-                        </div>
-
-                        
+                        @include($viewPath. '.form')
 
                     </div>
 
                     <div class="card-footer d-flex justify-content-end py-6 px-9">
-                        <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">{{trans('employee.save')}}</button>
+                        <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">{{trans('lang.save')}}</button>
                     </div>
                     <!--end::Actions-->
                 </form>
@@ -111,4 +69,17 @@
 @endsection
 
 @section('script')
+    <script>
+        $("#kt_roles_select_all").click(function () {
+            var items = $("#kt_account_profile_details_form input:checkbox");
+            for (var i = 0; i < items.length; i++) {
+                if (items[i].checked == true) {
+                    items[i].checked = false;
+                } else {
+                    items[i].checked = true;
+                }
+                
+            }
+        });
+    </script>
 @endsection

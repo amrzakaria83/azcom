@@ -50,6 +50,8 @@ return [
     "salary"=> "Salary",
 
     "name" => "Name",
+    "name_ar" => "Name AR",
+    "name_en" => "Name EN",
     "active" => "Active",
     "inactive" => "Inactive",
     "addnew" => "Add",
@@ -258,6 +260,8 @@ return [
     "logo_dark" => "Logo dark",
     "uncompleted" => "Uncompleted",
     "completed" => "Completed",
+    "level" => "Level",
+    "levels" => "Levels",
     
     ###########   API Lang   ###########
     

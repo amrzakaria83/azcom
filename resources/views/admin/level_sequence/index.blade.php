@@ -1,4 +1,8 @@
 @extends('admin.layout.master')
+@php
+    $route = 'admin.level_sequences';
+    $viewPath = 'admin.level_sequence';
+@endphp
 
 @section('css')
     <link href="{{asset('dash/assets/plugins/custom/datatables/datatables.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
@@ -21,7 +25,7 @@
         <span class="h-20px border-gray-300 border-start mx-4"></span>
         <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
             <li class="breadcrumb-item text-muted px-2">
-                <a  href="#" class="text-muted text-hover-primary">{{trans('lang.products')}}</a>
+                <a  href="#" class="text-muted text-hover-primary">{{trans('lang.levels')}}</a>
             </li>
             {{-- <li class="breadcrumb-item">
                 <span class="bullet bg-gray-300 w-5px h-2px"></span>
@@ -36,7 +40,7 @@
 @section('content')
     <!--begin::Container-->
     <div id="kt_app_content_container" class="app-container container-fluid">
-            
+            <h1>{{trans('lang.levels')}}</h1>
             <div class="card no-border">
                 <!--begin::Card header-->
                 <div class="card-header border-0 pt-6">
@@ -49,18 +53,15 @@
                                     <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
                                 </svg>
                             </span>
-                            <input type="text" data-kt-db-table-filter="search" id="search" name="search" class="form-control form-control-solid bg-light-dark text-dark w-250px ps-14" placeholder="Search user" />
+                            <input type="text" data-kt-db-table-filter="search" id="search" name="search" class="form-control form-control-solid bg-light-dark text-dark w-250px ps-14" placeholder="{{trans('lang.role_search')}}" />
                         </div>
                     </div>
                     <div class="card-toolbar">
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end dbuttons">
-                            <a href="{{route('admin.areas.create')}}" class="btn btn-sm btn-icon btn-primary btn-active-dark me-3 p-3">
+                            <a href="{{route($route. '.create')}}" class="btn btn-sm btn-icon btn-primary btn-active-dark me-3 p-3">
                                 <i class="bi bi-plus-square fs-1x"></i>
                             </a>
-                            <button type="button" class="btn btn-sm btn-icon btn-primary btn-active-dark me-3 p-3" data-bs-toggle="modal" data-bs-target="#kt_modal_filter">
-                                <i class="bi bi-funnel-fill fs-1x"></i>
-                            </button>
                             <button type="button" class="btn btn-sm btn-icon btn-danger btn-active-dark me-3 p-3" id="btn_delete" data-token="{{ csrf_token() }}">
                                 <i class="bi bi-trash3-fill fs-1x"></i>
                             </button>
@@ -82,9 +83,10 @@
                                         <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_datatable_table .form-check-input" value="1" />
                                     </div>
                                 </th>
-                                <th class="min-w-125px text-start">{{trans('lang.name')}}</th>
+                                <th class="min-w-125px text-start">{{trans('lang.name_en')}}</th>
+                                <!-- <th class="min-w-125px text-start">{{trans('lang.name_ar')}}</th> -->
                                 <th class="min-w-125px text-start">{{trans('lang.type_type')}}</th>
-                                <th class="min-w-125px text-start">{{trans('lang.area')}}</th>
+                                <th class="min-w-125px text-start">{{trans('lang.description')}}</th>
                                 <th class="min-w-125px text-start">{{trans('lang.note')}}</th>
                                 <th class="min-w-125px text-start">{{trans('lang.status')}}</th>
                                 <th class="min-w-125px text-start">{{trans('lang.action')}}</th>
@@ -101,76 +103,6 @@
                 </div>
                 <!--end::Card body-->
 
-                <div class="modal fade" id="kt_modal_filter" tabindex="-1" aria-hidden="true">
-                    <!--begin::Modal dialog-->
-                    <div class="modal-dialog modal-dialog-centered mw-650px">
-                        <!--begin::Modal content-->
-                        <div class="modal-content">
-                            <!--begin::Modal header-->
-                            <div class="modal-header" id="kt_modal_filter_header">
-                                <!--begin::Modal title-->
-                                <h2 class="fw-bold">{{trans('employee.filter')}}</h2>
-                                <!--end::Modal title-->
-                                <!--begin::Close-->
-                                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
-                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-                                    <span class="svg-icon svg-icon-1">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon-->
-                                </div>
-                                <!--end::Close-->
-                            </div>
-                            <!--end::Modal header-->
-                            <!--begin::Modal body-->
-                            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                                <!--begin::Form-->
-
-                                    <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
-
-                                        <div class="fv-row mb-7">
-                                            <label class="required fw-semibold fs-6 mb-2">{{trans('employee.choose_type')}}</label>
-                                            <select name="type" id="type" data-control="select2" data-placeholder="{{trans('employee.choose')}}" data-hide-search="true" class="form-select form-select-solid fw-bold">
-                                                <option></option>
-                                                <option value="teacher">{{trans('employee.teacher')}}</option>
-                                                <option value="dash">{{trans('employee.administrator')}}</option>
-                                            </select>
-                                        </div>
-                                        <div class="fv-row mb-7">
-                                            <label class="required fw-semibold fs-6 mb-2">{{trans('employee.is_active')}}</label>
-                                            <select name="is_active" id="is_active" data-control="select2" data-placeholder="{{trans('employee.choose')}}" data-hide-search="true" class="form-select form-select-solid fw-bold">
-                                                <option></option>
-                                                <option value="1">{{trans('employee.active')}}</option>
-                                                <option value="0">{{trans('employee.notactive')}}</option>
-                                            </select>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="text-center pt-15">
-                                        <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">{{trans('employee.close')}}</button>
-                                        <button type="submit" class="btn btn-primary" id="submit">
-                                            <span class="indicator-label">{{trans('employee.save')}}</span>
-                                            <span class="indicator-progress">Please wait...
-                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                        </button>
-                                    </div>
-                                    <!--end::Actions-->
-                                </form>
-                                <!--end::Form-->
-                            </div>
-                            <!--end::Modal body-->
-                        </div>
-                        <!--end::Modal content-->
-                    </div>
-                    <!--end::Modal dialog-->
-                </div>
-
-                
-
             </div>
     </div>
     <!--end::Container-->
@@ -182,6 +114,7 @@
 <script src="{{asset('dash/assets/plugins/custom/datatables/buttons.print.min.js')}}"></script>
 
 <script>
+
     $(function () {
       
         var table = $('#kt_datatable_table').DataTable({
@@ -208,21 +141,20 @@
                 //{extend: 'colvis', className: 'btn secondary', text: 'إظهار / إخفاء الأعمدة '}
             ],
             ajax: {
-                url: "{{ route('admin.hierarchy_emps.index') }}",
+                url: "{{ route($route.'.index') }}",
                 data: function (d) {
-                    d.is_active = $('#is_active').val(),
-                    
                     d.search = $('#search').val()
                 }
             },
             columns: [
                 {data: 'checkbox', name: 'checkbox'},
                 {data: 'name_en', name: 'name_en'},
-                {data: 'type_hierarchy', name: 'type_hierarchy'},
-                {data: 'status_area', name: 'status_area'},
+                {data: 'type', name: 'type'},
+                {data: 'description', name: 'description'},
                 {data: 'note', name: 'note'},
-                {data: 'is_active', name: 'is_active'},
+                {data: 'status', name: 'status'},
                 {data: 'actions', name: 'actions'},
+                
             ]
         });
 
@@ -230,11 +162,6 @@
         
         const filterSearch = document.querySelector('[data-kt-db-table-filter="search"]');
         filterSearch.addEventListener('keyup', function (e) {
-            table.draw();
-        });
-        
-        $('#submit').click(function(){
-            $("#kt_modal_filter").modal('hide');
             table.draw();
         });
 
@@ -260,7 +187,7 @@
                     if (isConfirm.value) {
                         $.ajax(
                         {
-                            url: "{{route('admin.employees.delete')}}",
+                            url: "{{route($route.'.delete')}}",
                             type: 'post',
                             dataType: "JSON",
                             data: {
@@ -290,41 +217,9 @@
 
         });
     });
+
+    
+
+
 </script>
-
-<script>
-$('#kt_modal_1b').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget);
-    var productId = button.data('productId');
-    var productname = button.data('productname');
-    var titleElement = $('#productname');
-    var idproduct = $('#productid');
-    titleElement.text(productname);
-    idproduct.val(productId);
-
-    });
-    </script>
-
-<script>
-    $('#dynamic_work').on('change', function () {
-        if (this.value === "2") {
-                $('#kt_datepicker_3').prop('disabled', true);
-                $('#kt_datepicker_4').prop('disabled', true);
-            } else {
-                $('#kt_datepicker_3').prop('disabled', false);
-                $('#kt_datepicker_4').prop('disabled', false);
-            }
-
-        });
-    </script>
-
-<script>
-    $('#on_workrule').on('change', function () {
-        if (this.value === "2") {
-                $('#work_days').prop('disabled', true);
-            } else {
-                $('#work_days').prop('disabled', false);
-            }
-        });
-    </script>
 @endsection
